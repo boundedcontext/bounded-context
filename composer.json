@@ -1,0 +1,27 @@
+{
+    "name": "olivemedia/ddd-framework",
+    "description": "A basic DDD framework for bootstrapping bounded contexts. Currently only supports Laravel.",
+    "require": {
+        "rhumsaa/uuid": "~2.8@dev",
+        "pda/pheanstalk": "~3.0@dev",
+        "guzzlehttp/guzzle": "~5.0@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6@dev",
+        "mockery/mockery": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Colin Lyons",
+            "email": "clyons@olivemedia.co"
+        },
+        {
+            "name": "Barry O'Sullivan",
+            "email": "bosullivan@olivemedia.co"
+        }
+    ],
+    "minimum-stability": "dev-master",
+    "autoload": {
+        "psr-4": {"OliveMedia\\": "src/"}
+    }
+}
