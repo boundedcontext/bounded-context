@@ -1,13 +1,13 @@
 {
-    "name": "olivemedia/ddd-framework",
-    "description": "A basic DDD framework for bootstrapping bounded contexts. Currently only supports Laravel.",
+    "name": "olivemedia/olive-media-bounded-context",
+    "description": "A basic framework bounded contexts. Currently only supports Laravel.",
     "require": {
+        "php": ">=5.4.0",
         "rhumsaa/uuid": "~2.8@dev",
-        "pda/pheanstalk": "~3.0@dev",
         "guzzlehttp/guzzle": "~5.0@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.6@dev",
+        "phpunit/phpunit": "4.1.*",
         "mockery/mockery": "dev-master"
     },
     "authors": [
@@ -20,8 +20,10 @@
             "email": "bosullivan@olivemedia.co"
         }
     ],
-    "minimum-stability": "dev-master",
     "autoload": {
-        "psr-4": {"OliveMedia\\": "src/"}
+        "psr-4": {
+            "BoundedContext\\": "src/",
+            "BoundedContext\\Examples\\": "examples/"
+        }
     }
 }
