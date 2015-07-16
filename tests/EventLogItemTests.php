@@ -17,7 +17,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         $type_id = Uuid::generate();
         $date_time = new \DateTime;
         $version = 1;
-        $event = new MockEvent('A');
+        $event = new GenericEvent('A');
 
         $item = new Item($id, $type_id, $date_time, $version, $event);
 
@@ -44,7 +44,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
     {
         $id = Uuid::generate();
         $date_time = new \DateTime;
-        $event = new MockEvent('A');
+        $event = new GenericEvent('A');
 
         $item = Item::from_event($id, $date_time, $event);
 

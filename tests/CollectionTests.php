@@ -3,26 +3,6 @@
 use BoundedContext\Collectable;
 use BoundedContext\Collection;
 
-class MockCollectableItem implements Collectable
-{
-    private $item;
-
-    public function __construct($item)
-    {
-        $this->item = $item;
-    }
-
-    public function id()
-    {
-        return (string) $this->item;
-    }
-
-    public function __toString()
-    {
-        return (string) $this->item;
-    }
-}
-
 class CollectionTests extends PHPUnit_Framework_TestCase
 {
     private $collection;
@@ -30,9 +10,9 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->collection = new Collection(array(
-            new MockCollectableItem('A'),
-            new MockCollectableItem('B'),
-            new MockCollectableItem('C')
+            new CollectableItem('A'),
+            new CollectableItem('B'),
+            new CollectableItem('C')
         ));
     }
 
@@ -78,7 +58,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
     public function test_append()
     {
         $this->collection->append(
-            new MockCollectableItem('D')
+            new CollectableItem('D')
         );
 
         $this->collection->next();
@@ -98,7 +78,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->collection->has_next());
 
         $this->collection->append(
-            new MockCollectableItem('D')
+            new CollectableItem('D')
         );
 
         $this->assertFalse($this->collection->has_next());
@@ -113,7 +93,7 @@ class CollectionTests extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->collection->has_next());
 
         $this->collection->append(
-            new MockCollectableItem('D')
+            new CollectableItem('D')
         );
 
         $this->assertTrue($this->collection->has_next());

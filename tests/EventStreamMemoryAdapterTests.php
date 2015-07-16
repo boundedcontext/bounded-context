@@ -5,7 +5,7 @@ use BoundedContext\Collection;
 
 use BoundedContext\Event\Stream;
 
-class StreamTests extends PHPUnit_Framework_TestCase
+class EventStreamMemoryAdapterTests extends PHPUnit_Framework_TestCase
 {
     private $collection;
     private $stream;
@@ -13,9 +13,9 @@ class StreamTests extends PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->collection = new Collection(array(
-            new MockCollectableItem('A'),
-            new MockCollectableItem('B'),
-            new MockCollectableItem('C')
+            Item::from_event(Uuid::generate(), new \DateTime, new MockEvent('A')),
+            Item::from_event(Uuid::generate(), new \DateTime, new MockEvent('B')),
+            Item::from_event(Uuid::generate(), new \DateTime, new MockEvent('C')),
         ));
 
         $this->stream = new Stream\Adapter\Memory(
