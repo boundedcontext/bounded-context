@@ -38,6 +38,13 @@ trait Projecting
 		$this->$function($e);
 	}
 
+	public function can_apply(Projectable $e)
+	{
+		$function = $this->get_function_name($e);
+		
+		return method_exists($this, $function);
+	}
+
 	public function apply(Projectable $e)
 	{
 		$this->mutate($e);
