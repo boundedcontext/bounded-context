@@ -2,6 +2,7 @@
 
 namespace BoundedContext\Event\Log\Adapter;
 
+use BoundedContext\Uuid;
 use BoundedContext\Collection;
 use BoundedContext\Event\Event;
 
@@ -14,7 +15,7 @@ class Memory implements Log
 
 	public function __construct(Collection $collection)
 	{
-		$this->collection = [];
+		$this->collection = $collection;
 	}
 
 	public function dump()
@@ -31,7 +32,11 @@ class Memory implements Log
 				throw new \Exception('A Log can only append Events.');
 			}
 
-			$item = Item::from_event($event);
+			$item = Item::from_event(
+				Uuid::generate(),
+				new \DateTime,
+				$event
+			);
 
 			$this->collection->append($item);
 		}
@@ -39,7 +44,11 @@ class Memory implements Log
 
 	public function append_event(Event $event)
 	{
-		$item = Item::from_event($event);
+		$item = Item::from_event(
+			Uuid::generate(),
+			new \DateTime,
+			$event
+		);
 
 		$this->collection->append($item);
 	}

@@ -1,6 +1,6 @@
 <?php
 
-use BoundedContext\Collectable;
+/*use BoundedContext\Collectable;
 use BoundedContext\Collection;
 
 use BoundedContext\Event\Stream;
@@ -87,4 +87,4 @@ class StreamTests extends PHPUnit_Framework_TestCase
             $item->id()
         );
     }
-}
+}*/

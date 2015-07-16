@@ -18,7 +18,7 @@ class Item implements Collectable, Identifiable, Versionable
     private $version;
     private $payload;
 
-    public function __construct($id, $type_id, $occured_at, $version, $payload)
+    public function __construct(Uuid $id, Uuid $type_id, \DateTime $occured_at, $version, Event $payload)
     {
         $this->id = $id;
         $this->type_id = $type_id;
@@ -52,12 +52,12 @@ class Item implements Collectable, Identifiable, Versionable
     	return $this->payload;
     }
 
-    public static function from_event(Event $event)
+    public static function from_event(Uuid $id, \DateTime $date_time, Event $event)
     {
     	return new Item(
-    		Uuid::generate(),
-    		$event->type_id(),
-    		new DateTime,
+    		$id,
+    		$event->id(),
+    		$date_time,
     		$event->version(),
     		$event
     	);
