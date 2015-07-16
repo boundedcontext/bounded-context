@@ -1,14 +1,14 @@
 {
     "name": "olivemedia/olive-media-bounded-context",
-    "description": "A basic framework bounded contexts. Currently only supports Laravel.",
+    "description": "A basic framework for event sourced bounded contexts.",
     "require": {
         "php": ">=5.4.0",
-        "rhumsaa/uuid": "~2.8@dev",
-        "guzzlehttp/guzzle": "~5.0@dev"
+        "rhumsaa/uuid": "~2.8@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.*",
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "dev-master",
+        "illuminate/database": "*"
     },
     "authors": [
         {

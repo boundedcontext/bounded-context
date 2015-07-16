@@ -4,7 +4,7 @@ namespace BoundedContext;
 
 use Rhumsaa\Uuid\Uuid as RhumsaaUuid;
 
-class Uuid implements Identity
+class Uuid implements Identifiable
 {
 	private $uuid;
 
@@ -16,5 +16,10 @@ class Uuid implements Identity
 	public function toString()
 	{
 		return $this->uuid->toString();
+	}
+
+	public static function generate()
+	{
+		return new Uuid(RhumsaaUuid::uuid4());
 	}
 }

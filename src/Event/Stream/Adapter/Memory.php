@@ -3,6 +3,8 @@
 namespace BoundedContext\Event\Stream\Adapter;
 
 use BoundedContext\Collection;
+use BoundedContext\Identifiable;
+
 use BoundedContext\Event\Stream\Stream;
 
 class Memory implements Stream 
@@ -14,6 +16,8 @@ class Memory implements Stream
 	{
 		$this->collection = $collection;
 		$this->collection->rewind();
+
+		$this->last_id = null;
 	}
 
 	public function last_id()
@@ -21,9 +25,43 @@ class Memory implements Stream
 		return $this->last_id;
 	}
 
-	public function position(Identity $last_id)
+	public function has_next()
 	{
-		$this->collection->rewind();
+		return $this->collection->has_next();
 	}
 
+	public function next()
+	{
+		$this->last_id = $this->collection->current();
+
+		$this->collection->next();
+
+		return $this->last_id;
+	}
+
+	public function position(Identifiable $last_id)
+	{
+		$this->collection->rewind();
+		$this->last_id = null;
+
+		foreach($this->collection as $item)
+		{
+			if($item == $last_id)
+			{
+				if($this->has_next())
+				{
+					$this->next();
+				}
+				
+				return true;
+			}
+
+			$this->last_id = $last_id;
+		}
+
+		if(is_null($this->last_id))
+		{
+			throw new \Exception('The identifier does not exist in this stream.');
+		}
+	}
 }

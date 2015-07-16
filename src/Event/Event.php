@@ -2,9 +2,10 @@
 
 namespace BoundedContext\Event;
 
+use BoundedContext\Collectable;
 use BoundedContext\Event\Projectable;
 
-interface Event extends Projectable
+interface Event extends Projectable, Collectable
 {
-	public function id();
+	public function type_id();
 }

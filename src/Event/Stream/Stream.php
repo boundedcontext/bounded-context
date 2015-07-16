@@ -1,12 +1,16 @@
 <?php
 
-namespace BoundedContext\Event\Store;
+namespace BoundedContext\Event\Stream;
 
-use BoundedContext\Identity;
+use BoundedContext\Identifiable;
 
 interface Stream
 {
 	public function last_id();
 
-	public function after(Identity $id);
+	public function position(Identifiable $id);
+
+	public function has_next();
+
+	public function next();
 }

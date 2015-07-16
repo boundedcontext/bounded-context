@@ -2,6 +2,8 @@
 
 namespace BoundedContext;
 
+use BoundedContext\Collectable;
+
 class Collection implements \Iterator
 {
 	private $key;	
@@ -16,17 +18,22 @@ class Collection implements \Iterator
 		}
 	}
 
+	public function count()
+	{
+		return count($this->items);
+	}
+
 	public function reset() {
 		$this->items = [];
 		$this->rewind();
 	}
 
-	public function append($e) {
-		$this->items[] = $e;
-	}
-
 	public function rewind() {
 		$this->key = 0;
+	}
+
+	public function append(Collectable $c) {
+		$this->items[] = $c;
 	}
 
 	public function current() {
@@ -35,6 +42,11 @@ class Collection implements \Iterator
 
 	public function key() {
 		return $this->key;
+	}
+
+	public function has_next()
+	{
+		return isset($this->items[$this->key + 1]);
 	}
 
 	public function next() {
