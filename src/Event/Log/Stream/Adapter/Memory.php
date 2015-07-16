@@ -1,11 +1,11 @@
 <?php
 
-namespace BoundedContext\Event\Stream\Adapter;
+namespace BoundedContext\Event\Log\Stream\Adapter;
 
+use BoundedContext\Uuid;
 use BoundedContext\Collection;
-use BoundedContext\Identifiable;
 
-use BoundedContext\Event\Stream\Stream;
+use BoundedContext\Event\Log\Stream\Stream;
 
 class Memory implements Stream 
 {
@@ -32,31 +32,28 @@ class Memory implements Stream
 
 	public function next()
 	{
-		$this->last_id = $this->collection->current();
+		if($this->last_id !== null)
+		{
+			$this->collection->next();
+		}
 
-		$this->collection->next();
+		$this->last_id = $this->collection->current()->id();
 
-		return $this->last_id;
+		return $this->collection->current()->payload();
 	}
 
-	public function position(Identifiable $last_id)
+	public function move_to_id(Uuid $last_id)
 	{
 		$this->collection->rewind();
 		$this->last_id = null;
 
 		foreach($this->collection as $item)
 		{
-			if($item == $last_id)
-			{
-				if($this->has_next())
-				{
-					$this->next();
-				}
-				
+			if($item->id() == $last_id)
+			{	
+				$this->last_id = $last_id;
 				return true;
 			}
-
-			$this->last_id = $last_id;
 		}
 
 		if(is_null($this->last_id))
