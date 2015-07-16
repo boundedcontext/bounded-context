@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Event\Projection;
 
-interface Projection 
+interface Projection
 {
-	public function version();
+
 }

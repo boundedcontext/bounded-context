@@ -2,7 +2,7 @@
 
 namespace BoundedContext;
 
-interface Handlable
+interface Handler
 {
 	public function handle($h);
 }
