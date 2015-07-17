@@ -4,6 +4,8 @@ namespace BoundedContext\Event\Projector;
 
 use BoundedContext\Collection;
 
+use BoundedContext\Event\Projectable;
+
 use BoundedContext\Event\Log\Stream\Stream;
 
 abstract class AbstractProjector implements Projector
@@ -35,6 +37,15 @@ abstract class AbstractProjector implements Projector
 				$event
 			);
 		}
+	}
+
+	public function apply(Projectable $p)
+	{
+		$this->play();
+
+		$this->mutate(
+			$p
+		);
 	}
 
 	public function state()

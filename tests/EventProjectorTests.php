@@ -50,15 +50,14 @@ class EventProjectorTests extends PHPUnit_Framework_TestCase
                     new \DateTime, 
                     new CharacterTypedEvent('d')
                 ),
-                Item::from_event(
-                    new Uuid('2de8f232-097d-4ff0-92c6-4c271b7631e0'), 
-                    new \DateTime, 
-                    new CharacterTypedEvent('!')
-                ),
             ))
         );
 
         $this->projector->play();
+
+        $this->projector->apply(
+            new CharacterTypedEvent('!')
+        );
 
         $this->assertEquals(
             $this->projector->version(),

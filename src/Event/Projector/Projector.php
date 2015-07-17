@@ -9,5 +9,7 @@ interface Projector extends Versionable
 {
 	public function play();
 
+	public function apply(Projectable $p);
+
 	public function state();
 }
