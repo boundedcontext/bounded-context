@@ -10,8 +10,6 @@ use BoundedContext\Event\Event;
 interface Aggregate extends Identifiable, Versionable
 {
 	public function __construct(Identity $id, Projector $projector);
-
-	protected function apply(Event $e);
 	
 	public function changes();
 }
