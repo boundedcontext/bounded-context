@@ -1,21 +1,20 @@
-<?php
-
-namespace BoundedContext\Event;
+<?php namespace BoundedContext\Event;
 
 use BoundedContext\Uuid;
 
-class AbstractEvent implements Event 
+class AbstractEvent implements Event
 {
-	protected $_id;
-	protected $_version;
 
-	public function id()
-	{
-		return new Uuid($this->_id);
-	}
+    protected $_id;
+    protected $_version;
 
-	public function version()
-	{
-		return $this->_version;
-	}	
+    public function id()
+    {
+        return new Uuid($this->_id);
+    }
+
+    public function version()
+    {
+        return $this->_version;
+    }
 }

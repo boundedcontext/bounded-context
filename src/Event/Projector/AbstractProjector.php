@@ -1,55 +1,49 @@
-<?php
-
-namespace BoundedContext\Event\Projector;
-
-use BoundedContext\Collection;
+<?php namespace BoundedContext\Event\Projector;
 
 use BoundedContext\Event\Projectable;
-
 use BoundedContext\Event\Log\Stream\Stream;
 
 abstract class AbstractProjector implements Projector
 {
-	use Projecting;
 
-	protected $stream;
-	protected $projection;
+    use Projecting;
 
-	protected $version;
+    protected $stream;
+    protected $projection;
+    protected $version;
 
-	public function __construct(Stream $stream)
-	{
-		$this->stream = $stream;
-		$this->projection = null;
-		
-		$this->version = 0;
+    public function __construct(Stream $stream)
+    {
+        $this->stream = $stream;
+        $this->projection = null;
 
-		$this->set_projection();
-	}
+        $this->version = 0;
 
-	public function play()
-	{
-		while($this->stream->has_next())
-		{
-			$event = $this->stream->next();
+        $this->set_projection();
+    }
 
-			$this->mutate(
-				$event
-			);
-		}
-	}
+    public function play()
+    {
+        while ($this->stream->has_next()) {
+            $event = $this->stream->next();
 
-	public function apply(Projectable $p)
-	{
-		$this->play();
+            $this->mutate(
+                $event
+            );
+        }
+    }
 
-		$this->mutate(
-			$p
-		);
-	}
+    public function apply(Projectable $p)
+    {
+        $this->play();
 
-	public function state()
-	{
-		return $this->projection;
-	}
+        $this->mutate(
+            $p
+        );
+    }
+
+    public function state()
+    {
+        return $this->projection;
+    }
 }

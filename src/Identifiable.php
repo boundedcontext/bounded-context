@@ -1,8 +1,7 @@
-<?php
+<?php namespace BoundedContext;
 
-namespace BoundedContext;
-
-interface Identifiable 
+interface Identifiable
 {
-	public function id();
+
+    public function id();
 }

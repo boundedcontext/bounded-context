@@ -1,8 +1,6 @@
-<?php
+<?php namespace BoundedContext\Event;
 
-namespace BoundedContext\Event;
-
-interface Projectable 
+interface Projectable
 {
-
+    
 }

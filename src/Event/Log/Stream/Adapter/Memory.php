@@ -1,64 +1,58 @@
-<?php
-
-namespace BoundedContext\Event\Log\Stream\Adapter;
+<?php namespace BoundedContext\Event\Log\Stream\Adapter;
 
 use BoundedContext\Uuid;
 use BoundedContext\Collection;
-
 use BoundedContext\Event\Log\Stream\Stream;
 
-class Memory implements Stream 
+class Memory implements Stream
 {
-	private $last_id;
-	private $collection;
 
-	public function __construct(Collection $collection)
-	{
-		$this->collection = $collection;
-		$this->collection->rewind();
+    private $last_id;
+    private $collection;
 
-		$this->last_id = null;
-	}
+    public function __construct(Collection $collection)
+    {
+        $this->collection = $collection;
+        $this->collection->rewind();
 
-	public function last_id()
-	{
-		return $this->last_id;
-	}
+        $this->last_id = null;
+    }
 
-	public function has_next()
-	{
-		return $this->collection->has_next();
-	}
+    public function last_id()
+    {
+        return $this->last_id;
+    }
 
-	public function next()
-	{
-		if($this->last_id !== null)
-		{
-			$this->collection->next();
-		}
+    public function has_next()
+    {
+        return $this->collection->has_next();
+    }
 
-		$this->last_id = $this->collection->current()->id();
+    public function next()
+    {
+        if ($this->last_id !== null) {
+            $this->collection->next();
+        }
 
-		return $this->collection->current()->payload();
-	}
+        $this->last_id = $this->collection->current()->id();
 
-	public function move_to_id(Uuid $last_id)
-	{
-		$this->collection->rewind();
-		$this->last_id = null;
+        return $this->collection->current()->payload();
+    }
 
-		foreach($this->collection as $item)
-		{
-			if($item->id() == $last_id)
-			{	
-				$this->last_id = $last_id;
-				return true;
-			}
-		}
+    public function move_to_id(Uuid $last_id)
+    {
+        $this->collection->rewind();
+        $this->last_id = null;
 
-		if(is_null($this->last_id))
-		{
-			throw new \Exception('The identifier does not exist in this stream.');
-		}
-	}
+        foreach ($this->collection as $item) {
+            if ($item->id() == $last_id) {
+                $this->last_id = $last_id;
+                return true;
+            }
+        }
+
+        if (is_null($this->last_id)) {
+            throw new \Exception('The identifier does not exist in this stream.');
+        }
+    }
 }

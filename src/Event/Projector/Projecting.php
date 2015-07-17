@@ -1,59 +1,61 @@
-<?php
-
-namespace BoundedContext\Event\Projector;
+<?php namespace BoundedContext\Event\Projector;
 
 use BoundedContext\Event\Projectable;
 
 trait Projecting
 {
-	private function from_camel_case($input) {
 
-		preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
+    private function from_camel_case($input)
+    {
 
-		$ret = $matches[0];
-		foreach ($ret as &$match) {
-	    	$match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
-	  	}
+        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
 
-	  	return implode('_', $ret);
-	}
+        $ret = $matches[0];
+        foreach ($ret as &$match) {
+            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+        }
 
-	private function get_function_name(Projectable $e) {
+        return implode('_', $ret);
+    }
 
-		$reflect = new \ReflectionClass($e);
+    private function get_function_name(Projectable $e)
+    {
 
-		$class_name = $reflect->getShortName();
+        $reflect = new \ReflectionClass($e);
 
-		return 'when_' . $this->from_camel_case($class_name);
-	}
+        $class_name = $reflect->getShortName();
 
-	private function mutate(Projectable $e) {
-		
-		$function = $this->get_function_name($e);
+        return 'when_' . $this->from_camel_case($class_name);
+    }
 
-		if(!method_exists($this, $function)){
-			throw new \Exception('An event handler could not be found.');
-		}
+    private function mutate(Projectable $e)
+    {
 
-		$this->$function($e);
+        $function = $this->get_function_name($e);
 
-		$this->version += 1;
-	}
+        if (!method_exists($this, $function)) {
+            throw new \Exception('An event handler could not be found.');
+        }
 
-	public function can_apply(Projectable $e)
-	{
-		$function = $this->get_function_name($e);
-		
-		return method_exists($this, $function);
-	}
+        $this->$function($e);
 
-	public function version()
-	{
-		return $this->version;
-	}
+        $this->version += 1;
+    }
 
-	public function apply(Projectable $e)
-	{
-		$this->mutate($e);
-	}
+    public function can_apply(Projectable $e)
+    {
+        $function = $this->get_function_name($e);
+
+        return method_exists($this, $function);
+    }
+
+    public function version()
+    {
+        return $this->version;
+    }
+
+    public function apply(Projectable $e)
+    {
+        $this->mutate($e);
+    }
 }

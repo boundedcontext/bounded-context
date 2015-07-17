@@ -1,59 +1,66 @@
-<?php
-
-namespace BoundedContext;
+<?php namespace BoundedContext;
 
 use BoundedContext\Collectable;
 
 class Collection implements \Iterator
 {
-	private $key;	
-	private $items;
 
-	public function __construct(array $items = []) {
+    private $key;
+    private $items;
 
-		$this->reset();
+    public function __construct(array $items = [])
+    {
 
-		foreach($items as $item) {
-			$this->append($item);
-		}
-	}
+        $this->reset();
 
-	public function count()
-	{
-		return count($this->items);
-	}
+        foreach ($items as $item) {
+            $this->append($item);
+        }
+    }
 
-	public function reset() {
-		$this->items = [];
-		$this->rewind();
-	}
+    public function count()
+    {
+        return count($this->items);
+    }
 
-	public function rewind() {
-		$this->key = 0;
-	}
+    public function reset()
+    {
+        $this->items = [];
+        $this->rewind();
+    }
 
-	public function append(Collectable $c) {
-		$this->items[] = $c;
-	}
+    public function rewind()
+    {
+        $this->key = 0;
+    }
 
-	public function current() {
-		return $this->items[$this->key];
-	}
+    public function append(Collectable $c)
+    {
+        $this->items[] = $c;
+    }
 
-	public function key() {
-		return $this->key;
-	}
+    public function current()
+    {
+        return $this->items[$this->key];
+    }
 
-	public function has_next()
-	{
-		return isset($this->items[$this->key + 1]);
-	}
+    public function key()
+    {
+        return $this->key;
+    }
 
-	public function next() {
-		$this->key = $this->key + 1;
-	}
+    public function has_next()
+    {
+        return isset($this->items[$this->key + 1]);
+    }
 
-	public function valid() {
-		return isset($this->items[$this->key]);
-	}
+    public function next()
+    {
+        $this->key = $this->key + 1;
+    }
+
+    public function valid()
+    {
+        return isset($this->items[$this->key]);
+    }
 }

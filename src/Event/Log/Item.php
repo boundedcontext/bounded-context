@@ -1,17 +1,14 @@
-<?php
-
-namespace BoundedContext\Event\Log;
+<?php namespace BoundedContext\Event\Log;
 
 use BoundedContext\Uuid;
-
 use BoundedContext\Versionable;
 use BoundedContext\Identifiable;
 use BoundedContext\Collectable;
-
 use BoundedContext\Event\Event;
 
 class Item implements Collectable, Identifiable, Versionable
 {
+
     private $id;
     private $type_id;
     private $occured_at;
@@ -49,17 +46,13 @@ class Item implements Collectable, Identifiable, Versionable
 
     public function payload()
     {
-    	return $this->payload;
+        return $this->payload;
     }
 
     public static function from_event(Uuid $id, \DateTime $date_time, Event $event)
     {
-    	return new Item(
-    		$id,
-    		$event->id(),
-    		$date_time,
-    		$event->version(),
-    		$event
-    	);
+        return new Item(
+            $id, $event->id(), $date_time, $event->version(), $event
+        );
     }
 }

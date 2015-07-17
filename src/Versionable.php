@@ -1,8 +1,7 @@
-<?php
+<?php namespace BoundedContext;
 
-namespace BoundedContext;
-
-interface Versionable 
+interface Versionable
 {
-	public function version();
+
+    public function version();
 }

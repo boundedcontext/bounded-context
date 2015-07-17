@@ -1,8 +1,7 @@
-<?php
-
-namespace BoundedContext;
+<?php namespace BoundedContext;
 
 interface Handler
 {
-	public function handle($h);
+
+    public function handle($h);
 }

@@ -1,6 +1,4 @@
-<?php
-
-namespace BoundedContext\Event;
+<?php namespace BoundedContext\Event;
 
 use BoundedContext\Identifiable;
 use BoundedContext\Collectable;
@@ -9,5 +7,5 @@ use BoundedContext\Event\Projectable;
 
 interface Event extends Projectable, Collectable, Versionable, Identifiable
 {
-
+    
 }
