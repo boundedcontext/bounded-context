@@ -13,7 +13,7 @@ class EventProjectorTests extends PHPUnit_Framework_TestCase
 {
     private $projector;
 
-    public function generate_projector($collection)
+    private function generate_projector($collection)
     {
         $stream = new Stream\Adapter\Memory(
             $collection

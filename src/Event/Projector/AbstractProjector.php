@@ -1,15 +1,12 @@
 <?php
 
-namespace BoundedContext\Event\Projector\Adapter;
+namespace BoundedContext\Event\Projector;
 
 use BoundedContext\Collection;
 
 use BoundedContext\Event\Log\Stream\Stream;
 
-use BoundedContext\Event\Projector\Projector;
-use BoundedContext\Event\Projector\Projecting;
-
-abstract class Abstracted implements Projector
+abstract class AbstractProjector implements Projector
 {
 	use Projecting;
 

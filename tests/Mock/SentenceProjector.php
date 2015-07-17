@@ -2,9 +2,9 @@
 
 use BoundedContext\Event\AbstractEvent;
 
-use BoundedContext\Event\Projector;
+use BoundedContext\Event\Projector\AbstractProjector;
 
-class SentenceProjector extends Projector\Adapter\Abstracted
+class SentenceProjector extends AbstractProjector
 {
 	protected function set_projection()
 	{
