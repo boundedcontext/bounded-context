@@ -1,10 +1,9 @@
 <?php
-
-use BoundedContext\Collectable;
 use BoundedContext\Collection;
 
 class CollectionTests extends PHPUnit_Framework_TestCase
 {
+
     private $collection;
 
     public function setup()

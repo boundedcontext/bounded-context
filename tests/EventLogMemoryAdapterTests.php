@@ -1,14 +1,12 @@
 <?php
-
 use BoundedContext\Uuid;
-use BoundedContext\Collectable;
 use BoundedContext\Collection;
-
 use BoundedContext\Event\Log;
 use BoundedContext\Event\Log\Item;
 
 class EventLogMemoryAdapterTests extends PHPUnit_Framework_TestCase
 {
+
     private $collection;
     private $log;
 
@@ -36,8 +34,7 @@ class EventLogMemoryAdapterTests extends PHPUnit_Framework_TestCase
         $collection->next();
 
         $this->assertEquals(
-            $collection->current()->payload()->item,
-            'D'
+            $collection->current()->payload()->item, 'D'
         );
     }
 
@@ -56,22 +53,19 @@ class EventLogMemoryAdapterTests extends PHPUnit_Framework_TestCase
         $collection->next();
 
         $this->assertEquals(
-            $collection->current()->payload()->item,
-            'D'
+            $collection->current()->payload()->item, 'D'
         );
 
         $collection->next();
 
         $this->assertEquals(
-            $collection->current()->payload()->item,
-            'E'
+            $collection->current()->payload()->item, 'E'
         );
 
         $collection->next();
 
         $this->assertEquals(
-            $collection->current()->payload()->item,
-            'F'
+            $collection->current()->payload()->item, 'F'
         );
     }
 }

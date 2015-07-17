@@ -1,16 +1,10 @@
 <?php
-
 use BoundedContext\Uuid;
-use BoundedContext\Collectable;
-use BoundedContext\Collection;
-
-use BoundedContext\Event\Log;
 use BoundedContext\Event\Log\Item;
-
-use BoundedContext\Event\AbstractEvent;
 
 class EventLogItemTests extends PHPUnit_Framework_TestCase
 {
+
     public function test_item()
     {
         $id = Uuid::generate();
@@ -30,13 +24,11 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            $date_time,
-            $item->occured_at()
+            $date_time, $item->occured_at()
         );
 
         $this->assertEquals(
-            $version,
-            $item->version()
+            $version, $item->version()
         );
     }
 
@@ -53,8 +45,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            $item->occured_at(),
-            $date_time
+            $item->occured_at(), $date_time
         );
 
         $this->assertTrue(
@@ -62,8 +53,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            $item->version(),
-            $event->version()
+            $item->version(), $event->version()
         );
     }
 }

@@ -1,11 +1,8 @@
 <?php
 
-use BoundedContext\Uuid;
-use BoundedContext\Collectable;
-use BoundedContext\Collection;
-
 class EventProjectionTests extends PHPUnit_Framework_TestCase
 {
+
     private $projection;
 
     public function setup()
@@ -29,18 +26,15 @@ class EventProjectionTests extends PHPUnit_Framework_TestCase
         $this->projection->add_character('.');
 
         $this->assertEquals(
-            $this->projection->last_character,
-            '.'
+            $this->projection->last_character, '.'
         );
 
         $this->assertEquals(
-            $this->projection->character_count,
-            strlen($sentence)
+            $this->projection->character_count, strlen($sentence)
         );
 
         $this->assertEquals(
-            $this->projection->concatenated_string,
-            $sentence
+            $this->projection->concatenated_string, $sentence
         );
     }
 
@@ -55,22 +49,19 @@ class EventProjectionTests extends PHPUnit_Framework_TestCase
         $this->projection->add_word('jumpexr');
 
         $this->assertEquals(
-            $this->projection->last_character,
-            'r'
+            $this->projection->last_character, 'r'
         );
 
         $this->projection->remove_character();
 
         $this->assertEquals(
-            $this->projection->last_character,
-            'x'
+            $this->projection->last_character, 'x'
         );
 
         $this->projection->remove_character();
 
         $this->assertEquals(
-            $this->projection->last_character,
-            'e'
+            $this->projection->last_character, 'e'
         );
 
         $this->projection->add_character('d');
@@ -81,18 +72,15 @@ class EventProjectionTests extends PHPUnit_Framework_TestCase
         $this->projection->add_character('.');
 
         $this->assertEquals(
-            $this->projection->last_character,
-            '.'
+            $this->projection->last_character, '.'
         );
 
         $this->assertEquals(
-            $this->projection->character_count,
-            strlen($sentence)
+            $this->projection->character_count, strlen($sentence)
         );
 
         $this->assertEquals(
-            $this->projection->concatenated_string,
-            $sentence
+            $this->projection->concatenated_string, $sentence
         );
     }
 }

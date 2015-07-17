@@ -1,10 +1,9 @@
 <?php
-
 use BoundedContext\Collectable;
-use BoundedContext\Collection;
 
 class CollectableItem implements Collectable
 {
+
     private $item;
 
     public function __construct($item)
