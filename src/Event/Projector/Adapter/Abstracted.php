@@ -4,9 +4,7 @@ namespace BoundedContext\Event\Projector\Adapter;
 
 use BoundedContext\Collection;
 
-use BoundedContext\Event\Projectable;
-
-use BoundedContext\Event\Projection\Projection;
+use BoundedContext\Event\Log\Stream\Stream;
 
 use BoundedContext\Event\Projector\Projector;
 use BoundedContext\Event\Projector\Projecting;
@@ -15,44 +13,34 @@ abstract class Abstracted implements Projector
 {
 	use Projecting;
 
-	protected $events;
+	protected $stream;
 	protected $projection;
 
-	public function __construct(Collection $events, Projection $projection)
-	{
-		$this->events = $events;
-		$this->projection = $projection;
-	}
+	protected $version;
 
-	public function reset()
+	public function __construct(Stream $stream)
 	{
-		$this->events->rewind();
+		$this->stream = $stream;
+		$this->projection = null;
+		
+		$this->version = 0;
 
-		$class = get_class($projection);
-		$this->projection = new $class;
+		$this->set_projection();
 	}
 
 	public function play()
 	{
-		while($this->events->valid())
+		while($this->stream->has_next())
 		{
-			$event = $this->events->current();
+			$event = $this->stream->next();
 
 			$this->mutate(
 				$event
 			);
-
-			$this->events->next();
 		}
 	}
 
-	public function apply(Projectable $p)
-	{
-		$this->play();
-		$this->mutate($p);
-	}
-
-	public function current()
+	public function state()
 	{
 		return $this->projection;
 	}

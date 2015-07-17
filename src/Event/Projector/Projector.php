@@ -2,15 +2,12 @@
 
 namespace BoundedContext\Event\Projector;
 
+use BoundedContext\Versionable;
 use BoundedContext\Event\Projectable;
 
-interface Projector 
+interface Projector extends Versionable
 {
-	public function reset();
-
 	public function play();
 
-	public function apply(Projectable $p);
-
-	public function current();
+	public function state();
 }

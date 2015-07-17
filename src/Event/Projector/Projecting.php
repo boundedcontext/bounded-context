@@ -36,6 +36,8 @@ trait Projecting
 		}
 
 		$this->$function($e);
+
+		$this->version += 1;
 	}
 
 	public function can_apply(Projectable $e)
@@ -43,6 +45,11 @@ trait Projecting
 		$function = $this->get_function_name($e);
 		
 		return method_exists($this, $function);
+	}
+
+	public function version()
+	{
+		return $this->version;
 	}
 
 	public function apply(Projectable $e)
