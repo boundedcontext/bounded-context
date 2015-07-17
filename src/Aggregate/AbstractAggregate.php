@@ -4,8 +4,9 @@ namespace BoundedContext\Aggregate;
 
 use BoundedContext\Aggregate\State\State;
 
-use BoundedContext\Identity;
+use BoundedContext\Uuid;
 use BoundedContext\Collection;
+
 use BoundedContext\Event\Event;
 use BoundedContext\Event\Projector\Projector;
 
@@ -16,7 +17,7 @@ abstract class AbstractAggregate implements Aggregate
 	protected $projector;
 	private $changes;
 
-	public function __construct(Identity $id, Projector $projector)
+	public function __construct(Uuid $id, Projector $projector)
 	{
 		$this->id = $id;
 
@@ -26,16 +27,14 @@ abstract class AbstractAggregate implements Aggregate
 		$this->projector->play();
 	}
 
-	protected function apply(Event $e)
-	{
-		$this->projector->apply($e);
-
-		$this->changes->append($e);
-	}
-
 	public function id()
 	{
 		return $this->id;
+	}
+
+	public function version()
+	{
+		return $this->projector->version();
 	}
 
 	public function changes()
@@ -43,8 +42,11 @@ abstract class AbstractAggregate implements Aggregate
 		return $this->changes;
 	}
 
-	public function version()
+	protected function apply(Event $e)
 	{
-		return $this->projector->current()->version();
+		$this->projector->apply($e);
+
+		$this->changes->append($e);
 	}
+
 }

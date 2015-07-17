@@ -2,13 +2,16 @@
 
 namespace BoundedContext\Aggregate;
 
+use BoundedContext\Identifiable;
+use BoundedContext\Versionable;
+
 use BoundedContext\Event\Event;
 
-interface Aggregate
+interface Aggregate extends Identifiable, Versionable
 {
-	public function id();
+	public function __construct(Identity $id, Projector $projector);
+
+	protected function apply(Event $e);
 	
 	public function changes();
-
-	public function version();
 }

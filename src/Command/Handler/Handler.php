@@ -1,15 +1,12 @@
 <?php
 
-namespace OliveMedia\BoundedContext\Command;
+namespace BoundedContext\Command;
 
-use OliveMedia\BoundedContext\Event\Store\Store;
-use OliveMedia\BoundedContext\Aggregate\Aggregate;
+use BoundedContext;
 
-use OliveMedia\BoundedContext\Command\Command;
+use BoundedContext\Aggregate\Aggregate;
 
-interface Handler
+interface Handler extends BoundedContext\Handler;
 {
-	public function __construct(Store $store, Aggregate $aggregate);
-
-	public function apply(Command $e);
+	public function __construct(Aggregate $aggregate);
 }
