@@ -12,15 +12,17 @@ class EventStreamMemoryAdapterTests extends PHPUnit_Framework_TestCase
 
     public function setup()
     {
+        $id = Uuid::generate();
+        
         $this->collection = new Collection(array(
             Item::from_event(
-                new Uuid('157a56d2-b157-4c02-b55c-95b63820cbfc'), new \DateTime, new GenericEvent('A')
+                new Uuid('157a56d2-b157-4c02-b55c-95b63820cbfc'), new \DateTime, new GenericEvent($id, 'A')
             ),
             Item::from_event(
-                new Uuid('8e993601-bb2a-4b5e-8a7e-2caa0e79e504'), new \DateTime, new GenericEvent('B')
+                new Uuid('8e993601-bb2a-4b5e-8a7e-2caa0e79e504'), new \DateTime, new GenericEvent($id, 'B')
             ),
             Item::from_event(
-                new Uuid('2de8f232-097d-4ff0-92c6-4c271b7631e0'), new \DateTime, new GenericEvent('C')
+                new Uuid('2de8f232-097d-4ff0-92c6-4c271b7631e0'), new \DateTime, new GenericEvent($id, 'C')
             ),
         ));
 

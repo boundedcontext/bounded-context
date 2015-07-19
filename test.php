@@ -108,14 +108,52 @@ try {
 
 {
 	id: '17c39d00-2b4d-11e5-a2cb-0800200c9a66',
-	type_id: '02668e8f-8b60-4c46-be4d-94fbb2439fbb',
-	version: 1,
-	occured_at: '2015-07-15T23:57:13+00:00'
 	payload: {
 		id: 'a794ef60-2b4d-11e5-a2cb-0800200c9a66',
+        type_id: '02668e8f-8b60-4c46-be4d-94fbb2439fbb',
+        occured_at: '2015-07-15T23:57:13+00:00',
+        version: 1,
 		first_name: 'Colin',
 		last_name: 'Lyons'
 	}
+}
+
+////////////////////////
+////////////////////////
+////////////////////////
+
+<?namespace BoundedContext\Sample\Aggregate\Test\Event;
+
+use Sample;
+
+class Upgrader extends AbstractUpgrader
+{
+    protected $item;
+    
+    protected function when_v0()
+    {
+        $this->item->add_property('first_name', null);
+        $this->item->add_property('last_name', null);
+    }
+    
+    protected function when_v1()
+    {
+        $this->item->add_property('email', null);
+        $this->item->add_property('username', null);
+    }
+    
+    protected function when_v2()
+    {
+        $this->item->add_property('full_name', $this->item->first_name .' '. $this->item->last_name);
+        
+        $this->item->remove_property('first_name');
+        $this->item->remove_property('last_name');
+    }
+    
+    public function state()
+    {
+        return new Event\Sample::from_item($this->item);
+    }
 }
 
 */

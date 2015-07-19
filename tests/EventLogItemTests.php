@@ -11,7 +11,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         $type_id = Uuid::generate();
         $date_time = new \DateTime;
         $version = 1;
-        $event = new GenericEvent('A');
+        $event = new GenericEvent(Uuid::generate(), 'A');
 
         $item = new Item($id, $type_id, $date_time, $version, $event);
 
@@ -36,7 +36,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
     {
         $id = Uuid::generate();
         $date_time = new \DateTime;
-        $event = new GenericEvent('A');
+        $event = new GenericEvent(Uuid::generate(), 'A');
 
         $item = Item::from_event($id, $date_time, $event);
 
@@ -56,4 +56,60 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
             $item->version(), $event->version()
         );
     }
+    
+    /*public function test_from_json()
+    {
+        $json = "
+            {
+                id: '17c39d00-2b4d-11e5-a2cb-0800200c9a66',
+                type_id: '02668e8f-8b60-4c46-be4d-94fbb2439fbb',
+                occured_at: '2015-07-15T23:57:13+00:00',
+                version: 1,
+                payload: {
+                    id: 'a794ef60-2b4d-11e5-a2cb-0800200c9a66',
+                    item: 'A'
+                }
+            }
+        ";
+        
+        $item = Item::from_json($json);
+        
+        $id = new Uuid('17c39d00-2b4d-11e5-a2cb-0800200c9a66');
+        
+        $this->assertTrue(
+            $item->id()->equals($id)
+        );
+        
+        $date_time = new \DateTime('2015-07-15T23:57:13+00:00');
+        
+        $this->assertTrue(
+            $item->occured_at()->format('U') == $date_time->format('U')
+        );
+        
+        $this->assertEquals(
+            $item->version(), 1
+        );
+        
+        $event_id = new Uuid('a794ef60-2b4d-11e5-a2cb-0800200c9a66');
+        
+        $this->assertTrue(
+            $item->payload()->id()->equals($event_id)
+        );
+        
+        $event_type_id = new Uuid('a794ef60-2b4d-11e5-a2cb-0800200c9a66');
+        
+        $this->assertTrue(
+            $item->payload()->type_id()->equals($event_type_id)
+        );
+        
+        $this->assertEquals(
+            $item->payload()->item,
+            'A'
+        );
+        
+        $this->assertInstanceOf(
+            $item->payload(),
+            'GenericEvent'
+        );
+    }*/
 }

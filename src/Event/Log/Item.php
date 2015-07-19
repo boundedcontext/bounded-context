@@ -55,4 +55,17 @@ class Item implements Collectable, Identifiable, Versionable
             $id, $event->id(), $date_time, $event->version(), $event
         );
     }
+    
+    public static function from_json($json)
+    {
+        $item = json_decode($json);
+        
+        return new Item(
+            new Uuid($item->id), 
+            $event->id(), 
+            new \DateTime($item->occured_at), 
+            $item->version, 
+            $event
+        );
+    }
 }
