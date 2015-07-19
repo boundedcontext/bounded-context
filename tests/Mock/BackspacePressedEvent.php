@@ -1,5 +1,4 @@
 <?php
-use BoundedContext\Uuid;
 use BoundedContext\Event\AbstractEvent;
 
 class BackspacePressedEvent extends AbstractEvent
