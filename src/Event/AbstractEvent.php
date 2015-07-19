@@ -8,6 +8,11 @@ class AbstractEvent implements Event
     
     protected $_type_id;
     protected $_version;
+    
+    public function __construct(Uuid $id)
+    {
+        $this->id = $id;
+    }
 
     public function id()
     {
