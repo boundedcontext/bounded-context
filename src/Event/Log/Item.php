@@ -52,7 +52,7 @@ class Item implements Collectable, Identifiable, Versionable
     public static function from_event(Uuid $id, \DateTime $date_time, Event $event)
     {
         return new Item(
-            $id, $event->id(), $date_time, $event->version(), $event
+            $id, $event->type_id(), $date_time, $event->version(), $event
         );
     }
     

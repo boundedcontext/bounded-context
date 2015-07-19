@@ -7,5 +7,5 @@ use BoundedContext\Event\Projectable;
 
 interface Event extends Projectable, Collectable, Versionable, Identifiable
 {
-    
+    public function type_id();
 }

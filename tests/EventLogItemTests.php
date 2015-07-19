@@ -49,7 +49,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue(
-            $item->type_id()->equals($event->id())
+            $item->type_id()->equals($event->type_id())
         );
 
         $this->assertEquals(
