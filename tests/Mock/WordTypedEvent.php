@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Uuid;
+use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Event\AbstractEvent;
 
 class WordTypedEvent extends AbstractEvent

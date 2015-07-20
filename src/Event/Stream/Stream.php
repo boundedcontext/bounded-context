@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Event\Stream;
 
-use BoundedContext\Uuid;
+use BoundedContext\ValueObject\Uuid;
 
 interface Stream
 {

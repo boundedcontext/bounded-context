@@ -1,8 +1,8 @@
 <?php namespace BoundedContext\Event\Map;
 
-use BoundedContext\Uuid;
+use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Identifiable;
-use BoundedContext\Collectable;
+use BoundedContext\Collection\Collectable;
 
 class Route implements Identifiable, Collectable
 {

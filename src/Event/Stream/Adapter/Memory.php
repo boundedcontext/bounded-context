@@ -1,7 +1,7 @@
 <?php namespace BoundedContext\Event\Stream\Adapter;
 
-use BoundedContext\Uuid;
-use BoundedContext\Collection;
+use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Stream\Stream;
 
 class Memory implements Stream

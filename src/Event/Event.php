@@ -1,9 +1,9 @@
 <?php namespace BoundedContext\Event;
 
 use BoundedContext\Identifiable;
-use BoundedContext\Collectable;
+use BoundedContext\Collection\Collectable;
 use BoundedContext\Versionable;
-use BoundedContext\Event\Projector\Projectable;
+use BoundedContext\Projector\Projectable;
 
 interface Event extends Projectable, Collectable, Versionable, Identifiable
 {
@@ -13,4 +13,6 @@ interface Event extends Projectable, Collectable, Versionable, Identifiable
      * @return \BoundedContext\Uuid
      */
     public function type_id();
+    
+    public function toArray();
 }

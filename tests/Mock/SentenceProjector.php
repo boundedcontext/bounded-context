@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Event\Projector\AbstractProjector;
+use BoundedContext\Projector\AbstractProjector;
 
 class SentenceProjector extends AbstractProjector
 {

@@ -1,8 +1,8 @@
-<?php namespace BoundedContext;
+<?php namespace BoundedContext\ValueObject;
 
 use Rhumsaa\Uuid\Uuid as RhumsaaUuid;
 
-class Uuid
+class Uuid implements ValueObject
 {
 
     private $uuid;

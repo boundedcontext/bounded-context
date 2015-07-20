@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Event;
 
-use BoundedContext\Uuid;
+use BoundedContext\ValueObject\Uuid;
 
 class AbstractEvent implements Event
 {
@@ -28,5 +28,18 @@ class AbstractEvent implements Event
     public function version()
     {
         return $this->_version;
+    }
+    
+    public function toArray()
+    {
+        $event = [];
+        
+        $class_vars = get_class_vars(get_class($this));
+
+        foreach ($class_vars as $name => $value) {
+            $event[$name] = $value;
+        }
+        
+        return $event;
     }
 }

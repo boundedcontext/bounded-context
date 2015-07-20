@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Event\Log;
 
-use BoundedContext\Collection;
+use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Event;
 
 interface Log

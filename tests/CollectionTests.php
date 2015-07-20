@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Collection;
+use BoundedContext\Collection\Collection;
 
 class CollectionTests extends PHPUnit_Framework_TestCase
 {

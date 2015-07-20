@@ -1,6 +1,4 @@
-<?php namespace BoundedContext;
-
-use BoundedContext\Collectable;
+<?php namespace BoundedContext\Collection;
 
 class Collection implements \Iterator
 {

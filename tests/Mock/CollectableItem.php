@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Collectable;
+use BoundedContext\Collection\Collectable;
 
 class CollectableItem implements Collectable
 {

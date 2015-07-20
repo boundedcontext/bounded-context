@@ -1,12 +1,14 @@
 <?php namespace BoundedContext\Event\Log;
 
-use BoundedContext\Uuid;
+use JsonSerializable;
+
+use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Versionable;
 use BoundedContext\Identifiable;
-use BoundedContext\Collectable;
+use BoundedContext\Collection\Collectable;
 use BoundedContext\Event\Event;
 
-class Item implements Collectable, Identifiable, Versionable
+class Item implements Collectable, Identifiable, Versionable, JsonSerializable
 {
 
     private $id;
@@ -47,6 +49,22 @@ class Item implements Collectable, Identifiable, Versionable
     public function payload()
     {
         return $this->payload;
+    }
+    
+    public function jsonSerialize()
+    {
+        $this->toArray();
+    }
+    
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'type_id' => $this->type_id,
+            'occured_at' => $this->occured_at,
+            'version' => $this->version,
+            'payload' => $this->payload->toArray()
+        ];
     }
 
     public static function from_event(Uuid $id, \DateTime $date_time, Event $event)

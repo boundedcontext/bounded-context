@@ -1,7 +1,7 @@
 <?php namespace BoundedContext\Event\Log\Adapter;
 
-use BoundedContext\Uuid;
-use BoundedContext\Collection;
+use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Event;
 use BoundedContext\Event\Log\Log;
 use BoundedContext\Event\Log\Item;

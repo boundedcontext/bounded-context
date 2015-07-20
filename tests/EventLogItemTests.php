@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Uuid;
+use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Event\Log\Item;
 
 class EventLogItemTests extends PHPUnit_Framework_TestCase
@@ -55,6 +55,17 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             $item->version(), $event->version()
         );
+        
+        /*$this->assertTrue(
+            array_diff($item->toArray(),
+                [
+                    'id' => $id->toString(),
+                    'type_id' => $event->type_id()->toString(),
+                    'occured_at' => $date_time->format(DateTime::ISO8601),
+                    'version' => $event->version()
+                ]
+            )
+        );*/
     }
     
     /*public function test_from_json()

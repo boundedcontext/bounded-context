@@ -1,6 +1,6 @@
-<?php namespace BoundedContext\Event\Projection\Adapter;
+<?php namespace BoundedContext\Projection\Adapter;
 
-use BoundedContext\Event\Projection\Projection;
+use BoundedContext\Projection\Projection;
 
 abstract class Abstracted implements Projection
 {

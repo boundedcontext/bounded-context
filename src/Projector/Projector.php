@@ -1,7 +1,7 @@
-<?php namespace BoundedContext\Event\Projector;
+<?php namespace BoundedContext\Projector;
 
 use BoundedContext\Versionable;
-use BoundedContext\Event\Projector\Projectable;
+use BoundedContext\Projector\Projectable;
 
 interface Projector extends Versionable
 {

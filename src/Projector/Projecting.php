@@ -1,6 +1,6 @@
-<?php namespace BoundedContext\Event\Projector;
+<?php namespace BoundedContext\Projector;
 
-use BoundedContext\Event\Projector\Projectable;
+use BoundedContext\Projector\Projectable;
 
 trait Projecting
 {

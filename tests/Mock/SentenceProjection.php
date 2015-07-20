@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\Event\Projection;
+use BoundedContext\Projection;
 
 class SentenceProjection extends Projection\Adapter\Abstracted
 {

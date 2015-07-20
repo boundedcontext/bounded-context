@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Event\Map;
 
-use BoundedContext\Collection;
+use BoundedContext\Collection\Collection;
 
 class Map
 {
