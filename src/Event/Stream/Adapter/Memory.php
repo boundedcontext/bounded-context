@@ -1,8 +1,8 @@
-<?php namespace BoundedContext\Event\Log\Stream\Adapter;
+<?php namespace BoundedContext\Event\Stream\Adapter;
 
 use BoundedContext\Uuid;
 use BoundedContext\Collection;
-use BoundedContext\Event\Log\Stream\Stream;
+use BoundedContext\Event\Stream\Stream;
 
 class Memory implements Stream
 {

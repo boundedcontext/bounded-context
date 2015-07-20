@@ -1,7 +1,7 @@
 <?php
 use BoundedContext\Uuid;
 use BoundedContext\Collection;
-use BoundedContext\Event\Log\Stream;
+use BoundedContext\Event\Stream;
 use BoundedContext\Event\Log\Item;
 
 class EventProjectorTests extends PHPUnit_Framework_TestCase

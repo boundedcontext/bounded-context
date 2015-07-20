@@ -4,7 +4,7 @@ interface Identifiable
 {
 
     /**
-     * Gets an id from something identifiable.
+     * Gets a unique Uuid identifier.
      *
      * @return \BoundedContext\Uuid
      */

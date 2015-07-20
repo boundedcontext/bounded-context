@@ -1,4 +1,4 @@
-<?php namespace BoundedContext\Event\Log\Stream;
+<?php namespace BoundedContext\Event\Stream;
 
 use BoundedContext\Uuid;
 
