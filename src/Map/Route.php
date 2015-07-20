@@ -1,4 +1,4 @@
-<?php namespace BoundedContext\Event\Map;
+<?php namespace BoundedContext\Map;
 
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Identifiable;
