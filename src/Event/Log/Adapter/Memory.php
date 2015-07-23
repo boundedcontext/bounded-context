@@ -5,14 +5,17 @@ use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Event;
 use BoundedContext\Event\Log\Log;
 use BoundedContext\Event\Log\Item;
+use BoundedContext\Map\Map;
 
 class Memory implements Log
 {
 
+    private $map;
     private $collection;
 
-    public function __construct(Collection $collection)
+    public function __construct(Map $map, Collection $collection)
     {
+        $this->map = $map;
         $this->collection = $collection;
     }
 
@@ -24,23 +27,15 @@ class Memory implements Log
     public function append_collection(Collection $collection)
     {
         foreach ($collection as $event) {
-            if (!$event instanceof Event) {
-                throw new \Exception('A Log can only append Events.');
-            }
-
-            $item = Item::from_event(
-                    Uuid::generate(), new \DateTime, $event
-            );
-
-            $this->collection->append($item);
+            $this->append_event($event);
         }
     }
 
     public function append_event(Event $event)
     {
-        $item = Item::from_event(
-                Uuid::generate(), new \DateTime, $event
-        );
+        $type_id = new Uuid($this->map->reverse_lookup(get_class($event)));
+
+        $item = new Item(Uuid::generate(), $type_id, $event->occured_at(), 1, $event);
 
         $this->collection->append($item);
     }

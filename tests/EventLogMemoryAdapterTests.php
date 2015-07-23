@@ -3,30 +3,39 @@ use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Log;
 use BoundedContext\Event\Log\Item;
+use BoundedContext\Map\Map;
+use BoundedContext\Map\Route;
 
 class EventLogMemoryAdapterTests extends PHPUnit_Framework_TestCase
 {
 
     private $collection;
+    private $map;
     private $log;
 
     public function setup()
     {
         $id = Uuid::generate();
         
+        $event_type = Uuid::generate();
+        
         $this->collection = new Collection(array(
-            Item::from_event(Uuid::generate(), new \DateTime, new GenericEvent($id, 'A')),
-            Item::from_event(Uuid::generate(), new \DateTime, new GenericEvent($id, 'B')),
-            Item::from_event(Uuid::generate(), new \DateTime, new GenericEvent($id, 'C')),
+            new Item(Uuid::generate(), $event_type, new \DateTime, 1, array('id' => $id, 'item' => 'A')),
+            new Item(Uuid::generate(), $event_type, new \DateTime, 1, array('id' => $id, 'item' => 'B')),
+            new Item(Uuid::generate(), $event_type, new \DateTime, 1, array('id' => $id, 'item' => 'C')),
         ));
+        
+        $this->map = new Map(new Collection(array(
+            new Route($event_type, 'GenericEvent')
+        )));
 
-        $this->log = new Log\Adapter\Memory($this->collection);
+        $this->log = new Log\Adapter\Memory($this->map, $this->collection);
     }
 
     public function test_append_event()
     {
         $this->log->append_event(
-            new GenericEvent(Uuid::generate(), 'D')
+            new GenericEvent(Uuid::generate(), new \DateTime, 'D')
         );
 
         $collection = $this->log->dump();
@@ -43,9 +52,9 @@ class EventLogMemoryAdapterTests extends PHPUnit_Framework_TestCase
     public function test_append_collection()
     {
         $this->log->append_collection(new Collection(array(
-            new GenericEvent(Uuid::generate(), 'D'),
-            new GenericEvent(Uuid::generate(), 'E'),
-            new GenericEvent(Uuid::generate(), 'F')
+            new GenericEvent(Uuid::generate(), new \DateTime, 'D'),
+            new GenericEvent(Uuid::generate(), new \DateTime, 'E'),
+            new GenericEvent(Uuid::generate(), new \DateTime, 'F')
         )));
 
         $collection = $this->log->dump();

@@ -12,7 +12,7 @@ class Aggregate extends AbstractAggregate
 		$this->projector->current()->assert_not_created();
 
 		$this->apply(new Event\Created(
-			$this->id->toString(),
+			$this->id,
 			$username,
 			$password
 		));
@@ -21,7 +21,7 @@ class Aggregate extends AbstractAggregate
 	public function change_username($username)
 	{
 		$this->apply(new Event\UsernameChanged(
-			$this->id->toString(),
+			$this->id,
 			$username
 		));
 	}
@@ -29,7 +29,7 @@ class Aggregate extends AbstractAggregate
 	public function change_password($password)
 	{
 		$this->apply(new Event\PasswordChanged(
-			$this->id->toString(),
+			$this->id,
 			$password
 		));
 	}
@@ -37,14 +37,14 @@ class Aggregate extends AbstractAggregate
 	public function delete()
 	{
 		$this->apply(new Event\Deleted(
-			$this->id->toString()
+			$this->id
 		));
 	}
 
 	public function undelete()
 	{
 		$this->apply(new Event\Undeleted(
-			$this->id->toString()
+			$this->id
 		));
 	}
 }

@@ -4,42 +4,44 @@ use BoundedContext\ValueObject\Uuid;
 
 class AbstractEvent implements Event
 {
-    public $id;
-    
-    protected $_type_id;
-    protected $_version;
-    
-    public function __construct(Uuid $id)
+    protected $_id;
+    protected $_occured_at;
+    protected $_version = 1;
+
+    public function __construct(Uuid $id, \DateTime $occured_at)
     {
-        $this->id = $id;
+        $this->_id = $id;
+        $this->_occured_at = $occured_at;
     }
 
     public function id()
     {
-        return $this->id;
+        return $this->_id;
     }
     
-    public function type_id()
+    public function occured_at()
     {
-        return new Uuid($this->_type_id);
+        return $this->_occured_at;
     }
-
-
+    
     public function version()
     {
         return $this->_version;
     }
-    
+
     public function toArray()
     {
-        $event = [];
-        
-        $class_vars = get_class_vars(get_class($this));
+        $event = [
+            'id' => $this->id()->toString()
+        ];
 
-        foreach ($class_vars as $name => $value) {
-            $event[$name] = $value;
-        }
+        $class_vars = (new \ReflectionObject($this))->getProperties(\ReflectionProperty::IS_PUBLIC);
         
+        foreach ($class_vars as $property) {
+            $name = $property->getName();
+            $event[$name] = $this->$name;
+        }
+
         return $event;
     }
 }

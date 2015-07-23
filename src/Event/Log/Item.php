@@ -1,14 +1,11 @@
 <?php namespace BoundedContext\Event\Log;
 
-use JsonSerializable;
-
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Versionable;
 use BoundedContext\Identifiable;
 use BoundedContext\Collection\Collectable;
-use BoundedContext\Event\Event;
 
-class Item implements Collectable, Identifiable, Versionable, JsonSerializable
+class Item implements Collectable, Identifiable, Versionable
 {
 
     private $id;
@@ -17,13 +14,13 @@ class Item implements Collectable, Identifiable, Versionable, JsonSerializable
     private $version;
     private $payload;
 
-    public function __construct(Uuid $id, Uuid $type_id, \DateTime $occured_at, $version, Event $payload)
+    public function __construct(Uuid $id, Uuid $type_id, \DateTime $occured_at, $version, $payload)
     {
         $this->id = $id;
         $this->type_id = $type_id;
         $this->occured_at = $occured_at;
-        $this->version = $version;
-        $this->payload = $payload;
+        $this->version = (int) $version;
+        $this->payload = (object) $payload;
     }
 
     public function id()
@@ -50,40 +47,29 @@ class Item implements Collectable, Identifiable, Versionable, JsonSerializable
     {
         return $this->payload;
     }
-    
-    public function jsonSerialize()
+
+    public function to_json()
     {
-        $this->toArray();
+        return json_encode($this->to_array());
     }
-    
-    public function toArray()
+
+    public function to_array()
     {
         return [
-            'id' => $this->id,
-            'type_id' => $this->type_id,
-            'occured_at' => $this->occured_at,
-            'version' => $this->version,
-            'payload' => $this->payload->toArray()
+            'id' => $this->id->toString(),
+            'type_id' => $this->type_id->toString(),
+            'occured_at' => $this->occured_at->format(\DateTime::ISO8601),
+            'version' => (int) $this->version,
+            'payload' => (array) $this->payload
         ];
     }
 
-    public static function from_event(Uuid $id, \DateTime $date_time, Event $event)
-    {
-        return new Item(
-            $id, $event->type_id(), $date_time, $event->version(), $event
-        );
-    }
-    
     public static function from_json($json)
     {
         $item = json_decode($json);
-        
+
         return new Item(
-            new Uuid($item->id), 
-            $event->id(), 
-            new \DateTime($item->occured_at), 
-            $item->version, 
-            $event
+            new Uuid($item->id), new Uuid($item->type_id), new \DateTime($item->occured_at), $item->version, $item->payload
         );
     }
 }

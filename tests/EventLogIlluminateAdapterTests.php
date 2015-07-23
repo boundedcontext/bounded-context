@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\ValueObject\Uuid;
+/*use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Log;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -56,9 +56,9 @@ class EventLogIlluminateAdapterTests extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(true);
 
-        /* $this->assertEquals(
-          $collection->current()->payload()->item, 'D'
-          ); */
+        //$this->assertEquals(
+        //  $collection->current()->payload()->item, 'D'
+        //);
     }
 
     public function test_append_collection()
@@ -71,4 +71,4 @@ class EventLogIlluminateAdapterTests extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(true);
     }
-}
+}*/

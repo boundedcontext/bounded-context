@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\ValueObject\Uuid;
+/*use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Stream;
 use BoundedContext\Event\Log\Item;
@@ -84,4 +84,4 @@ class EventStreamMemoryAdapterTests extends PHPUnit_Framework_TestCase
         $event = $this->stream->next();
         $this->assertEquals($event->item, 'C');
     }
-}
+}*/

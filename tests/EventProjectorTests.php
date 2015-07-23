@@ -1,5 +1,5 @@
 <?php
-use BoundedContext\ValueObject\Uuid;
+/*use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Event\Stream;
 use BoundedContext\Event\Log\Item;
@@ -65,4 +65,4 @@ class EventProjectorTests extends PHPUnit_Framework_TestCase
             $this->projector->state()->concatenated_string, $sentence
         );
     }
-}
+}*/
