@@ -1,5 +1,6 @@
 <?php namespace BoundedContext\Map;
 
+use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 
 class Map
@@ -27,6 +28,6 @@ class Map
     
     public function reverse_lookup($class_namespace)
     {
-        return $this->namespace_routes[$class_namespace];
+        return new Uuid($this->namespace_routes[$class_namespace]);
     }
 }

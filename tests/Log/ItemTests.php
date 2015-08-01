@@ -1,8 +1,8 @@
 <?php
-use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Event\Log\Item;
+/*use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Log\Item;
 
-class EventLogItemTests extends PHPUnit_Framework_TestCase
+class ItemTests extends PHPUnit_Framework_TestCase
 {
 
     public function test_item()
@@ -11,7 +11,7 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
         $type_id = new Uuid('02668e8f-8b60-4c46-be4d-94fbb2439fbb');
         $date_time = new \DateTime("2015-07-21T23:24:58+0000");
         $version = 1;
-        $event = array(
+        $payload = array(
             'item' => 'A'
         );
 
@@ -91,4 +91,4 @@ class EventLogItemTests extends PHPUnit_Framework_TestCase
             $item->payload()->item, 'A'
         );
     }
-}
+}*/
