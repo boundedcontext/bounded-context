@@ -5,23 +5,16 @@ use BoundedContext\ValueObject\Uuid;
 class AbstractEvent implements Event
 {
     protected $_id;
-    protected $_occured_at;
     protected $_version = 1;
 
-    public function __construct(Uuid $id, \DateTime $occured_at)
+    public function __construct(Uuid $id)
     {
         $this->_id = $id;
-        $this->_occured_at = $occured_at;
     }
 
     public function id()
     {
         return $this->_id;
-    }
-    
-    public function occured_at()
-    {
-        return $this->_occured_at;
     }
     
     public function version()

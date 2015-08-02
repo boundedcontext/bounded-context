@@ -7,16 +7,11 @@ class EventTests extends PHPUnit_Framework_TestCase
     public function test_event()
     {
         $id = Uuid::generate();
-        $date_time = new \DateTime;
 
-        $event = new GenericEvent($id, $date_time, 'A');
+        $event = new GenericEvent($id, 'A');
 
         $this->assertTrue(
             $event->id()->equals($id)
-        );
-
-        $this->assertEquals(
-            $event->occured_at()->format('U'), $date_time->format('U')
         );
         
         $this->assertEquals(
