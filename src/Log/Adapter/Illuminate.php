@@ -1,5 +1,7 @@
 <?php namespace BoundedContext\Log\Adapter;
 
+use BoundedContext\Log\Appendable;
+use BoundedContext\Map\Map;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Log\Item;
 use Illuminate\Database\Capsule\Manager as Capsule;

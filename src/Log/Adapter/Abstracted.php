@@ -17,7 +17,7 @@ abstract class Abstracted implements Log
         $this->map = $map;
     }
 
-    private function generate_item(Appendable $appendable)
+    protected function generate_item(Appendable $appendable)
     {
         $type_id = $this->map->reverse_lookup(get_class($appendable));
 
