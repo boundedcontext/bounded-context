@@ -173,5 +173,27 @@ public function next()
 }
 
 
+//////////////
+/////////////
+/////////////
+
+// An example of a Workflow
+// - When I get a UserCreated event, run a SendEmailNotification command.
+        - I need to check that the user has an email address.
+        - I need to check
+
+
+$bounded_context = new BoundedContext(
+    $event_stream
+);
+
+$bounded_context->command();
+
+public function run()
+{
+    
+}
+
+
 */
 

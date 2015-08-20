@@ -19,9 +19,9 @@ abstract class Abstracted implements Log
 
     protected function generate_item(Appendable $appendable)
     {
-        $type_id = $this->map->reverse_lookup(get_class($appendable));
+        $route = $this->map->get_by_namespace(get_class($appendable));
 
-        return new Item(Uuid::generate(), $type_id, new \DateTime, 1, $appendable);
+        return new Item(Uuid::generate(), $route->id(), new \DateTime, $route->version(), $appendable);
     }
 
     abstract protected function append_item(Item $item);

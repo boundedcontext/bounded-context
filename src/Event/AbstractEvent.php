@@ -4,25 +4,19 @@ use BoundedContext\ValueObject\Uuid;
 
 class AbstractEvent implements Event
 {
-    protected $_id;
-    protected $_version = 1;
+    private $id;
 
     public function __construct(Uuid $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     public function id()
     {
-        return $this->_id;
-    }
-    
-    public function version()
-    {
-        return $this->_version;
+        return $this->id;
     }
 
-    public function toArray()
+    /*public function toArray()
     {
         $event = [
             'id' => $this->id()->toString()
@@ -36,5 +30,5 @@ class AbstractEvent implements Event
         }
 
         return $event;
-    }
+    }*/
 }

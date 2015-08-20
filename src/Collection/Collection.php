@@ -32,9 +32,22 @@ class Collection implements \Iterator
         $this->key = 0;
     }
 
+    public function is_empty()
+    {
+        return (count($this->items) == 0);
+    }
+
     public function append(Collectable $c)
     {
         $this->items[] = $c;
+    }
+
+    public function append_collection(Collection $other)
+    {
+        foreach($other as $item)
+        {
+            $this->items[] = $item;
+        }
     }
 
     public function current()
@@ -49,7 +62,7 @@ class Collection implements \Iterator
 
     public function has_next()
     {
-        return isset($this->items[$this->key + 1]);
+        return isset($this->items[$this->key]);
     }
 
     public function next()

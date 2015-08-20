@@ -1,19 +1,18 @@
-<?
+<?php namespace BoundedContext\Examples\Recruitment\Aggregate\User\Command;
 
-namespace BoundedContext\Examples\Recruitment\Aggregate\User\Command;
+use BoundedContext\Command\Command;
 
-use BoundedContext\Command;
-
-class Created extends Command\AbstractCommand
+class Create implements Command
 {
-	public $id;
-	public $username;
-	public $password;
 
-	public function __construct($id, $username, $password)
-	{
-		$this->id = $id;
-		$this->username = $username;
-		$this->password = $password; 
-	}
+    public $id;
+    public $username;
+    public $password;
+
+    public function __construct($id, $username, $password)
+    {
+        $this->id = $id;
+        $this->username = $username;
+        $this->password = $password;
+    }
 }

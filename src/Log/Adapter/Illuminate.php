@@ -11,20 +11,27 @@ class Illuminate extends Abstracted
 
     private $capsule;
     private $connection_name;
-    private $table_name;
+    private $log_table_name;
+    private $stream_table_name;
 
-    public function __construct(Map $map, Capsule $capsule, $connection_name = 'default', $table_name = 'log')
+    public function __construct(Map $map, Capsule $capsule, $connection_name = 'default', $log_table_name = 'event_log', $stream_table_name = 'event_stream')
     {
         parent::__construct($map);
 
         $this->capsule = $capsule;
         $this->connection_name = $connection_name;
-        $this->table_name = $table_name;
+        $this->log_table_name = $log_table_name;
+        $this->stream_table_name = $stream_table_name;
     }
 
-    public function table_name()
+    public function log_table_name()
     {
-        return $this->table_name;
+        return $this->log_table_name;
+    }
+    
+    public function stream_table_name()
+    {
+        return $this->stream_table_name;
     }
 
     public function capsule()
@@ -37,9 +44,20 @@ class Illuminate extends Abstracted
         $this->capsule->getConnection($this->connection_name)->transaction(
             function ($connectionManager) use ($item) {
 
-            $connectionManager->table($this->table_name())->insert(
+            $connectionManager->table($this->log_table_name())->insert(
                 [
                     'item' => json_encode($item->to_array())
+                ]
+            );
+            
+            $connectionManager->table($this->stream_table_name())->insert(
+                [
+                    'event_id' => $item->id()->toString(),
+                    'event_occured_at' => $item->occured_at(),
+                    'event_type_id' => $item->type_id()->toString(),
+                    'event_version' => $item->version(),
+                    'aggregate_id' => $item->payload()->id()->toString(),
+                    'payload' => json_encode($item->payload()->to_array())
                 ]
             );
         });
@@ -57,9 +75,20 @@ class Illuminate extends Abstracted
 
                 $item = $this->generate_item($element);
 
-                $connectionManager->table($this->table_name())->insert(
+                $connectionManager->table($this->log_table_name())->insert(
                     [
                         'item' => json_encode($item->to_array())
+                    ]
+                );
+                
+                $connectionManager->table($this->stream_table_name())->insert(
+                    [
+                        'event_id' => $item->id()->toString(),
+                        'event_occured_at' => $item->occured_at(),
+                        'event_type_id' => $item->type_id()->toString(),
+                        'event_version' => $item->version(),
+                        'aggregate_id' => $item->payload()->id()->toString(),
+                        'payload' => json_encode($item->payload()->to_array())
                     ]
                 );
             }

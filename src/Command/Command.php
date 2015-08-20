@@ -1,8 +1,8 @@
 <?php
 
-namespace OliveMedia\BoundedContext\Command;
+namespace BoundedContext\Command;
 
 interface Command
 {
-
+    public function id();
 }

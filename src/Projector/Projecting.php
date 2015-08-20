@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Projector;
 
-use BoundedContext\Projector\Projectable;
+use BoundedContext\Event\Event;
 
 trait Projecting
 {
@@ -18,44 +18,39 @@ trait Projecting
         return implode('_', $ret);
     }
 
-    private function get_function_name(Projectable $e)
+    private function get_function_name(Event $e)
     {
 
         $reflect = new \ReflectionClass($e);
-
         $class_name = $reflect->getShortName();
 
-        return 'when_' . $this->from_camel_case($class_name);
+        $namespaced_class = get_class($e);
+        $words = preg_split('#[\\\.]#', $namespaced_class, -1, PREG_SPLIT_NO_EMPTY);
+
+        return 'when_' . strtolower($words[2]) . '_' . strtolower($words[4]) . '_' . $this->from_camel_case($class_name);
     }
 
-    private function mutate(Projectable $e)
+    private function mutate(Projectable $item)
     {
 
-        $function = $this->get_function_name($e);
+        $function = $this->get_function_name($item->event());
 
         if (!method_exists($this, $function)) {
-            throw new \Exception('An event handler could not be found.');
+            return false;
         }
 
-        $this->$function($e);
-
-        $this->version += 1;
+        $this->$function($this->projection, $item);
     }
 
-    public function can_apply(Projectable $e)
+    protected function can_apply(Projectable $item)
     {
-        $function = $this->get_function_name($e);
+        $function = $this->get_function_name($item->event());
 
         return method_exists($this, $function);
     }
 
-    public function version()
+    protected function apply(Projectable $item)
     {
-        return $this->version;
-    }
-
-    public function apply(Projectable $e)
-    {
-        $this->mutate($e);
+        $this->mutate($item);
     }
 }

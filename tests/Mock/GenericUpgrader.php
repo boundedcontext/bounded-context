@@ -17,7 +17,7 @@ class GenericUpgrader extends AbstractUpgrader
     
     public function get()
     {
-        $id = new Uuid($this->item->payload()->id);
+        $id = new Uuid($this->payload['id']);
         $item = $this->payload['item'];
         
         return new GenericEvent($id, $item);

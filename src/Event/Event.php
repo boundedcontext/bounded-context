@@ -3,10 +3,8 @@
 use BoundedContext\Identifiable;
 use BoundedContext\Collection\Collectable;
 use BoundedContext\Projector\Projectable;
-use BoundedContext\Versionable;
 
-interface Event extends Projectable, Collectable, Identifiable, Versionable
+interface Event extends Identifiable, Collectable
 {
 
-    public function toArray();
 }
