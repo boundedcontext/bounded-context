@@ -2,6 +2,5 @@
 
 interface ValueObject
 {
-
     public function toString();
 }
