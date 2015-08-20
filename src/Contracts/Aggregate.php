@@ -4,7 +4,6 @@ namespace BoundedContext\Contracts;
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Versionable;
 
 interface Aggregate extends Identifiable, Versionable {
 

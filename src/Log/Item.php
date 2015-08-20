@@ -3,7 +3,7 @@
 use BoundedContext\Event\Event;
 use BoundedContext\Projector\Projectable;
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Versionable;
+use BoundedContext\Contracts\Versionable;
 use BoundedContext\Contracts\Identifiable;
 use BoundedContext\Collection\Collectable;
 

@@ -1,4 +1,4 @@
-<?php namespace BoundedContext;
+<?php namespace BoundedContext\Contracts;
 
 interface Versionable
 {

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92e934cc-9998-46b2-8a55-76c01403cfed" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Identifiable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Versionable.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Contracts/Aggregate.php" afterPath="$PROJECT_DIR$/src/Contracts/Aggregate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Event/Event.php" afterPath="$PROJECT_DIR$/src/Event/Event.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Item.php" afterPath="$PROJECT_DIR$/src/Log/Item.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Contracts/Projection.php" afterPath="$PROJECT_DIR$/src/Contracts/Projection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Contracts/Projector.php" afterPath="$PROJECT_DIR$/src/Contracts/Projector.php" />
     </list>
     <ignored path="bounded-context.iws" />
     <ignored path=".idea/workspace.xml" />

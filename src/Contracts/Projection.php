@@ -3,7 +3,6 @@
 namespace BoundedContext\Contracts;
 
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Versionable;
 
 interface Projection extends Versionable
 {
