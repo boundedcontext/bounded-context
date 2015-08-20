@@ -3,7 +3,6 @@
 namespace BoundedContext\Contracts;
 
 use BoundedContext\Collection\Collection;
-use BoundedContext\Identifiable;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Versionable;
 

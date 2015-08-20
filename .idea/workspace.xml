@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92e934cc-9998-46b2-8a55-76c01403cfed" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handlable.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handling.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Identifiable.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Contracts/Aggregate.php" afterPath="$PROJECT_DIR$/src/Contracts/Aggregate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Event/Event.php" afterPath="$PROJECT_DIR$/src/Event/Event.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Item.php" afterPath="$PROJECT_DIR$/src/Log/Item.php" />
     </list>
     <ignored path="bounded-context.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -334,7 +335,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />

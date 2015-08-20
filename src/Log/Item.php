@@ -4,7 +4,7 @@ use BoundedContext\Event\Event;
 use BoundedContext\Projector\Projectable;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Versionable;
-use BoundedContext\Identifiable;
+use BoundedContext\Contracts\Identifiable;
 use BoundedContext\Collection\Collectable;
 
 class Item implements Identifiable, Versionable, Projectable, Collectable
