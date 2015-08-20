@@ -2,38 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92e934cc-9998-46b2-8a55-76c01403cfed" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Command/Create/Command.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Command/Create/Handler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Aggregate/Aggregate.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Command/Handler/Handler.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Event/Stream/Stream.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Event/Upgrade/Upgrader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Event/Upgrade/Upgrading.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Log/Log.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Projection/Adapter/Abstracted.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Projection/Projection.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Projector/Projector.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Stream/Adapter/Memory.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Aggregate/AbstractAggregate.php" afterPath="$PROJECT_DIR$/src/Aggregate/AbstractAggregate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Event/AbstractEvent.php" afterPath="$PROJECT_DIR$/src/Event/AbstractEvent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Command/Handler/AbstractHandler.php" afterPath="$PROJECT_DIR$/src/Command/Handler/AbstractHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Projector/AbstractProjector.php" afterPath="$PROJECT_DIR$/src/Projector/AbstractProjector.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Adapter/Abstracted.php" afterPath="$PROJECT_DIR$/src/Log/Adapter/Abstracted.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Appendable.php" afterPath="$PROJECT_DIR$/src/Log/Appendable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Collection/Collection.php" afterPath="$PROJECT_DIR$/src/Collection/Collection.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Command/Command.php" afterPath="$PROJECT_DIR$/src/Command/Command.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Command/Create.php" afterPath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Command/Create.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Event/Created.php" afterPath="$PROJECT_DIR$/examples/Recruitment/Aggregate/User/Event/Created.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Event/Event.php" afterPath="$PROJECT_DIR$/src/Event/Event.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/Mock/GenericAppendable.php" afterPath="$PROJECT_DIR$/tests/Mock/GenericAppendable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/Mock/GenericUpgrader.php" afterPath="$PROJECT_DIR$/tests/Mock/GenericUpgrader.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Adapter/Illuminate.php" afterPath="$PROJECT_DIR$/src/Log/Adapter/Illuminate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Log/Item.php" afterPath="$PROJECT_DIR$/src/Log/Item.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Map/Map.php" afterPath="$PROJECT_DIR$/src/Map/Map.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Projector/Projecting.php" afterPath="$PROJECT_DIR$/src/Projector/Projecting.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Map/Route.php" afterPath="$PROJECT_DIR$/src/Map/Route.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Stream/Stream.php" afterPath="$PROJECT_DIR$/src/Stream/Stream.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.php" afterPath="$PROJECT_DIR$/test.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handlable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Handler/Handling.php" afterPath="" />
     </list>
     <ignored path="bounded-context.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -363,7 +334,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
