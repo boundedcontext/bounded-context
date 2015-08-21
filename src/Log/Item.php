@@ -1,26 +1,24 @@
 <?php namespace BoundedContext\Log;
 
 use BoundedContext\Contracts\Event;
-use BoundedContext\Projector\Projectable;
+use BoundedContext\ValueObject\DateTime;
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Contracts\Versionable;
-use BoundedContext\Contracts\Identifiable;
-use BoundedContext\Collection\Collectable;
+use BoundedContext\ValueObject\Version;
 
-class Item implements Identifiable, Versionable, Projectable, Collectable
+class Item implements \BoundedContext\Contracts\Item
 {
     private $id;
     private $type_id;
-    private $occured_at;
+    private $occurred_at;
     private $version;
     private $event;
 
-    public function __construct(Uuid $id, Uuid $type_id, \DateTime $occured_at, $version, Event $event)
+    public function __construct(Uuid $id, Uuid $type_id, DateTime $occurred_at, Version $version, Event $event)
     {
         $this->id = $id;
         $this->type_id = $type_id;
-        $this->occured_at = $occured_at;
-        $this->version = (int) $version;
+        $this->occurred_at = $occurred_at;
+        $this->version = $version;
         $this->event = $event;
     }
 
@@ -34,9 +32,9 @@ class Item implements Identifiable, Versionable, Projectable, Collectable
         return $this->type_id;
     }
 
-    public function occured_at()
+    public function occurred_at()
     {
-        return $this->occured_at;
+        return $this->occurred_at;
     }
 
     public function version()
@@ -49,14 +47,22 @@ class Item implements Identifiable, Versionable, Projectable, Collectable
         return $this->event;
     }
 
-    /*public function to_array()
+    public function toString()
     {
-        return [
-            'id' => $this->id->toString(),
-            'type_id' => $this->type_id->toString(),
-            'occured_at' => $this->occured_at->format(\DateTime::ISO8601),
-            'version' => (int) $this->version,
-            'payload' => $this->payload->to_array(),
-        ];
-    }*/
+        return $this->id->toString();
+    }
+
+    public function serialize()
+    {
+        $class_vars = (new \ReflectionObject($this))->getProperties(\ReflectionProperty::IS_PRIVATE);
+
+        $command = [];
+
+        foreach ($class_vars as $property) {
+            $name = $property->getName();
+            $command[$name] = $this->$name->serialize();
+        }
+
+        return $command;
+    }
 }

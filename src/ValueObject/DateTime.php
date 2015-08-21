@@ -1,21 +1,20 @@
 <?php namespace BoundedContext\ValueObject;
 
 use BoundedContext\Contracts\ValueObject;
-use Rhumsaa\Uuid\Uuid as RhumsaaUuid;
 
-class Uuid implements ValueObject
+class DateTime implements ValueObject
 {
 
-    private $uuid;
+    private $date_time;
 
-    public function __construct($uuid)
+    public function __construct($date_time = 'now')
     {
-        $this->uuid = RhumsaaUuid::fromString($uuid);
+        $this->date_time = new \DateTime($date_time);
     }
 
     public function toString()
     {
-        return $this->uuid->toString();
+        return $this->date_time->format(DATE_ISO8601);
     }
 
     public function serialize()
@@ -28,8 +27,8 @@ class Uuid implements ValueObject
         return ($this->toString() == $other->toString());
     }
 
-    public static function generate()
+    public static function now()
     {
-        return new Uuid(RhumsaaUuid::uuid4());
+        return new DateTime();
     }
 }
