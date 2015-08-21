@@ -2,7 +2,7 @@
 
 namespace BoundedContext\State;
 
-use BoundedContext\Event\Event;
+use BoundedContext\Contracts\Event;
 
 class State
 {

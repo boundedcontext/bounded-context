@@ -2,10 +2,9 @@
 
 namespace BoundedContext\Aggregate;
 
-use BoundedContext\State\State;
+use BoundedContext\Contracts\Event;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
-use BoundedContext\Event\Event;
 
 abstract class AbstractAggregate
 {

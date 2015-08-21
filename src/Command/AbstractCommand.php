@@ -1,9 +1,9 @@
-<?php namespace BoundedContext\Event;
+<?php namespace BoundedContext\Command;
 
-use BoundedContext\Contracts\Event;
+use BoundedContext\Contracts\Command;
 use BoundedContext\ValueObject\Uuid;
 
-class AbstractEvent implements Event
+class AbstractCommand implements Command
 {
     private $id;
 
@@ -19,7 +19,7 @@ class AbstractEvent implements Event
 
     public function toString()
     {
-        return $this->id;
+        return $this->id->toString();
     }
 
     public function serialize()

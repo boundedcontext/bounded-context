@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Log;
 
-use BoundedContext\Event\Event;
+use BoundedContext\Contracts\Event;
 use BoundedContext\Projector\Projectable;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Contracts\Versionable;
