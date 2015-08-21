@@ -32,4 +32,9 @@ class Uuid implements ValueObject
     {
         return new Uuid(RhumsaaUuid::uuid4());
     }
+
+    public static function deserialize($uuid)
+    {
+        return new Uuid(RhumsaaUuid::fromString($uuid));
+    }
 }

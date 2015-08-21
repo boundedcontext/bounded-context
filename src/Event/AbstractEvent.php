@@ -26,13 +26,36 @@ class AbstractEvent implements Event
     {
         $class_vars = (new \ReflectionObject($this))->getProperties(\ReflectionProperty::IS_PUBLIC);
 
-        $command = [];
+        $event = [
+            'id' => $this->id->serialize()
+        ];
 
         foreach ($class_vars as $property) {
             $name = $property->getName();
-            $command[$name] = $this->$name->serialize();
+            $event[$name] = $this->$name->serialize();
         }
 
-        return $command;
+        return $event;
+    }
+
+    public static function deserialize($array = [])
+    {
+        $event_class = get_called_class();
+        $class_params = (new \ReflectionClass($event_class))
+            ->getMethod('__construct')
+            ->getParameters();
+
+        $params = [];
+        foreach($class_params as $class_param)
+        {
+            $class = $class_param->getClass()->name;
+            $name = $class_param->name;
+
+            $params[] = $class::deserialize($array[$name]);
+        }
+
+        $event_class = new \ReflectionClass($event_class);
+
+        return $event_class->newInstanceArgs($params);
     }
 }

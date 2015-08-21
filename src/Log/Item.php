@@ -65,4 +65,9 @@ class Item implements \BoundedContext\Contracts\Item
 
         return $command;
     }
+
+    public static function deserialize($array = [])
+    {
+        dd($array);
+    }
 }

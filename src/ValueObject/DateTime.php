@@ -31,4 +31,9 @@ class DateTime implements ValueObject
     {
         return new DateTime();
     }
+
+    public static function deserialize($date_time)
+    {
+        return new DateTime($date_time);
+    }
 }

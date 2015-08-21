@@ -1,40 +1,31 @@
-<?php namespace BoundedContext\Map;
+<?php
 
+namespace BoundedContext\Map;
+
+use BoundedContext\Contracts\Event;
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Collection\Collection;
 
-class Map
+class Map implements \BoundedContext\Contracts\Map
 {
+    private $id_map;
+    private $event_class_map;
 
-    private $routes;
-    private $namespace_routes;
-
-    public function __construct(Collection $routes)
+    public function __construct(array $event_map = [])
     {
-        foreach ($routes as $route) {
-            $id = $route->id()->toString();
-            $class_namespace = $route->class_namespace();
-
-            $this->routes[$id] = $route;
-            $this->namespace_routes[$class_namespace] = $route;
+        foreach($event_map as $id => $event_class)
+        {
+            $this->id_map[$id] = $event_class;
+            $this->event_class_map[$event_class] = $id;
         }
     }
 
-    public function get_by_id(Uuid $id)
+    public function get_event_class(Uuid $id)
     {
-        if (!isset($this->routes[$id->toString()])) {
-            throw new \Exception('The route "' . $id->toString() . '" could not be found.');
-        }
-
-        return $this->routes[$id->toString()];
+        return $this->id_map[$id->toString()];
     }
 
-    public function get_by_namespace($class_namespace)
+    public function get_id(Event $class)
     {
-        if (!isset($this->namespace_routes[$class_namespace])) {
-            throw new \Exception('The route ' . $class_namespace . ' could not be found.');
-        }
-
-        return $this->namespace_routes[$class_namespace];
+        return new Uuid($this->event_class_map[get_class($class)]);
     }
 }

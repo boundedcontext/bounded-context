@@ -20,4 +20,9 @@ class Version implements ValueObject
     {
         return $this->toString();
     }
+
+    public static function deserialize($version)
+    {
+        return new Version($version);
+    }
 }

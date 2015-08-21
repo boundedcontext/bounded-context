@@ -28,11 +28,18 @@ class AbstractCommand implements Command
 
         $command = [];
 
+        $command['id'] = $this->id->serialize();
+
         foreach ($class_vars as $property) {
             $name = $property->getName();
             $command[$name] = $this->$name->serialize();
         }
 
         return $command;
+    }
+
+    public static function deserialize($params)
+    {
+
     }
 }
