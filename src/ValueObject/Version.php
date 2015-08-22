@@ -16,14 +16,9 @@ class Version implements ValueObject
         $this->version += 1;
     }
 
-    public function toString()
-    {
-        return $this->version;
-    }
-
     public function serialize()
     {
-        return $this->toString();
+        return $this->version;
     }
 
     public static function deserialize($version = null)

@@ -21,7 +21,7 @@ class Map implements \BoundedContext\Contracts\Map
 
     public function get_event_class(Uuid $id)
     {
-        return $this->id_map[$id->toString()];
+        return $this->id_map[$id->serialize()];
     }
 
     public function get_id(Event $class)

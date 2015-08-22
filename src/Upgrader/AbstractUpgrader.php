@@ -17,7 +17,7 @@ abstract class AbstractUpgrader implements Upgrader
         $this->schema = $schema;
         $this->version = $version;
 
-        if($version->toString() == 0)
+        if($version->serialize() == 0)
         {
             $this->schema->add('id');
         }

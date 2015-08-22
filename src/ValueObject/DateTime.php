@@ -4,7 +4,6 @@ use BoundedContext\Contracts\ValueObject;
 
 class DateTime implements ValueObject
 {
-
     private $date_time;
 
     public function __construct($date_time = 'now')
@@ -12,19 +11,14 @@ class DateTime implements ValueObject
         $this->date_time = new \DateTime($date_time);
     }
 
-    public function toString()
+    public function serialize()
     {
         return $this->date_time->format(DATE_ISO8601);
     }
 
-    public function serialize()
-    {
-        return $this->toString();
-    }
-
     public function equals(Uuid $other)
     {
-        return ($this->toString() == $other->toString());
+        return ($this->serialize() == $other->serialize());
     }
 
     public static function now()

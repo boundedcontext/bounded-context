@@ -11,13 +11,13 @@ trait Upgrading
     {
         return method_exists(
             $this,
-            $this->get_function_name($this->version->toString())
+            $this->get_function_name($this->version->serialize())
         );
     }
 
     protected function upgrade()
     {
-        $function = $this->get_function_name($this->version->toString());
+        $function = $this->get_function_name($this->version->serialize());
 
         if (!method_exists($this, $function)) {
             throw new \Exception('A upgrade handler could not be found.');

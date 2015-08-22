@@ -12,19 +12,14 @@ class Uuid implements ValueObject
         $this->uuid = RhumsaaUuid::fromString($uuid);
     }
 
-    public function toString()
+    public function serialize()
     {
         return $this->uuid->toString();
     }
 
-    public function serialize()
-    {
-        return $this->toString();
-    }
-
     public function equals(Uuid $other)
     {
-        return ($this->toString() == $other->toString());
+        return ($this->serialize() == $other->serialize());
     }
 
     public static function generate()
