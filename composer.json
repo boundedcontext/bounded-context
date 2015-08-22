@@ -1,6 +1,6 @@
 {
-    "name": "olivemedia/olive-media-bounded-context",
-    "description": "A basic framework for event sourced bounded contexts.",
+    "name": "lyonscf/bounded-context",
+    "description": "A framework for event-sourced bounded contexts.",
     "require": {
         "php": ">=5.4.0",
         "rhumsaa/uuid": "~2.8@dev"
