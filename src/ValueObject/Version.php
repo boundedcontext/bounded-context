@@ -11,6 +11,11 @@ class Version implements ValueObject
         $this->version = $version;
     }
 
+    public function increment()
+    {
+        $this->version += 1;
+    }
+
     public function toString()
     {
         return $this->version;

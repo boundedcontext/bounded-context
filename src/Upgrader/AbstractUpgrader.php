@@ -1,31 +1,25 @@
 <?php namespace BoundedContext\Upgrader;
 
-use BoundedContext\Log\Item;
+
+use BoundedContext\Contracts\Schema;
+use BoundedContext\Contracts\Upgrader;
+use BoundedContext\ValueObject\Version;
 
 abstract class AbstractUpgrader implements Upgrader
 {
     use Upgrading;
 
-    protected $item;
-    protected $payload;
-    protected $version;
-    protected $event;
+    private $schema;
+    private $version;
 
-    public function __construct(Item $item)
+    public function __construct(Schema $schema, Version $version)
     {
-        $this->item = $item;
-        $this->payload = (array) $item->payload();
-        $this->version = $item->version();
-        
-        $this->run();
-    }
-    
-    protected function run()
-    {
-        while($this->can_upgrade()){
-            $this->upgrade();
+        $this->schema = $schema;
+        $this->version = $version;
+
+        if($version->toString() == 0)
+        {
+            $this->schema->add('id');
         }
     }
-
-    abstract public function get();
 }
