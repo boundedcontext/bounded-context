@@ -1,7 +1,0 @@
-[
-    {
-        "id" : "c9dca633-2dce-487c-aca8-5e507ff54fb6",
-        "event_class" : "BoundedContext\Examples\Recruitment\Aggregate\User\Event\Created",
-        "upgrader_class" : "BoundedContext\Examples\Recruitment\Aggregate\User\Upgrader\Created"
-    }
-]
