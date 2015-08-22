@@ -5,7 +5,6 @@ use Rhumsaa\Uuid\Uuid as RhumsaaUuid;
 
 class Uuid implements ValueObject
 {
-
     private $uuid;
 
     public function __construct($uuid)
@@ -33,7 +32,7 @@ class Uuid implements ValueObject
         return new Uuid(RhumsaaUuid::uuid4());
     }
 
-    public static function deserialize($uuid)
+    public static function deserialize($uuid = null)
     {
         return new Uuid(RhumsaaUuid::fromString($uuid));
     }

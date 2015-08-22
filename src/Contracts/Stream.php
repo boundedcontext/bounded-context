@@ -1,6 +1,4 @@
-<?php
-
-namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts;
 
 use BoundedContext\ValueObject\Uuid;
 

@@ -32,7 +32,7 @@ class DateTime implements ValueObject
         return new DateTime();
     }
 
-    public static function deserialize($date_time)
+    public static function deserialize($date_time = null)
     {
         return new DateTime($date_time);
     }
