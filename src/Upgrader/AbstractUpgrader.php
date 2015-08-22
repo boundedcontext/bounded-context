@@ -22,4 +22,9 @@ abstract class AbstractUpgrader implements Upgrader
             $this->schema->add('id');
         }
     }
+
+    public function schema()
+    {
+        return $this->schema->get();
+    }
 }

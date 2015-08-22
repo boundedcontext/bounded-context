@@ -6,7 +6,7 @@ class Version implements ValueObject
 {
     private $version;
 
-    public function __construct($version)
+    public function __construct($version = 0)
     {
         $this->version = $version;
     }

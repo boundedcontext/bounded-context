@@ -8,7 +8,7 @@ class Schema implements \BoundedContext\Contracts\Schema
 
     public function __construct($schema = [])
     {
-        $this->schema = [];
+        $this->schema = $schema;
     }
 
     private function exists($key)
