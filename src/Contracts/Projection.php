@@ -12,5 +12,7 @@ interface Projection extends Versionable
 
     public function reset();
 
+    public function save();
+
     public function increment(Uuid $last_id, $can_apply);
 }

@@ -1,9 +1,8 @@
 <?php namespace BoundedContext\Projection;
 
-use BoundedContext\Contracts\Projection;
 use BoundedContext\ValueObject\Uuid;
 
-abstract class AbstractProjection implements Projection
+abstract class AbstractProjection
 {
     protected $last_id;
     protected $version;
@@ -35,7 +34,6 @@ abstract class AbstractProjection implements Projection
     {
         $this->last_id = null;
         $this->version = 0;
-        $this->items_streamed = 0;
     }
 
     public function increment(Uuid $last_id, $can_apply)
@@ -47,6 +45,5 @@ abstract class AbstractProjection implements Projection
         {
             $this->version += 1;
         }
-
     }
 }

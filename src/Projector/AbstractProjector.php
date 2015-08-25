@@ -49,6 +49,8 @@ abstract class AbstractProjector implements Projector
                 $this->can_apply($item)
             );
         }
+
+        $this->projection->save();
     }
 
     public function projection()
