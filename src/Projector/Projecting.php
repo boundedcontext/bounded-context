@@ -30,13 +30,16 @@ trait Projecting
 
     private function mutate(Projectable $item)
     {
-        if (!$this->can_apply($item)) {
+        if (!$this->can_apply($item))
+        {
             return false;
         }
 
         $function = $this->get_function_name($item->event());
 
         $this->$function($this->projection, $item);
+
+        $this->projection->increment_version();
     }
 
     protected function can_apply(Projectable $item)
@@ -48,6 +51,10 @@ trait Projecting
 
     protected function apply(Projectable $item)
     {
+        $this->projection->increment_count();
+
         $this->mutate($item);
+
+        $this->projection->set_last_id($item->id());
     }
 }

@@ -43,11 +43,6 @@ abstract class AbstractProjector implements Projector
             $item = $stream->next();
 
             $this->apply($item);
-
-            $this->projection->increment(
-                $item->id(),
-                $this->can_apply($item)
-            );
         }
 
         $this->projection->save();

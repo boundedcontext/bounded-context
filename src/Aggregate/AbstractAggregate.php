@@ -12,16 +12,18 @@ abstract class AbstractAggregate
     protected $state;
     protected $changes;
 
-    public function __construct(Uuid $id, Collection $events)
+    public function __construct(Uuid $id, Collection $items)
     {
         $this->id = $id;
         $this->changes = new Collection();
 
         $this->state = $this->generate();
 
-        foreach($events as $event)
+        foreach($items as $item)
         {
-            $this->apply($event);
+            $this->apply(
+                $item->event()
+            );
         }
 
         $this->flush();

@@ -7,14 +7,14 @@ use BoundedContext\Collection\Collection;
 
 use BoundedContext\Contracts\Aggregate;
 use BoundedContext\Contracts\Log;
-use BoundedContext\Contracts\Projection\AggregateCollections;
+use BoundedContext\Projector;
 
 abstract class AbstractRepository
 {
     private $log;
     private $projector;
 
-    public function __construct(Log $log, AggregateCollections\Projector $projector)
+    public function __construct(Log $log, Projector\AggregateCollections $projector)
     {
         $this->log = $log;
         $this->projector = $projector;

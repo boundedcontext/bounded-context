@@ -24,7 +24,7 @@ trait Upgrading
         }
 
         $this->$function($this->schema);
-        $this->version->increment();
+        $this->version = $this->version->increment();
     }
 
     public function run()

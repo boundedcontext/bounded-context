@@ -21,9 +21,9 @@ class Stream implements \BoundedContext\Contracts\Stream
         $this->limit = $limit;
         $this->chunk_size = $chunk_size;
 
-        $this->items = $this->log->get_collection(null, $this->chunk_size);
+        $this->items = [];
 
-        $this->last_item_id = null;
+        $this->last_item_id = Uuid::null();
     }
 
     public function last_id()
@@ -33,7 +33,7 @@ class Stream implements \BoundedContext\Contracts\Stream
 
     public function move_to(Uuid $id)
     {
-        $this->items = $this->log->get_collection($id, $this->chunk_size);
+        $this->items = $this->log->get_collection($id);
         $this->last_item_id = $id;
     }
 

@@ -1,6 +1,7 @@
 <?php namespace BoundedContext\Projection;
 
 use BoundedContext\ValueObject\Uuid;
+use BoundedContext\ValueObject\Version;
 
 abstract class AbstractProjection
 {
@@ -8,7 +9,7 @@ abstract class AbstractProjection
     protected $version;
     protected $count;
 
-    public function __construct(Uuid $last_id = null, $version = 0, $count = 0)
+    public function __construct(Uuid $last_id, Version $version, Version $count)
     {
         $this->last_id = $last_id;
         $this->version = $version;
@@ -32,18 +33,23 @@ abstract class AbstractProjection
 
     public function reset()
     {
-        $this->last_id = null;
-        $this->version = 0;
+        $this->last_id = Uuid::null();
+        $this->version = new Version(0);
+        $this->count = new Version(0);
     }
 
-    public function increment(Uuid $last_id, $can_apply)
+    public function set_last_id(Uuid $last_id)
     {
         $this->last_id = $last_id;
-        $this->count += 1;
+    }
 
-        if($can_apply)
-        {
-            $this->version += 1;
-        }
+    public function increment_version()
+    {
+        $this->version = $this->version->increment();
+    }
+
+    public function increment_count()
+    {
+        $this->count = $this->count->increment();
     }
 }

@@ -13,7 +13,9 @@ class Version implements ValueObject
 
     public function increment()
     {
-        $this->version += 1;
+        $new_version = $this->serialize() + 1;
+
+        return new Version($new_version);
     }
 
     public function serialize()
@@ -21,7 +23,7 @@ class Version implements ValueObject
         return $this->version;
     }
 
-    public static function deserialize($version = null)
+    public static function deserialize($version = 0)
     {
         return new Version($version);
     }

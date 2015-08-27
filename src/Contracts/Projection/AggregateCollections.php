@@ -1,12 +1,12 @@
 <?php
 
-namespace BoundedContext\Contracts\Projection\AggregateCollections;
+namespace BoundedContext\Contracts\Projection;
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\Log\Item;
 use BoundedContext\ValueObject\Uuid;
 
-interface Projection extends \BoundedContext\Contracts\Projection {
+interface AggregateCollections extends \BoundedContext\Contracts\Projection {
 
     public function exists(Uuid $id);
 
