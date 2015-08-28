@@ -1,6 +1,6 @@
 {
     "name": "lyonscf/bounded-context",
-    "description": "A framework for event-sourced bounded contexts.",
+    "description": "A library for event-sourced bounded contexts.",
     "require": {
         "php": ">=5.4.0",
         "ramsey/uuid": "~2.8"
@@ -18,6 +18,10 @@
         {
             "name": "Barry O'Sullivan",
             "email": "bosullivan@olivemedia.co"
+        },
+        {
+            "name": "Kiran Guragai",
+            "email": "kguragai@olivemedia.co"
         }
     ],
     "autoload": {
