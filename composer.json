@@ -1,14 +1,14 @@
 {
     "name": "lyonscf/bounded-context",
     "description": "A library for event-sourced bounded contexts.",
+    "license": "MIT",
     "require": {
         "php": ">=5.4.0",
         "ramsey/uuid": "~2.8"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.*",
-        "mockery/mockery": "dev-master",
-        "illuminate/database": "*"
+        "mockery/mockery": "dev-master"
     },
     "authors": [
         {
