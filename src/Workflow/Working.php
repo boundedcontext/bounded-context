@@ -38,7 +38,7 @@ trait Working
 
         $function = $this->get_function_name($item->event());
 
-        $this->$function($this->projection, $item);
+        $this->$function($item);
 
         $this->last_id = $item->id();
     }
