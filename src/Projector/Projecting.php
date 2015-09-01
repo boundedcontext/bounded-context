@@ -39,7 +39,7 @@ trait Projecting
 
         $this->$function($this->projection, $item);
 
-        $this->projection->increment_version();
+        $this->version = $this->version->increment();
     }
 
     protected function can_apply(Projectable $item)
@@ -51,10 +51,10 @@ trait Projecting
 
     protected function apply(Projectable $item)
     {
-        $this->projection->increment_count();
+        $this->count = $this->count->increment();
 
         $this->mutate($item);
 
-        $this->projection->set_last_id($item->id());
+        $this->last_id = $item->id();
     }
 }

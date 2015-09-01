@@ -4,7 +4,7 @@ namespace BoundedContext\State;
 
 use BoundedContext\Contracts\Event;
 
-class State
+abstract class AbstractState
 {
     private function from_camel_case($input)
     {

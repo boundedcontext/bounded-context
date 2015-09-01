@@ -3,6 +3,9 @@
 use BoundedContext\Contracts\Log;
 use BoundedContext\Contracts\Projection;
 use BoundedContext\Contracts\Projector;
+use BoundedContext\Stream\Stream;
+use BoundedContext\ValueObject\Uuid;
+use BoundedContext\ValueObject\Version;
 
 abstract class AbstractProjector implements Projector
 {
@@ -11,41 +14,59 @@ abstract class AbstractProjector implements Projector
     protected $log;
     protected $projection;
 
-    public function __construct(Log $log, Projection $projection)
+    protected $last_id;
+    protected $version;
+    protected $count;
+
+    public function __construct(
+        Log $log,
+        Projection $projection,
+        Uuid $last_id,
+        Version $version,
+        Version $count
+    )
     {
         $this->log = $log;
         $this->projection = $projection;
+
+        $this->last_id = $last_id;
+        $this->version = $version;
+        $this->count = $count;
     }
 
     public function version()
     {
-        return $this->projection->version();
+        return $this->version;
     }
 
     public function last_id()
     {
-        return $this->projection->last_id();
+        return $this->last_id;
+    }
+
+    public function count()
+    {
+        return $this->count;
     }
 
     public function reset()
     {
         $this->projection->reset();
+
+        $this->last_id = Uuid::null();
+        $this->version = new Version(0);
+        $this->count = new Version(0);
     }
 
-    public function play()
+    public function play($limit = 1000)
     {
-        $stream = $this->log->get_stream(
-            $this->projection->last_id()
-        );
+        $stream = new Stream($this->log, $this->last_id, $limit);
 
         while($stream->has_next())
         {
             $item = $stream->next();
-
             $this->apply($item);
         }
-
-        $this->projection->save();
     }
 
     public function projection()

@@ -4,6 +4,7 @@ namespace BoundedContext\Contracts;
 
 use BoundedContext\Contracts;
 use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Projection\AggregateCollections;
 
 /**
  * Interface Repository
@@ -13,9 +14,14 @@ interface Repository {
 
     /**
      * @param Log $log
-     * @param \BoundedContext\Projector\AggregateCollections $projector
+     * @param AggregateCollections\Projector $projector
+     * @param Aggregate $aggregate
      */
-    public function __construct(Contracts\Log $log, \BoundedContext\Projector\AggregateCollections $projector);
+    public function __construct(
+        Contracts\Log $log,
+        AggregateCollections\Projector $projector,
+        Aggregate $aggregate
+    );
 
     /**
      * @param Uuid $id

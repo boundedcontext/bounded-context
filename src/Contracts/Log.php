@@ -10,8 +10,6 @@ interface Log
 {
     public function reset();
 
-    public function get_stream(Uuid $starting_id);
-
     public function get_collection(Uuid $starting_id, $limit = 1000);
 
     public function append_collection(Collection $collection);

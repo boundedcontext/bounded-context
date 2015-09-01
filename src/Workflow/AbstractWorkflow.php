@@ -2,6 +2,7 @@
 
 use BoundedContext\Contracts\Log;
 use BoundedContext\Contracts\Workflow;
+use BoundedContext\Stream\Stream;
 use BoundedContext\ValueObject\Uuid;
 
 abstract class AbstractWorkflow implements Workflow
@@ -29,9 +30,7 @@ abstract class AbstractWorkflow implements Workflow
 
     public function play()
     {
-        $stream = $this->log->get_stream(
-            $this->last_id
-        );
+        $stream = new Stream($this->log, $this->last_id);
 
         while($stream->has_next())
         {

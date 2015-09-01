@@ -3,6 +3,7 @@
 namespace BoundedContext\Aggregate;
 
 use BoundedContext\Contracts\Event;
+use BoundedContext\Contracts\State;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
 
@@ -12,12 +13,12 @@ abstract class AbstractAggregate
     protected $state;
     protected $changes;
 
-    public function __construct(Uuid $id, Collection $items)
+    public function __construct(Uuid $id, State $state, Collection $items)
     {
         $this->id = $id;
-        $this->changes = new Collection();
+        $this->state = $state;
 
-        $this->state = $this->generate();
+        $this->changes = new Collection();
 
         foreach($items as $item)
         {
@@ -28,8 +29,6 @@ abstract class AbstractAggregate
 
         $this->flush();
     }
-
-    protected abstract function generate();
 
     private function check_event_belongs(Event $event)
     {
@@ -71,5 +70,4 @@ abstract class AbstractAggregate
         $this->state->apply($event);
         $this->changes->append($event);
     }
-
 }

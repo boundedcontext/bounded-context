@@ -2,9 +2,11 @@
 
 namespace BoundedContext\Contracts;
 
-interface Projector extends Versionable {
-
+interface Projector extends Versionable
+{
     public function last_id();
+
+    public function count();
 
     public function reset();
 

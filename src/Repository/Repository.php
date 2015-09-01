@@ -3,31 +3,37 @@
 namespace BoundedContext\Repository;
 
 use BoundedContext\ValueObject\Uuid;
-use BoundedContext\Collection\Collection;
-
 use BoundedContext\Contracts\Aggregate;
 use BoundedContext\Contracts\Log;
-use BoundedContext\Projector;
+use \BoundedContext\Projection\AggregateCollections;
 
-abstract class AbstractRepository
+class Repository implements \BoundedContext\Contracts\Repository
 {
     private $log;
     private $projector;
+    private $aggregate;
 
-    public function __construct(Log $log, Projector\AggregateCollections $projector)
+    public function __construct(
+        Log $log,
+        AggregateCollections\Projector $projector,
+        Aggregate $aggregate
+    )
     {
         $this->log = $log;
         $this->projector = $projector;
+        $this->aggregate = $aggregate;
     }
-
-    abstract protected function generate(Uuid $id, Collection $events);
 
     public function get(Uuid $id)
     {
         $projection = $this->projector->projection();
 
-        return $this->generate(
+        $aggregate_class = get_class($this->aggregate);
+        $state = clone $this->aggregate->state();
+
+        return new $aggregate_class(
             $id,
+            $state,
             $projection->get($id)
         );
     }
