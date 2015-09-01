@@ -10,31 +10,29 @@ use \BoundedContext\Projection\AggregateCollections;
 class Repository implements \BoundedContext\Contracts\Repository
 {
     private $log;
-    private $projector;
+    private $projection;
     private $aggregate;
 
     public function __construct(
         Log $log,
-        AggregateCollections\Projector $projector,
+        AggregateCollections\Projection $projection,
         Aggregate $aggregate
     )
     {
         $this->log = $log;
-        $this->projector = $projector;
+        $this->projection = $projection;
         $this->aggregate = $aggregate;
     }
 
     public function get(Uuid $id)
     {
-        $projection = $this->projector->projection();
-
         $aggregate_class = get_class($this->aggregate);
         $state = clone $this->aggregate->state();
 
         return new $aggregate_class(
             $id,
             $state,
-            $projection->get($id)
+            $this->projection->get($id)
         );
     }
 
@@ -43,8 +41,6 @@ class Repository implements \BoundedContext\Contracts\Repository
         $this->log->append_collection(
             $aggregate->changes()
         );
-
-        $this->projector->play();
 
         $aggregate->flush();
     }

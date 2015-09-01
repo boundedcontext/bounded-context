@@ -14,12 +14,12 @@ interface Repository {
 
     /**
      * @param Log $log
-     * @param AggregateCollections\Projector $projector
+     * @param AggregateCollections\Projection $projection
      * @param Aggregate $aggregate
      */
     public function __construct(
         Contracts\Log $log,
-        AggregateCollections\Projector $projector,
+        AggregateCollections\Projection $projection,
         Aggregate $aggregate
     );
 
