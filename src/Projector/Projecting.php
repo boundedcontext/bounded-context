@@ -37,7 +37,16 @@ trait Projecting
 
         $function = $this->get_function_name($item->payload());
 
-        $this->$function($this->projection, $item);
+        $reflectionMethod = new \ReflectionMethod($this, $function);
+        $reflectionMethod->setAccessible(true);
+        $reflectionMethod->invokeArgs(
+            $this,
+            array(
+                $item->payload(),
+                $this->projection,
+                $item
+            )
+        );
 
         $this->version = $this->version->increment();
     }

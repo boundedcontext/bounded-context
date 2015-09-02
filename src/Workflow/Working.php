@@ -38,7 +38,12 @@ trait Working
 
         $function = $this->get_function_name($item->payload());
 
-        $this->$function($item);
+        $reflectionMethod = new \ReflectionMethod($this, $function);
+        $reflectionMethod->setAccessible(true);
+        $reflectionMethod->invokeArgs(
+            $this,
+            array($item->payload(), $item)
+        );
 
         $this->last_id = $item->id();
     }
