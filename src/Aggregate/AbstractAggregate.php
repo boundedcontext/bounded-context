@@ -23,7 +23,7 @@ abstract class AbstractAggregate
         foreach($items as $item)
         {
             $this->apply(
-                $item->event()
+                $item->payload()
             );
         }
 

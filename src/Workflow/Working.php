@@ -36,7 +36,7 @@ trait Working
             return false;
         }
 
-        $function = $this->get_function_name($item->event());
+        $function = $this->get_function_name($item->payload());
 
         $this->$function($item);
 
@@ -45,7 +45,7 @@ trait Working
 
     protected function can_apply(Item $item)
     {
-        $function = $this->get_function_name($item->event());
+        $function = $this->get_function_name($item->payload());
 
         return method_exists($this, $function);
     }

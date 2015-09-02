@@ -2,30 +2,30 @@
 
 namespace BoundedContext\Map;
 
-use BoundedContext\Contracts\Event;
+use BoundedContext\Collection\Collectable;
 use BoundedContext\ValueObject\Uuid;
 
 class Map implements \BoundedContext\Contracts\Map
 {
     private $id_map;
-    private $event_class_map;
+    private $class_map;
 
-    public function __construct(array $event_map = [])
+    public function __construct(array $class_map = [])
     {
-        foreach($event_map as $id => $event_class)
+        foreach($class_map as $id => $class)
         {
-            $this->id_map[$id] = $event_class;
-            $this->event_class_map[$event_class] = $id;
+            $this->id_map[$id] = $class;
+            $this->class_map[$class] = $id;
         }
     }
 
-    public function get_event_class(Uuid $id)
+    public function get_class(Uuid $id)
     {
         return $this->id_map[$id->serialize()];
     }
 
-    public function get_id(Event $class)
+    public function get_id(Collectable $class)
     {
-        return new Uuid($this->event_class_map[get_class($class)]);
+        return new Uuid($this->class_map[get_class($class)]);
     }
 }

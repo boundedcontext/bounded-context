@@ -35,7 +35,7 @@ trait Projecting
             return false;
         }
 
-        $function = $this->get_function_name($item->event());
+        $function = $this->get_function_name($item->payload());
 
         $this->$function($this->projection, $item);
 
@@ -44,7 +44,7 @@ trait Projecting
 
     protected function can_apply(Projectable $item)
     {
-        $function = $this->get_function_name($item->event());
+        $function = $this->get_function_name($item->payload());
 
         return method_exists($this, $function);
     }
