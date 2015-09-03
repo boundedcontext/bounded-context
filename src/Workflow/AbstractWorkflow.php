@@ -1,5 +1,6 @@
 <?php namespace BoundedContext\Workflow;
 
+use BoundedContext\Contracts\Dispatcher;
 use BoundedContext\Contracts\Log;
 use BoundedContext\Contracts\Workflow;
 use BoundedContext\Stream\Stream;
@@ -10,11 +11,13 @@ abstract class AbstractWorkflow implements Workflow
     use Working;
 
     protected $log;
+    protected $bus;
     protected $last_id;
 
-    public function __construct(Log $log, Uuid $last_id)
+    public function __construct(Log $log, Dispatcher $bus, Uuid $last_id)
     {
         $this->log = $log;
+        $this->bus = $bus;
         $this->last_id = $last_id;
     }
 
