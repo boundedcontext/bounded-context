@@ -1,12 +1,15 @@
 <?php namespace BoundedContext\Contracts;
 
+use BoundedContext\ValueObject\Uuid;
+
 interface Identifiable
 {
 
     /**
-     * Gets a unique Uuid identifier.
+     * Returns the objects unique identifier.
      *
-     * @return \BoundedContext\Uuid
+     * @return Uuid
      */
+
     public function id();
 }
