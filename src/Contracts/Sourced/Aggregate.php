@@ -2,7 +2,7 @@
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\Identifiable;
-use BoundedContext\Contracts\State;
+use BoundedContext\Contracts\Sourced\State;
 use BoundedContext\Contracts\Versionable;
 use BoundedContext\ValueObject\Uuid;
 

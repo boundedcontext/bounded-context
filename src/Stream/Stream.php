@@ -6,7 +6,7 @@ use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\ValueObject\Uuid;
 
-class Stream implements \BoundedContext\Contracts\Stream
+class Stream implements \BoundedContext\Contracts\Sourced\Stream
 {
     private $log;
     private $last_id;
