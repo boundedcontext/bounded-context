@@ -5,7 +5,7 @@ namespace BoundedContext\Map;
 use BoundedContext\Collection\Collectable;
 use BoundedContext\ValueObject\Uuid;
 
-class Map implements \BoundedContext\Contracts\Map
+class Map
 {
     private $id_map;
     private $class_map;
