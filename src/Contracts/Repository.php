@@ -4,6 +4,7 @@ namespace BoundedContext\Contracts;
 
 use BoundedContext\Contracts;
 use BoundedContext\Contracts\Sourced\Aggregate;
+use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Projection\AggregateCollections;
 
@@ -19,7 +20,7 @@ interface Repository {
      * @param Aggregate $aggregate
      */
     public function __construct(
-        Contracts\Log $log,
+        Sourced\Log $log,
         AggregateCollections\Projection $projection,
         Aggregate $aggregate
     );

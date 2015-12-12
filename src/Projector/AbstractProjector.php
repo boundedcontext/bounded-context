@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Projector;
 
-use BoundedContext\Contracts\Log;
+use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\Contracts\Projection;
 use BoundedContext\Contracts\Projector;
 use BoundedContext\Stream\Stream;

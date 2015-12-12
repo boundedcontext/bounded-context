@@ -1,6 +1,6 @@
 <?php
 
-namespace BoundedContext\Contracts;
+namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Collection\Collectable;
 use BoundedContext\Collection\Collection;
