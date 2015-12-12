@@ -7,7 +7,7 @@ use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\Log;
 use \BoundedContext\Projection\AggregateCollections;
 
-class Repository implements \BoundedContext\Contracts\Repository
+class Repository implements \BoundedContext\Contracts\Sourced\Repository
 {
     private $log;
     private $projection;

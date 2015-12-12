@@ -1,8 +1,9 @@
 <?php
 
-namespace BoundedContext\Contracts;
+namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Contracts;
+use BoundedContext\Contracts\Sourced;
 use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\ValueObject\Uuid;

@@ -3,7 +3,7 @@
 namespace BoundedContext\Command\Handler;
 
 use BoundedContext\Contracts\Command;
-use BoundedContext\Contracts\Repository;
+use BoundedContext\Contracts\Sourced\Repository;
 
 abstract class AbstractHandler
 {
