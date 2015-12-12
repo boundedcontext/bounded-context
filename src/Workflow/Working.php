@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Workflow;
 
-use BoundedContext\Contracts\Event;
+use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Sourced\Item;
 
 trait Working

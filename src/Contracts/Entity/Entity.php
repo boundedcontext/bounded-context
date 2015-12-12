@@ -1,4 +1,4 @@
-<?php namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts\Entity;
 
 use BoundedContext\Collection\Collectable;
 use BoundedContext\Contracts\Core\Identifiable;

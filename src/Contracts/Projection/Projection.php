@@ -1,6 +1,6 @@
 <?php
 
-namespace BoundedContext\Contracts;
+namespace BoundedContext\Contracts\Projection;
 
 interface Projection
 {

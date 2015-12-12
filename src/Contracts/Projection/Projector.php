@@ -1,6 +1,6 @@
 <?php
 
-namespace BoundedContext\Contracts;
+namespace BoundedContext\Contracts\Projection;
 
 use BoundedContext\Contracts\Core\Versionable;
 

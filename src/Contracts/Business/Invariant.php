@@ -1,4 +1,4 @@
-<?php namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts\Business;
 
 use BoundedContext\Invariant\Exception;
 

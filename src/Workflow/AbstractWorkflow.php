@@ -2,7 +2,7 @@
 
 use BoundedContext\Contracts\Bus\Dispatcher;
 use BoundedContext\Contracts\Sourced\Log;
-use BoundedContext\Contracts\Workflow;
+use BoundedContext\Contracts\Workflow\Workflow;
 use BoundedContext\Stream\Stream;
 use BoundedContext\ValueObject\Uuid;
 

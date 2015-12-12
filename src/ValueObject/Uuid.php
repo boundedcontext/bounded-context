@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\ValueObject;
 
-use BoundedContext\Contracts\ValueObject;
+use BoundedContext\Contracts\ValueObject\ValueObject;
 use Rhumsaa\Uuid\Uuid as RhumsaaUuid;
 
 class Uuid implements ValueObject

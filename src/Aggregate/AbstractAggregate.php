@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Aggregate;
 
-use BoundedContext\Contracts\Event;
+use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Sourced\State;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;

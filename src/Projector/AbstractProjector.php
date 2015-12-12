@@ -1,8 +1,8 @@
 <?php namespace BoundedContext\Projector;
 
 use BoundedContext\Contracts\Sourced\Log;
-use BoundedContext\Contracts\Projection;
-use BoundedContext\Contracts\Projector;
+use BoundedContext\Contracts\Projection\Projection;
+use BoundedContext\Contracts\Projection\Projector;
 use BoundedContext\Stream\Stream;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\ValueObject\Version;

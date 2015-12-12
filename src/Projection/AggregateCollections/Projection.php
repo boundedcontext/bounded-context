@@ -6,7 +6,7 @@ use BoundedContext\Collection\Collection;
 use BoundedContext\Log\Item;
 use BoundedContext\ValueObject\Uuid;
 
-interface Projection extends \BoundedContext\Contracts\Projection {
+interface Projection extends \BoundedContext\Contracts\Projection\Projection {
 
     public function exists(Uuid $id);
 

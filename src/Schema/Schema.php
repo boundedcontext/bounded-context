@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Schema;
 
-class Schema implements \BoundedContext\Contracts\Schema
+class Schema implements \BoundedContext\Contracts\Schema\Schema
 {
     private $schema;
 

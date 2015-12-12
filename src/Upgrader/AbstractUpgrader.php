@@ -1,8 +1,8 @@
 <?php namespace BoundedContext\Upgrader;
 
 
-use BoundedContext\Contracts\Schema;
-use BoundedContext\Contracts\Upgrader;
+use BoundedContext\Contracts\Schema\Schema;
+use BoundedContext\Contracts\Schema\Upgrader;
 use BoundedContext\ValueObject\Version;
 
 abstract class AbstractUpgrader implements Upgrader

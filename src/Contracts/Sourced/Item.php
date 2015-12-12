@@ -2,7 +2,7 @@
 
 use BoundedContext\Collection\Collectable;
 use BoundedContext\Contracts\Core\Identifiable;
-use BoundedContext\Contracts\ValueObject;
+use BoundedContext\Contracts\ValueObject\ValueObject;
 use BoundedContext\Contracts\Core\Versionable;
 use BoundedContext\Projector\Projectable;
 

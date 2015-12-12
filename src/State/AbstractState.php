@@ -2,7 +2,7 @@
 
 namespace BoundedContext\State;
 
-use BoundedContext\Contracts\Event;
+use BoundedContext\Contracts\Event\Event;
 
 abstract class AbstractState
 {
