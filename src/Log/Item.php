@@ -5,7 +5,7 @@ use BoundedContext\ValueObject\DateTime;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\ValueObject\Version;
 
-class Item implements \BoundedContext\Contracts\Item
+class Item implements \BoundedContext\Contracts\Sourced\Item
 {
     private $id;
     private $type_id;

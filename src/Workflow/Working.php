@@ -1,7 +1,7 @@
 <?php namespace BoundedContext\Workflow;
 
 use BoundedContext\Contracts\Event;
-use BoundedContext\Contracts\Item;
+use BoundedContext\Contracts\Sourced\Item;
 
 trait Working
 {

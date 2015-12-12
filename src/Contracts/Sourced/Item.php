@@ -1,6 +1,9 @@
-<?php namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Collection\Collectable;
+use BoundedContext\Contracts\Identifiable;
+use BoundedContext\Contracts\ValueObject;
+use BoundedContext\Contracts\Versionable;
 use BoundedContext\Projector\Projectable;
 
 interface Item extends Identifiable, Collectable, Versionable, Projectable, ValueObject
