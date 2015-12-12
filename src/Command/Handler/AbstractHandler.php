@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Command\Handler;
 
-use BoundedContext\Contracts\Command;
+use BoundedContext\Contracts\Command\Command;
 use BoundedContext\Contracts\Sourced\Repository;
 
 abstract class AbstractHandler

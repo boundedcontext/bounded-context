@@ -1,6 +1,7 @@
-<?php namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts\Bus;
 
 use BoundedContext\Collection\Collection;
+use BoundedContext\Contracts\Command\Command;
 
 interface Dispatcher
 {

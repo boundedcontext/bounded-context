@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Serializable;
 
-use BoundedContext\Contracts\Identifiable;
+use BoundedContext\Contracts\Core\Identifiable;
 use BoundedContext\ValueObject\Uuid;
 
 class AbstractIdentifiedSerializable extends AbstractSerializable implements Identifiable

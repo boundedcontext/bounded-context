@@ -1,9 +1,9 @@
 <?php namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Collection\Collection;
-use BoundedContext\Contracts\Identifiable;
+use BoundedContext\Contracts\Core\Identifiable;
 use BoundedContext\Contracts\Sourced\State;
-use BoundedContext\Contracts\Versionable;
+use BoundedContext\Contracts\Core\Versionable;
 use BoundedContext\ValueObject\Uuid;
 
 interface Aggregate extends Identifiable, Versionable

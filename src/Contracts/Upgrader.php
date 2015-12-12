@@ -2,6 +2,7 @@
 
 namespace BoundedContext\Contracts;
 
+use BoundedContext\Contracts\Core\Versionable;
 use BoundedContext\ValueObject\Version;
 
 interface Upgrader extends Versionable {

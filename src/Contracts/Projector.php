@@ -2,6 +2,8 @@
 
 namespace BoundedContext\Contracts;
 
+use BoundedContext\Contracts\Core\Versionable;
+
 interface Projector extends Versionable
 {
     public function last_id();

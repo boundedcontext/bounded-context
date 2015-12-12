@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Log;
 
-use BoundedContext\Contracts\Serializable;
+use BoundedContext\Contracts\Core\Serializable;
 use BoundedContext\ValueObject\DateTime;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\ValueObject\Version;

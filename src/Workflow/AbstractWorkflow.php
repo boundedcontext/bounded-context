@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Workflow;
 
-use BoundedContext\Contracts\Dispatcher;
+use BoundedContext\Contracts\Bus\Dispatcher;
 use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\Contracts\Workflow;
 use BoundedContext\Stream\Stream;
