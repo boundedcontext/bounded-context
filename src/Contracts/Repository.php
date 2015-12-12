@@ -3,6 +3,7 @@
 namespace BoundedContext\Contracts;
 
 use BoundedContext\Contracts;
+use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Projection\AggregateCollections;
 

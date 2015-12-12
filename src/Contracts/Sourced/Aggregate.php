@@ -1,6 +1,9 @@
-<?php namespace BoundedContext\Contracts;
+<?php namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Collection\Collection;
+use BoundedContext\Contracts\Identifiable;
+use BoundedContext\Contracts\State;
+use BoundedContext\Contracts\Versionable;
 use BoundedContext\ValueObject\Uuid;
 
 interface Aggregate extends Identifiable, Versionable
