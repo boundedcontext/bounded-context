@@ -3,9 +3,10 @@
 namespace BoundedContext\Command\Handler;
 
 use BoundedContext\Contracts\Command\Command;
+use BoundedContext\Contracts\Command\Handler;
 use BoundedContext\Contracts\Sourced\Repository;
 
-abstract class AbstractHandler
+abstract class AbstractHandler implements Handler
 {
 	protected $repository;
 
