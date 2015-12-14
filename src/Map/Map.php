@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Map;
 
-use BoundedContext\Collection\Collectable;
+use BoundedContext\Contracts\Core\Collectable;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Contracts\ValueObject\Identifier;
 

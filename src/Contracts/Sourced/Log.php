@@ -2,7 +2,7 @@
 
 namespace BoundedContext\Contracts\Sourced;
 
-use BoundedContext\Collection\Collectable;
+use BoundedContext\Contracts\Core\Collectable;
 use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\ValueObject\Identifier;
 

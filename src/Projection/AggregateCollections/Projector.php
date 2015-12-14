@@ -3,7 +3,7 @@
 namespace BoundedContext\Projection\AggregateCollections;
 
 use BoundedContext\Projector\AbstractProjector;
-use BoundedContext\Projector\Projectable;
+use BoundedContext\Contracts\Core\Projectable;
 
 class Projector extends AbstractProjector
 {
