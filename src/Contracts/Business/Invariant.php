@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Contracts\Business;
 
-use BoundedContext\Invariant\Exception;
+use BoundedContext\Contracts\Business\InvariantException;
 
 interface Invariant
 {
@@ -15,7 +15,7 @@ interface Invariant
     /**
      * Asserts the invariant.
      *
-     * @throws Exception
+     * @throws InvariantException
      * @return void
      */
 
