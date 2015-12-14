@@ -3,17 +3,18 @@
 namespace BoundedContext\Aggregate;
 
 use BoundedContext\Contracts\Event\Event;
+use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\State;
-use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Collection\Collection;
+use BoundedContext\Contracts\ValueObject\Identifier;
 
-abstract class AbstractAggregate
+abstract class AbstractAggregate implements Aggregate
 {
     protected $id;
     protected $state;
     protected $changes;
 
-    public function __construct(Uuid $id, State $state, Collection $items)
+    public function __construct(Identifier $id, State $state, Collection $items)
     {
         $this->id = $id;
         $this->state = $state;

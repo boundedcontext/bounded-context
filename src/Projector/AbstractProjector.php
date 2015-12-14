@@ -3,8 +3,9 @@
 use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\Contracts\Projection\Projection;
 use BoundedContext\Contracts\Projection\Projector;
+use BoundedContext\Contracts\ValueObject\Identifier;
+use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Stream\Stream;
-use BoundedContext\ValueObject\Uuid;
 use BoundedContext\ValueObject\Version;
 
 abstract class AbstractProjector implements Projector
@@ -21,7 +22,7 @@ abstract class AbstractProjector implements Projector
     public function __construct(
         Log $log,
         Projection $projection,
-        Uuid $last_id,
+        Identifier $last_id,
         Version $version,
         Version $count
     )
@@ -49,11 +50,11 @@ abstract class AbstractProjector implements Projector
         return $this->count;
     }
 
-    public function reset()
+    public function reset(IdentifierGenerator $generator)
     {
-        $this->projection->reset();
+        $this->projection->reset($generator);
 
-        $this->last_id = Uuid::null();
+        $this->last_id = $generator->null();
         $this->version = new Version(0);
         $this->count = new Version(0);
     }

@@ -2,17 +2,13 @@
 
 namespace BoundedContext\Contracts\Projection;
 
+use BoundedContext\Contracts\Core\Resetable;
+use BoundedContext\Contracts\Core\Playable;
 use BoundedContext\Contracts\Core\Versionable;
 
-interface Projector extends Versionable
+interface Projector extends Resetable, Playable, Versionable
 {
-    public function last_id();
-
     public function count();
-
-    public function reset();
-
-    public function play();
 
     public function projection();
 }

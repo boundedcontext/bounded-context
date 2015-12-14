@@ -2,23 +2,10 @@
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\Core\Identifiable;
-use BoundedContext\Contracts\Sourced\State;
 use BoundedContext\Contracts\Core\Versionable;
-use BoundedContext\ValueObject\Uuid;
 
 interface Aggregate extends Identifiable, Versionable
 {
-    /**
-     * Create a new instance of an Aggregate.
-     *
-     * @param Uuid $id
-     * @param State $state
-     * @param Collection $collection
-     * @return void
-     */
-
-    public function __construct(Uuid $id, State $state, Collection $collection);
-
     /**
      * Get the current State of the Aggregate.
      *

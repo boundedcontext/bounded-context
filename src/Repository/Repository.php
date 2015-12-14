@@ -2,9 +2,9 @@
 
 namespace BoundedContext\Repository;
 
-use BoundedContext\ValueObject\Uuid;
 use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\Log;
+use BoundedContext\Contracts\ValueObject\Identifier;
 use \BoundedContext\Projection\AggregateCollections;
 
 class Repository implements \BoundedContext\Contracts\Sourced\Repository
@@ -24,7 +24,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Repository
         $this->aggregate = $aggregate;
     }
 
-    public function get(Uuid $id)
+    public function get(Identifier $id)
     {
         $aggregate_class = get_class($this->aggregate);
         $state = clone $this->aggregate->state();

@@ -2,11 +2,10 @@
 
 namespace BoundedContext\Contracts\Workflow;
 
-interface Workflow
+use BoundedContext\Contracts\Core\Playable;
+use BoundedContext\Contracts\Core\Resetable;
+
+interface Workflow extends Resetable, Playable
 {
-    public function last_id();
 
-    public function reset();
-
-    public function play();
 }

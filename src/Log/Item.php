@@ -1,8 +1,8 @@
 <?php namespace BoundedContext\Log;
 
 use BoundedContext\Contracts\Core\Serializable;
+use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\ValueObject\DateTime;
-use BoundedContext\ValueObject\Uuid;
 use BoundedContext\ValueObject\Version;
 
 class Item implements \BoundedContext\Contracts\Sourced\Item
@@ -13,7 +13,7 @@ class Item implements \BoundedContext\Contracts\Sourced\Item
     private $version;
     private $payload;
 
-    public function __construct(Uuid $id, Uuid $type_id, DateTime $occurred_at, Version $version, Serializable $payload)
+    public function __construct(Identifier $id, Identifier $type_id, DateTime $occurred_at, Version $version, Serializable $payload)
     {
         $this->id = $id;
         $this->type_id = $type_id;

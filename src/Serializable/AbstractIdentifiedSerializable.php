@@ -1,13 +1,13 @@
 <?php namespace BoundedContext\Serializable;
 
 use BoundedContext\Contracts\Core\Identifiable;
-use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Contracts\ValueObject\Identifier;
 
 class AbstractIdentifiedSerializable extends AbstractSerializable implements Identifiable
 {
     protected $id;
 
-    public function __construct(Uuid $id)
+    public function __construct(Identifier $id)
     {
         $this->id = $id;
     }

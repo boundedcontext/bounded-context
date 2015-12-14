@@ -4,9 +4,7 @@ namespace BoundedContext\Contracts\Sourced;
 
 use BoundedContext\Contracts;
 use BoundedContext\Contracts\Sourced;
-use BoundedContext\Contracts\Sourced\Aggregate;
-use BoundedContext\Contracts\Sourced\Log;
-use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Projection\AggregateCollections;
 
 /**
@@ -27,10 +25,10 @@ interface Repository {
     );
 
     /**
-     * @param Uuid $id
-     * @return Aggregate
+     * @param Identifier $id
+     * @return \BoundedContext\Contracts\Sourced\Aggregate
      */
-    public function get(Uuid $id);
+    public function get(Identifier $id);
 
     /**
      * @param Aggregate $aggregate

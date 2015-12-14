@@ -2,9 +2,10 @@
 
 use BoundedContext\Contracts\Bus\Dispatcher;
 use BoundedContext\Contracts\Sourced\Log;
+use BoundedContext\Contracts\ValueObject\Identifier;
+use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Contracts\Workflow\Workflow;
 use BoundedContext\Stream\Stream;
-use BoundedContext\ValueObject\Uuid;
 
 abstract class AbstractWorkflow implements Workflow
 {
@@ -14,7 +15,7 @@ abstract class AbstractWorkflow implements Workflow
     protected $bus;
     protected $last_id;
 
-    public function __construct(Log $log, Dispatcher $bus, Uuid $last_id)
+    public function __construct(Log $log, Dispatcher $bus, Identifier $last_id)
     {
         $this->log = $log;
         $this->bus = $bus;
@@ -26,14 +27,14 @@ abstract class AbstractWorkflow implements Workflow
         return $this->last_id;
     }
 
-    public function reset()
+    public function reset(IdentifierGenerator $generator)
     {
-        $this->last_id = Uuid::null();
+        $this->last_id = $generator->null();
     }
 
-    public function play()
+    public function play($limit = 1000)
     {
-        $stream = new Stream($this->log, $this->last_id);
+        $stream = new Stream($this->log, $this->last_id, $limit);
 
         while($stream->has_next())
         {

@@ -2,7 +2,9 @@
 
 namespace BoundedContext\Contracts\Projection;
 
-interface Projection
+use BoundedContext\Contracts\Core\Resetable;
+
+interface Projection extends Resetable
 {
-    public function reset();
+
 }

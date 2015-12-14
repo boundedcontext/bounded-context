@@ -4,7 +4,7 @@ namespace BoundedContext\Stream;
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\Sourced\Log;
-use BoundedContext\ValueObject\Uuid;
+use BoundedContext\Contracts\ValueObject\Identifier;
 
 class Stream implements \BoundedContext\Contracts\Sourced\Stream
 {
@@ -18,7 +18,7 @@ class Stream implements \BoundedContext\Contracts\Sourced\Stream
 
     private $items;
 
-    public function __construct(Log $log, Uuid $last_id, $limit = 1000, $chunk_size = 1000)
+    public function __construct(Log $log, Identifier $last_id, $limit = 1000, $chunk_size = 1000)
     {
         $this->log = $log;
         $this->last_id = $last_id;
