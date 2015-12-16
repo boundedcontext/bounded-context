@@ -3,7 +3,7 @@
 
 use BoundedContext\Contracts\Schema\Schema;
 use BoundedContext\Contracts\Schema\Upgrader;
-use BoundedContext\ValueObject\Version;
+use BoundedContext\ValueObject\Integer;
 
 abstract class AbstractUpgrader implements Upgrader
 {
@@ -12,7 +12,7 @@ abstract class AbstractUpgrader implements Upgrader
     private $schema;
     private $version;
 
-    public function __construct(Schema $schema, Version $version)
+    public function __construct(Schema $schema, Integer $version)
     {
         $this->schema = $schema;
         $this->version = $version;

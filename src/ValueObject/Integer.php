@@ -2,7 +2,7 @@
 
 use BoundedContext\Contracts\ValueObject\ValueObject;
 
-class Version extends AbstractValueObject implements ValueObject
+class Integer extends AbstractValueObject implements ValueObject
 {
     private $version;
 
@@ -15,7 +15,14 @@ class Version extends AbstractValueObject implements ValueObject
     {
         $new_version = $this->serialize() + 1;
 
-        return new Version($new_version);
+        return new Integer($new_version);
+    }
+
+    public function decrement()
+    {
+        $new_version = $this->serialize() - 1;
+
+        return new Integer($new_version);
     }
 
     public function serialize()
@@ -25,6 +32,6 @@ class Version extends AbstractValueObject implements ValueObject
 
     public static function deserialize($version = 0)
     {
-        return new Version($version);
+        return new Integer($version);
     }
 }

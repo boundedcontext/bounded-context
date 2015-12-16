@@ -6,7 +6,7 @@ use BoundedContext\Contracts\Projection\Projector;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Stream\Stream;
-use BoundedContext\ValueObject\Version;
+use BoundedContext\ValueObject\Integer;
 
 abstract class AbstractProjector implements Projector
 {
@@ -23,8 +23,8 @@ abstract class AbstractProjector implements Projector
         Log $log,
         Projection $projection,
         Identifier $last_id,
-        Version $version,
-        Version $count
+        Integer $version,
+        Integer $count
     )
     {
         $this->log = $log;
@@ -55,8 +55,8 @@ abstract class AbstractProjector implements Projector
         $this->projection->reset($generator);
 
         $this->last_id = $generator->null();
-        $this->version = new Version(0);
-        $this->count = new Version(0);
+        $this->version = new Integer(0);
+        $this->count = new Integer(0);
     }
 
     public function play($limit = 1000)

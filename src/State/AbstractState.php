@@ -3,7 +3,7 @@
 namespace BoundedContext\State;
 
 use BoundedContext\Contracts\Event\Event;
-use BoundedContext\ValueObject\Version;
+use BoundedContext\ValueObject\Integer;
 
 abstract class AbstractState
 {
@@ -11,7 +11,7 @@ abstract class AbstractState
 
     public function __construct()
     {
-        $this->version = new Version(0);
+        $this->version = new Integer(0);
     }
 
     private function from_camel_case($input)

@@ -4,7 +4,7 @@ use BoundedContext\Contracts\Core\Serializable;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\ValueObject\AbstractValueObject;
 use BoundedContext\ValueObject\DateTime;
-use BoundedContext\ValueObject\Version;
+use BoundedContext\ValueObject\Integer;
 
 class Item extends AbstractValueObject implements \BoundedContext\Contracts\Sourced\Item
 {
@@ -14,7 +14,7 @@ class Item extends AbstractValueObject implements \BoundedContext\Contracts\Sour
     private $version;
     private $payload;
 
-    public function __construct(Identifier $id, Identifier $type_id, DateTime $occurred_at, Version $version, Serializable $payload)
+    public function __construct(Identifier $id, Identifier $type_id, DateTime $occurred_at, Integer $version, Serializable $payload)
     {
         $this->id = $id;
         $this->type_id = $type_id;
