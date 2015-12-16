@@ -2,7 +2,7 @@
 
 use BoundedContext\Contracts\ValueObject\Identifier as IdentifierVO;
 
-interface Identifier
+interface Identifier extends ValueObject
 {
     /**
      * Generates a new random Identifier.

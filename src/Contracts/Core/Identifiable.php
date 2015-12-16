@@ -4,7 +4,6 @@ use BoundedContext\Contracts\ValueObject\Identifier;
 
 interface Identifiable
 {
-
     /**
      * Returns the objects unique identifier.
      *

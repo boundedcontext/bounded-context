@@ -3,9 +3,9 @@
 namespace BoundedContext\Contracts\Workflow;
 
 use BoundedContext\Contracts\Core\Playable;
-use BoundedContext\Contracts\Core\Resetable;
+use BoundedContext\Contracts\Core\ResetableByGenerator;
 
-interface Workflow extends Resetable, Playable
+interface Workflow extends ResetableByGenerator, Playable
 {
 
 }

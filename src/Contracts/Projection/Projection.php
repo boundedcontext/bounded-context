@@ -1,6 +1,4 @@
-<?php
-
-namespace BoundedContext\Contracts\Projection;
+<?php namespace BoundedContext\Contracts\Projection;
 
 use BoundedContext\Contracts\Core\Resetable;
 

@@ -1,10 +1,10 @@
 <?php namespace BoundedContext\Collection;
 
 use BoundedContext\Contracts\Core\Collectable;
+use BoundedContext\Contracts\Collection\Collection as CollectionContract;
 
-class Collection implements \Iterator
+class Collection implements CollectionContract
 {
-
     private $key;
     private $items;
 
@@ -44,7 +44,7 @@ class Collection implements \Iterator
         $this->items[] = $c;
     }
 
-    public function append_collection(Collection $other)
+    public function append_collection(CollectionContract $other)
     {
         foreach($other as $item)
         {

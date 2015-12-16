@@ -1,6 +1,6 @@
 <?php namespace BoundedContext\Contracts\Sourced;
 
-use BoundedContext\Collection\Collection;
+use BoundedContext\Contracts\Collection\Collection;
 use BoundedContext\Contracts\Core\Identifiable;
 use BoundedContext\Contracts\Core\Versionable;
 

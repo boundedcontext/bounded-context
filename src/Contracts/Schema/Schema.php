@@ -1,6 +1,4 @@
-<?php
-
-namespace BoundedContext\Contracts\Schema;
+<?php namespace BoundedContext\Contracts\Schema;
 
 interface Schema
 {
