@@ -2,13 +2,22 @@
 
 use BoundedContext\Contracts\Core\Versionable;
 use BoundedContext\Contracts\Schema\Schema;
-use BoundedContext\ValueObject\Version;
 
 interface Upgrader extends Versionable {
 
-    public function __construct(Schema $schema, Version $version);
+    /**
+     * Runs the upgrader.
+     *
+     * @return void
+     */
 
     public function run();
+
+    /**
+     * Returns the current Schema.
+     *
+     * @return Schema
+     */
 
     public function schema();
 }

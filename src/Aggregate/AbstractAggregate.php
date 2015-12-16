@@ -1,12 +1,10 @@
-<?php
-
-namespace BoundedContext\Aggregate;
+<?php namespace BoundedContext\Aggregate;
 
 use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\State;
-use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\ValueObject\Identifier;
+use BoundedContext\Collection\Collection;
 
 abstract class AbstractAggregate implements Aggregate
 {
