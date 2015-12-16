@@ -2,9 +2,10 @@
 
 namespace BoundedContext\Contracts\Sourced;
 
+use BoundedContext\Contracts\Core\Versionable;
 use BoundedContext\Contracts\Event\Event;
 
-interface State
+interface State extends Versionable
 {
     /**
      * Applies a new Event to the State.

@@ -2,7 +2,7 @@
 
 use BoundedContext\Contracts\ValueObject\ValueObject;
 
-class Version implements ValueObject
+class Version extends AbstractValueObject implements ValueObject
 {
     private $version;
 

@@ -2,7 +2,7 @@
 
 use BoundedContext\Contracts\ValueObject\ValueObject;
 
-class DateTime implements ValueObject
+class DateTime extends AbstractValueObject implements ValueObject
 {
     private $date_time;
 
@@ -14,11 +14,6 @@ class DateTime implements ValueObject
     public function serialize()
     {
         return $this->date_time->format(DATE_ISO8601);
-    }
-
-    public function equals(Uuid $other)
-    {
-        return ($this->serialize() == $other->serialize());
     }
 
     public static function now()

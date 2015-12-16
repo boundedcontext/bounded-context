@@ -33,7 +33,12 @@ abstract class AbstractAggregate implements Aggregate
     {
         if(!$event->id()->equals($this->id))
         {
-            throw new \Exception("Event [".get_class($event)."] ".$event->id()->toString()." does not belong to Aggregate ".$this->id()->toString().".");
+            throw new \Exception("
+            Event [".get_class($event)."] ".$event->id()->serialize().
+                " does not belong to Aggregate ".
+                $this->id()->serialize().
+                "."
+            );
         }
     }
 

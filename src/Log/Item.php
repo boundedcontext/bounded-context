@@ -2,10 +2,11 @@
 
 use BoundedContext\Contracts\Core\Serializable;
 use BoundedContext\Contracts\ValueObject\Identifier;
+use BoundedContext\ValueObject\AbstractValueObject;
 use BoundedContext\ValueObject\DateTime;
 use BoundedContext\ValueObject\Version;
 
-class Item implements \BoundedContext\Contracts\Sourced\Item
+class Item extends AbstractValueObject implements \BoundedContext\Contracts\Sourced\Item
 {
     private $id;
     private $type_id;
