@@ -5,7 +5,7 @@ namespace BoundedContext\Repository;
 use BoundedContext\Contracts\Sourced\Aggregate;
 use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\Contracts\ValueObject\Identifier;
-use \BoundedContext\Projection\AggregateCollections;
+use BoundedContext\Projection\AggregateCollections;
 
 class Repository implements \BoundedContext\Contracts\Sourced\Repository
 {

@@ -2,10 +2,10 @@
 
 namespace BoundedContext\Contracts\Sourced;
 
-use BoundedContext\Contracts\Core\Versionable;
+use BoundedContext\Contracts\Core\Snapshotable;
 use BoundedContext\Contracts\Event\Event;
 
-interface State extends Versionable
+interface State extends Snapshotable
 {
     /**
      * Applies a new Event to the State.

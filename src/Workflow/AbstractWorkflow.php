@@ -2,45 +2,17 @@
 
 use BoundedContext\Contracts\Bus\Dispatcher;
 use BoundedContext\Contracts\Sourced\Log;
-use BoundedContext\Contracts\ValueObject\Identifier;
-use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
-use BoundedContext\Contracts\Workflow\Workflow;
-use BoundedContext\Stream\Stream;
+use BoundedContext\Player\AbstractPlayer;
+use BoundedContext\Player\Snapshot;
 
-abstract class AbstractWorkflow implements Workflow
+class AbstractWorkflow extends AbstractPlayer
 {
-    use Working;
-
-    protected $log;
     protected $bus;
-    protected $last_id;
 
-    public function __construct(Log $log, Dispatcher $bus, Identifier $last_id)
+    public function __construct(Log $log, Dispatcher $bus, Snapshot $snapshot)
     {
-        $this->log = $log;
+        parent::__construct($log, $snapshot);
+
         $this->bus = $bus;
-        $this->last_id = $last_id;
-    }
-
-    public function last_id()
-    {
-        return $this->last_id;
-    }
-
-    public function reset(IdentifierGenerator $generator)
-    {
-        $this->last_id = $generator->null();
-    }
-
-    public function play($limit = 1000)
-    {
-        $stream = new Stream($this->log, $this->last_id, $limit);
-
-        while($stream->has_next())
-        {
-            $item = $stream->next();
-
-            $this->apply($item);
-        }
     }
 }

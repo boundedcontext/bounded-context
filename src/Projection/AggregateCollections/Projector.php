@@ -1,6 +1,4 @@
-<?php
-
-namespace BoundedContext\Projection\AggregateCollections;
+<?php namespace BoundedContext\Projection\AggregateCollections;
 
 use BoundedContext\Projector\AbstractProjector;
 use BoundedContext\Contracts\Core\Projectable;
@@ -16,8 +14,8 @@ class Projector extends AbstractProjector
     {
         $this->projection->append($item);
 
-        $this->version = $this->version->increment();
-        $this->count = $this->count->increment();
-        $this->last_id = $item->id();
+        return $this->snapshot->take(
+            $item->id()
+        );
     }
 }

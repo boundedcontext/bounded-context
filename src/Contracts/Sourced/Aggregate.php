@@ -2,9 +2,8 @@
 
 use BoundedContext\Contracts\Collection\Collection;
 use BoundedContext\Contracts\Core\Identifiable;
-use BoundedContext\Contracts\Core\Versionable;
 
-interface Aggregate extends Identifiable, Versionable
+interface Aggregate extends Identifiable
 {
     /**
      * Get the current State of the Aggregate.

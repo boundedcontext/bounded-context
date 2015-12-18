@@ -12,21 +12,12 @@ abstract class AbstractAggregate implements Aggregate
     protected $state;
     protected $changes;
 
-    public function __construct(Identifier $id, State $state, Collection $items)
+    public function __construct(Identifier $id, State $state)
     {
         $this->id = $id;
         $this->state = $state;
 
         $this->changes = new Collection();
-
-        foreach($items as $item)
-        {
-            $this->apply(
-                $item->payload()
-            );
-        }
-
-        $this->flush();
     }
 
     private function check_event_belongs(Event $event)
@@ -50,11 +41,6 @@ abstract class AbstractAggregate implements Aggregate
     public function state()
     {
         return $this->state;
-    }
-
-    public function version()
-    {
-        return $this->state->version();
     }
 
     public function changes()

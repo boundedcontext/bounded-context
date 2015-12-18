@@ -1,10 +1,11 @@
-<?php namespace BoundedContext\Projector;
+<?php namespace BoundedContext\Player;
 
 use BoundedContext\Contracts\Core\Projectable;
 use BoundedContext\Contracts\Event\Event;
 
-trait Projecting
+trait Playing
 {
+    protected $snapshot;
 
     private function from_camel_case($input)
     {
@@ -31,11 +32,6 @@ trait Projecting
 
     private function mutate(Projectable $item)
     {
-        if (!$this->can_apply($item))
-        {
-            return false;
-        }
-
         $function = $this->get_function_name($item->payload());
 
         $reflectionMethod = new \ReflectionMethod($this, $function);
@@ -48,8 +44,6 @@ trait Projecting
                 $item
             )
         );
-
-        $this->version = $this->version->increment();
     }
 
     protected function can_apply(Projectable $item)
@@ -61,10 +55,17 @@ trait Projecting
 
     protected function apply(Projectable $item)
     {
-        $this->count = $this->count->increment();
+        if (!$this->can_apply($item))
+        {
+            return $this->snapshot->skip(
+                $item->id()
+            );
+        }
 
         $this->mutate($item);
 
-        $this->last_id = $item->id();
+        return $this->snapshot->take(
+            $item->id()
+        );
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace BoundedContext\Contracts\Workflow;
+<?php namespace BoundedContext\Contracts\Player;
 
 use BoundedContext\Contracts\ValueObject\Identifier;
 
@@ -6,15 +6,16 @@ interface Repository
 {
     /**
      * @param Identifier $id
-     * @return Workflow
+     * @return Player
      */
 
     public function get(Identifier $id);
 
     /**
-     * @param Workflow $workflow
+     * @param Player $player
      * @return void
      */
 
-    public function save(Workflow $workflow);
+    public function save(Player $player);
 }
+

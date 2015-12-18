@@ -3,17 +3,10 @@
 namespace BoundedContext\State;
 
 use BoundedContext\Contracts\Event\Event;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\Contracts\Sourced\State;
 
-abstract class AbstractState
+abstract class AbstractState implements State
 {
-    private $version;
-
-    public function __construct()
-    {
-        $this->version = new Integer(0);
-    }
-
     private function from_camel_case($input)
     {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
@@ -49,11 +42,7 @@ abstract class AbstractState
     public function apply(Event $event)
     {
         $this->mutate($event);
-        $this->version->increment();
-    }
 
-    public function version()
-    {
-        return $this->version->serialize();
+
     }
 }

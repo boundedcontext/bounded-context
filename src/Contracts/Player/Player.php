@@ -1,12 +1,10 @@
-<?php
-
-namespace BoundedContext\Contracts\Workflow;
+<?php namespace BoundedContext\Contracts\Player;
 
 use BoundedContext\Contracts\Core\Playable;
 use BoundedContext\Contracts\Core\ResetableByGenerator;
 use BoundedContext\Contracts\Core\Snapshotable;
 
-interface Workflow extends ResetableByGenerator, Playable, Snapshotable
+interface Player extends ResetableByGenerator, Playable, Snapshotable
 {
 
 }
