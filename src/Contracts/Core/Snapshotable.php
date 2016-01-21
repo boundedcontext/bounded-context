@@ -1,11 +1,11 @@
 <?php namespace BoundedContext\Contracts\Core;
 
-use BoundedContext\Contracts\Core\Snapshot\Snapshot;
+use BoundedContext\Contracts\Snapshot\Snapshot;
 
 interface Snapshotable
 {
     /**
-     * Returns the current snapshot of the Snapshotable object.
+     * Returns the current Snapshot of the Snapshotable object.
      *
      * @return Snapshot
      */

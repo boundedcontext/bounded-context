@@ -11,6 +11,11 @@ class Integer extends AbstractValueObject implements ValueObject
         $this->version = $version;
     }
 
+    public function reset()
+    {
+        return new Integer();
+    }
+
     public function increment()
     {
         $new_version = $this->serialize() + 1;

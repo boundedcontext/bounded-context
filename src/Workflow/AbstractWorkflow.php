@@ -1,9 +1,9 @@
 <?php namespace BoundedContext\Workflow;
 
 use BoundedContext\Contracts\Bus\Dispatcher;
-use BoundedContext\Contracts\Sourced\Log;
+use BoundedContext\Contracts\Sourced\Log\Log;
 use BoundedContext\Player\AbstractPlayer;
-use BoundedContext\Player\Snapshot;
+use BoundedContext\Player\Snapshot\Snapshot;
 
 class AbstractWorkflow extends AbstractPlayer
 {

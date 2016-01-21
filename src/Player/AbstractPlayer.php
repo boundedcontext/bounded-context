@@ -1,29 +1,39 @@
 <?php namespace BoundedContext\Player;
 
-use BoundedContext\Contracts\Player\Player;
-use BoundedContext\Contracts\Sourced\Log;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
+use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
+use BoundedContext\Contracts\Player\Player;
+use BoundedContext\Contracts\Sourced\Log\Log;
+use BoundedContext\Player\Snapshot\Snapshot;
 use BoundedContext\Stream\Stream;
-use BoundedContext\ValueObject\Integer;
 
 abstract class AbstractPlayer implements Player
 {
     use Playing;
 
+    protected $identifier_generator;
+    protected $datetime_generator;
     protected $log;
     protected $snapshot;
 
-    public function __construct(Log $log, Snapshot $snapshot)
+    public function __construct(
+        IdentifierGenerator $identifier_generator,
+        DateTimeGenerator $datetime_generator,
+        Log $log,
+        Snapshot $snapshot
+    )
     {
+        $this->identifier_generator = $identifier_generator;
+        $this->datetime_generator = $datetime_generator;
         $this->log = $log;
         $this->snapshot = $snapshot;
     }
 
-    public function reset(IdentifierGenerator $generator)
+    public function reset()
     {
-        $this->snapshot = new Snapshot(
-            $generator->null(),
-            new Integer(0)
+        $this->snapshot->reset(
+            $this->identifier_generator,
+            $this->datetime_generator
         );
     }
 

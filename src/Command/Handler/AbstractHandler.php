@@ -1,19 +1,53 @@
-<?php
-
-namespace BoundedContext\Command\Handler;
+<?php namespace BoundedContext\Command\Handler;
 
 use BoundedContext\Contracts\Command\Command;
 use BoundedContext\Contracts\Command\Handler;
-use BoundedContext\Contracts\Sourced\Repository;
+use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Factory as SnapshotFactory;
+use BoundedContext\Contracts\Sourced\Aggregate\Repository as AggregateRepository;
+use BoundedContext\Contracts\Business\Invariant\Factory as InvariantFactory;
+use BoundedContext\Contracts\Service\Factory as ServiceFactory;
+
 
 abstract class AbstractHandler implements Handler
 {
-	protected $repository;
+    protected $snapshot_factory;
+	protected $aggregate_repository;
+    protected $invariant_factory;
+    protected $service_factory;
 
-	public function __construct(Repository $repository)
+	public function __construct(
+        SnapshotFactory $snapshot_factory,
+        AggregateRepository $aggregate_repository,
+        InvariantFactory $invariant_factory,
+        ServiceFactory $service_factory
+    )
 	{
-		$this->repository = $repository;
+        $this->snapshot_factory = $snapshot_factory;
+		$this->aggregate_repository = $aggregate_repository;
+        $this->invariant_factory = $invariant_factory;
+        $this->service_factory = $service_factory;
 	}
+
+    protected function assert($class, $params = [])
+    {
+        $invariant = $this->invariant_factory->by_class($class, $params);
+
+        $invariant->assert();
+
+        return true;
+    }
+
+    protected function is_satisfied($class, $params = [])
+    {
+        $invariant = $this->invariant_factory->by_class($class, $params);
+
+        return $invariant->is_satisfied();
+    }
+
+    protected function service($class)
+    {
+        return $this->service_factory->by_class($class);
+    }
 
 	private function from_camel_case($input)
 	{
@@ -50,8 +84,14 @@ abstract class AbstractHandler implements Handler
 			throw new \Exception("Command [".get_class($command)."] does not have a hander.");
 		}
 
-		$handler = $this->get_handler_name($command);
+        $aggregate = $this->aggregate_repository->by_snapshot(
+            $this->snapshot_factory->command($command)
+        );
 
-		return $this->$handler($command);
+        $handler = $this->get_handler_name($command);
+
+        $this->$handler($aggregate, $command);
+
+        $this->aggregate_repository->save($aggregate);
 	}
 }

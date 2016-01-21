@@ -18,4 +18,3 @@ interface Repository
 
     public function save(Player $player);
 }
-

@@ -31,11 +31,6 @@ class Schema implements \BoundedContext\Contracts\Schema\Schema
         return $this->schema[$key];
     }
 
-    public function get()
-    {
-        return $this->schema;
-    }
-
     public function add($key, \Closure $changes = null)
     {
         if($this->exists($key))
@@ -85,5 +80,10 @@ class Schema implements \BoundedContext\Contracts\Schema\Schema
         }
 
         unset($this->schema[$key]);
+    }
+
+    public function serialize()
+    {
+        return $this->schema;
     }
 }

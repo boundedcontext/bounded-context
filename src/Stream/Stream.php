@@ -3,7 +3,7 @@
 namespace BoundedContext\Stream;
 
 use BoundedContext\Collection\Collection;
-use BoundedContext\Contracts\Sourced\Log;
+use BoundedContext\Contracts\Sourced\Log\Log;
 use BoundedContext\Contracts\ValueObject\Identifier;
 
 class Stream

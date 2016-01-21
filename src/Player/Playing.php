@@ -1,11 +1,27 @@
 <?php namespace BoundedContext\Player;
 
-use BoundedContext\Contracts\Core\Projectable;
+use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
 use BoundedContext\Contracts\Event\Event;
+use BoundedContext\Contracts\Event\Factory;
+use BoundedContext\Contracts\Event\Snapshot\Snapshot;
 
 trait Playing
 {
+
+    /**
+     * @var DateTimeGenerator $datetime_generator
+     */
+    protected $datetime_generator;
+
+    /**
+     * @var \BoundedContext\Player\Snapshot\Snapshot $snapshot
+     */
     protected $snapshot;
+
+    /**
+     * @var Factory $event_factory
+     */
+    protected $event_factory;
 
     private function from_camel_case($input)
     {
@@ -30,42 +46,39 @@ trait Playing
         return 'when_' . strtolower($words[1]) . '_' . strtolower($words[3]) . '_' . $this->from_camel_case($class_name);
     }
 
-    private function mutate(Projectable $item)
+    protected function can_apply(Event $event)
     {
-        $function = $this->get_function_name($item->payload());
-
-        $reflectionMethod = new \ReflectionMethod($this, $function);
-        $reflectionMethod->setAccessible(true);
-        $reflectionMethod->invokeArgs(
-            $this,
-            array(
-                $item->payload(),
-                $this->projection,
-                $item
-            )
-        );
-    }
-
-    protected function can_apply(Projectable $item)
-    {
-        $function = $this->get_function_name($item->payload());
+        $function = $this->get_function_name($event);
 
         return method_exists($this, $function);
     }
 
-    protected function apply(Projectable $item)
+    private function mutate($function, Event $event, Snapshot $snapshot)
     {
-        if (!$this->can_apply($item))
+        $this->$function($event, $snapshot);
+    }
+
+    protected function apply(Snapshot $event_snapshot)
+    {
+        $event = $this->event_factory->snapshot($event_snapshot);
+
+        if (!$this->can_apply($event))
         {
             return $this->snapshot->skip(
-                $item->id()
+                $event_snapshot->id(),
+                $this->datetime_generator
             );
         }
 
-        $this->mutate($item);
+        $this->mutate(
+            $this->get_function_name($event),
+            $event,
+            $event_snapshot
+        );
 
         return $this->snapshot->take(
-            $item->id()
+            $event_snapshot->id(),
+            $this->datetime_generator
         );
     }
 }

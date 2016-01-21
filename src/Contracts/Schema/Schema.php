@@ -3,14 +3,6 @@
 interface Schema
 {
     /**
-     * Gets the schema as an array.
-     *
-     * @return array
-     */
-
-    public function get();
-
-    /**
      * Adds a new structure to the Schema by key.
      *
      * @param string $key
@@ -48,4 +40,12 @@ interface Schema
      */
 
     public function remove($key);
+
+    /**
+     * Gets the schema as an array.
+     *
+     * @return array
+     */
+
+    public function serialize();
 }
