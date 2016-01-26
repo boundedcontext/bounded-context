@@ -1,14 +1,15 @@
 <?php namespace BoundedContext\Contracts\Player;
 
-use BoundedContext\Contracts\Command\Handler;
+use BoundedContext\Contracts\Player\Snapshot\Snapshot;
 
 interface Factory
 {
     /**
-     * Returns a Player for a Handler.
+     * Returns a Player by a Snapshot.
      *
+     * @param Snapshot $snapshot
      * @return Player $player
      */
 
-    public function handler(Handler $handler);
+    public function snapshot(Snapshot $snapshot);
 }

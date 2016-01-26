@@ -2,9 +2,15 @@
 
 use BoundedContext\Contracts\Core\Playable;
 use BoundedContext\Contracts\Core\Resetable;
-use BoundedContext\Contracts\Core\Snapshotable;
+use BoundedContext\Player\Snapshot\Snapshot;
 
-interface Player extends Resetable, Playable, Snapshotable
+interface Player extends Resetable, Playable
 {
+    /**
+     * Returns the current Snapshot of the Player.
+     *
+     * @return Snapshot
+     */
 
+    public function snapshot();
 }

@@ -1,23 +1,11 @@
 <?php namespace BoundedContext\Player;
 
-use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
 use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Event\Factory;
 use BoundedContext\Contracts\Event\Snapshot\Snapshot;
 
 trait Playing
 {
-
-    /**
-     * @var DateTimeGenerator $datetime_generator
-     */
-    protected $datetime_generator;
-
-    /**
-     * @var \BoundedContext\Player\Snapshot\Snapshot $snapshot
-     */
-    protected $snapshot;
-
     /**
      * @var Factory $event_factory
      */

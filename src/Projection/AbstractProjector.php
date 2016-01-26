@@ -13,9 +13,9 @@ abstract class AbstractProjector extends AbstractPlayer implements \BoundedConte
     protected $projection;
 
     public function __construct(
+        Projection $projection,
         IdentifierGenerator $identifier_generator,
         DateTimeGenerator $datetime_generator,
-        Projection $projection,
         Log $log,
         Snapshot $snapshot
     )

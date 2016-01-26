@@ -1,8 +1,6 @@
 <?php namespace BoundedContext\ValueObject;
 
-use BoundedContext\Contracts\ValueObject\ValueObject;
-
-class DateTime extends AbstractValueObject implements ValueObject
+class DateTime extends AbstractValueObject implements \BoundedContext\Contracts\ValueObject\DateTime
 {
     private $date_time;
 

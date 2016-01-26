@@ -5,7 +5,7 @@ use BoundedContext\Contracts\ValueObject\DateTime;
 use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Snapshot\AbstractSnapshot;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Version;
 
 class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Player\Snapshot\Snapshot
 {
@@ -13,7 +13,7 @@ class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Pla
 
     public function __construct(
         Identifier $id,
-        Integer $version,
+        Version $version,
         DateTime $occurred_at,
         Identifier $last_id
     )

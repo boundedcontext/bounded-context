@@ -3,7 +3,7 @@
 use BoundedContext\Contracts\ValueObject\DateTime;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\ValueObject\AbstractValueObject;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Version;
 
 abstract class AbstractSnapshot extends AbstractValueObject
 {
@@ -13,7 +13,7 @@ abstract class AbstractSnapshot extends AbstractValueObject
 
     public function __construct(
         Identifier $id,
-        Integer $version,
+        Version $version,
         DateTime $occurred_at
     )
     {

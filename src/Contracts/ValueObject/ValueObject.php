@@ -1,8 +1,9 @@
 <?php namespace BoundedContext\Contracts\ValueObject;
 
+use BoundedContext\Contracts\Core\Collectable;
 use BoundedContext\Contracts\Core\Serializable;
 
-interface ValueObject extends Serializable
+interface ValueObject extends Serializable, Collectable
 {
 
     /*
