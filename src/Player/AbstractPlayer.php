@@ -4,7 +4,7 @@ use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
 use BoundedContext\Contracts\Player\Player;
 use BoundedContext\Contracts\Sourced\Log\Log;
-use BoundedContext\Player\Snapshot\Snapshot;
+use BoundedContext\Contracts\Player\Snapshot\Snapshot;
 use BoundedContext\Stream\Stream;
 
 abstract class AbstractPlayer implements Player
@@ -31,7 +31,7 @@ abstract class AbstractPlayer implements Player
 
     public function reset()
     {
-        $this->snapshot->reset(
+        $this->snapshot = $this->snapshot->reset(
             $this->identifier_generator,
             $this->datetime_generator
         );

@@ -19,7 +19,7 @@ abstract class AbstractValueObject
 
         foreach($properties as $property)
         {
-            $serialised[$property->getName()] = $property->getValue()->serialize();
+            $serialised[$property->getName()] = $property->getValue($this)->serialize();
         }
 
         return $serialised;

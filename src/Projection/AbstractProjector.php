@@ -1,12 +1,12 @@
 <?php namespace BoundedContext\Projection;
 
+use BoundedContext\Contracts\Player\Snapshot\Snapshot;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Contracts\Generator\DateTime as DateTimeGenerator;
 use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Sourced\Log\Log;
 use BoundedContext\Contracts\Projection\Projection;
 use BoundedContext\Player\AbstractPlayer;
-use BoundedContext\Player\Snapshot\Snapshot;
 
 abstract class AbstractProjector extends AbstractPlayer implements \BoundedContext\Contracts\Projection\Projector
 {
