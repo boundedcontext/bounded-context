@@ -1,15 +1,15 @@
 <?php namespace BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot;
 
-use BoundedContext\Contracts\Command\Command;
+use BoundedContext\Contracts\Sourced\Aggregate\State\State;
 
 interface Factory
 {
     /**
-     * Returns a Snapshot from a Command.
+     * Returns a Snapshot from a State.
      *
-     * @param Command $command
+     * @param State $state
      * @return Snapshot
      */
 
-    public function command(Command $command);
+    public function state(State $state);
 }

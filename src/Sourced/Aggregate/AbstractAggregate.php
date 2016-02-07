@@ -1,52 +1,38 @@
 <?php namespace BoundedContext\Sourced\Aggregate;
 
-use BoundedContext\Contracts\Business\Invariant\Factory as InvariantFactory;
-use BoundedContext\Contracts\Event\Factory as EventFactory;
-use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
+use BoundedContext\Contracts\Business\Invariant\Factory;
+use BoundedContext\Contracts\Command\Command;
+use BoundedContext\Contracts\Event\Event;
 use BoundedContext\Contracts\Sourced\Aggregate\State\State;
+use BoundedContext\Command\Handling;
 use BoundedContext\Collection\Collection;
 
-abstract class AbstractAggregate implements Aggregate
+abstract class AbstractAggregate
 {
-    protected $invariant_factory;
-    protected $event_factory;
+    use Handling;
 
     protected $state;
     protected $changes;
 
-    public function __construct(
-        InvariantFactory $invariant_factory,
-        EventFactory $event_factory,
-        State $state
-    )
-    {
-        $this->invariant_factory = $invariant_factory;
-        $this->event_factory = $event_factory;
+    protected $assert;
+    protected $check;
 
+    public function __construct(Factory $invariant_factory, State $state)
+    {
         $this->state = $state;
         $this->changes = new Collection();
+
+        $this->assert = new Assertion($invariant_factory, $state);
+        $this->check = new Check($invariant_factory, $state);
     }
 
-    protected function assert($class, $params = [])
+    public function handle(Command $command)
     {
-        $invariant = $this->invariant_factory->by_class($class, $params);
-
-        $invariant->assert();
-
-        return true;
+        $this->mutate($command);
     }
 
-    protected function is_satisfied($class, $params = [])
+    protected function apply(Event $event)
     {
-        $invariant = $this->invariant_factory->by_class($class, $params);
-
-        return $invariant->is_satisfied();
-    }
-
-    protected function apply($class, $params = [])
-    {
-        $event = $this->event_factory->by_class($class, $params);
-
         $this->state->apply($event);
         $this->changes->append($event);
     }

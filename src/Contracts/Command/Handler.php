@@ -1,15 +1,13 @@
 <?php namespace BoundedContext\Contracts\Command;
 
-use BoundedContext\Collection\Collection;
-
 interface Handler
 {
     /**
-     * Handles a Command and returns a collection of Projections used by the Handler.
+     * Handles a Command.
      *
      * @param Command $command
      * @throws \Exception
-     * @return Collection
+     * @return void
      */
 
     public function handle(Command $command);

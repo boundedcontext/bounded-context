@@ -1,5 +1,6 @@
 <?php namespace BoundedContext\Sourced\Aggregate;
 
+use BoundedContext\Contracts\Command\Command;
 use BoundedContext\Contracts\Event\Snapshot\Stream;
 use BoundedContext\Contracts\Event\Factory as EventFactory;
 use BoundedContext\Contracts\Event\Snapshot\Factory as EventSnapshotFactory;
@@ -8,6 +9,7 @@ use BoundedContext\Contracts\Sourced\Aggregate\State\Repository as StateReposito
 use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Snapshot;
 use BoundedContext\Contracts\Sourced\Log\Log;
+use BoundedContext\Contracts\ValueObject\Identifier;
 
 class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Repository
 {
@@ -35,31 +37,40 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         $this->log = $log;
     }
 
-    public function by_snapshot(Snapshot $snapshot)
+    public function by_command(Command $command)
     {
-        $state = $this->state_repository->by_snapshot(
-            $snapshot
+        $state = $this->state_repository->by_command($command);
+
+
+    }
+
+    public function id(Identifier $id)
+    {
+        $aggregate = $this->aggregate_factory->create(
+            $this->snapshot_repository->id($id)
         );
 
         $event_snapshots = $this->event_snapshot_stream
-            ->after($state->version())
-            ->with($snapshot->id())
+            ->after($aggregate->version())
+            ->with($aggregate->id())
             ->get();
 
         foreach($event_snapshots as $snapshot)
         {
-            $state->apply(
+            $aggregate->apply(
                 $this->event_factory->snapshot($snapshot)
             );
         }
 
-        return $this->aggregate_factory->create($state);
+        $aggregate->flush();
+
+        return $aggregate;
     }
 
     public function save(Aggregate $aggregate)
     {
-        $this->state_repository->save(
-            $aggregate->state()
+        $this->snapshot_repository->save(
+            $aggregate->snapshot()
         );
 
         $this->log->append_collection(

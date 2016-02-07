@@ -5,6 +5,14 @@ use BoundedContext\Contracts\Business\Invariant\Exception;
 interface Invariant
 {
     /**
+     * Configures the Invariant to be a not Invariant.
+     *
+     * @return Invariant
+     */
+
+    public function not();
+
+    /**
      * Returns whether or not the invariant has been satisfied.
      *
      * @return boolean

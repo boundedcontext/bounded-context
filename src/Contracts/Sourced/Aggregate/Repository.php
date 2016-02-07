@@ -1,15 +1,15 @@
 <?php namespace BoundedContext\Contracts\Sourced\Aggregate;
 
-use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Snapshot;
+use BoundedContext\Contracts\Command\Command;
 
 interface Repository {
 
     /**
-     * @param Snapshot $snapshot
+     * @param Command $command
      * @return Aggregate
      */
 
-    public function by_snapshot(Snapshot $snapshot);
+    public function by_command(Command $command);
 
     /**
      * @param Aggregate $aggregate

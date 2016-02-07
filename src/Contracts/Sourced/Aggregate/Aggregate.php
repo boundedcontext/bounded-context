@@ -1,20 +1,13 @@
 <?php namespace BoundedContext\Contracts\Sourced\Aggregate;
 
 use BoundedContext\Contracts\Collection\Collection;
+use BoundedContext\Contracts\Command\Handler;
 use BoundedContext\Contracts\Sourced\Aggregate\State\State;
 
-interface Aggregate
+interface Aggregate extends Handler
 {
     /**
-     * Get the current state of the Aggregate.
-     *
-     * @return State
-     */
-
-    public function state();
-
-    /**
-     * Get the Collection of Log Snapshots applied to the Aggregate.
+     * Gets the Collection of Events applied to the Aggregate.
      *
      * @return Collection
      */
@@ -28,4 +21,12 @@ interface Aggregate
      */
 
     public function flush();
+
+    /**
+     * Get the current state of the Aggregate.
+     *
+     * @return State
+     */
+
+    public function state();
 }

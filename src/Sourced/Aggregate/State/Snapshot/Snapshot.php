@@ -1,29 +1,29 @@
 <?php namespace BoundedContext\Sourced\Aggregate\State\Snapshot;
 
-use BoundedContext\Contracts\Schema\Schema;
+use BoundedContext\Contracts\Sourced\Aggregate\State\State;
 use BoundedContext\Contracts\ValueObject\DateTime;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Snapshot\AbstractSnapshot;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Version;
 
 class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Snapshot
 {
-    private $schema;
+    private $state;
 
     public function __construct(
         Identifier $id,
-        Integer $version,
+        Version $version,
         DateTime $occurred_at,
-        Schema $schema
+        State $state
     )
     {
         parent::__construct($id, $version, $occurred_at);
 
-        $this->schema = $schema;
+        $this->state = $state;
     }
 
-    public function schema()
+    public function state()
     {
-        return $this->schema;
+        return $this->state;
     }
 }
