@@ -42,7 +42,7 @@ class Schema implements \BoundedContext\Contracts\Schema\Schema
 
         if(!is_null($changes))
         {
-            return $changes($this, $this->schema[$key]);
+            $this->schema[$key] = $changes();
         }
     }
 
@@ -53,7 +53,7 @@ class Schema implements \BoundedContext\Contracts\Schema\Schema
             throw new \Exception("The key [$key] does not exist in the schema.");
         }
 
-        return $changes($this, $this->schema[$key]);
+        $this->schema[$key] = $changes($this->schema[$key]);
     }
 
     public function rename($old_key, $new_key)

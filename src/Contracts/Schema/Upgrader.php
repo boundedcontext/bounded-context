@@ -1,13 +1,31 @@
 <?php namespace BoundedContext\Contracts\Schema;
 
-interface Upgrader
+use BoundedContext\Contracts\Core\Versionable;
+use BoundedContext\ValueObject\Integer as Version;
+
+interface Upgrader extends Versionable
 {
     /**
-     * Returns an upgraded version of the Schema.
+     * Runs the latest version of the upgrader.
      *
-     * @param Snapshot $schema_snapshot
-     * @return Snapshot
+     * @return Version
      */
 
-    public function upgrade(Snapshot $schema_snapshot);
+    public function latest_version();
+
+    /**
+     * Runs the upgrader.
+     *
+     * @throws \Exception
+     * @return void
+     */
+
+    public function run();
+
+    /**
+     * Returns the upgraded Schema.
+     *
+     * @return Schema
+     */
+    public function schema();
 }

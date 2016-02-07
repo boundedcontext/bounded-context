@@ -1,37 +1,45 @@
 <?php namespace BoundedContext\Schema\Upgrader;
 
-use BoundedContext\Schema\Snapshot;
+use BoundedContext\Contracts\Schema\Schema;
+use BoundedContext\ValueObject\Integer as Version;
 
 trait Upgrading
 {
-    private function get_function_name($version)
+    /**
+     * @var Schema
+     */
+    private $schema;
+
+    /**
+     * @var Version
+     */
+    private $version;
+
+    private function get_function_name()
     {
-        return 'when_version_' . $version->serialize();
+        return 'when_version_' . $this->version->serialize();
     }
 
-    protected function can_upgrade()
+    private function can_upgrade()
     {
         return method_exists(
             $this,
-            $this->get_function_name(
-                $this->snapshot->version()
-            )
+            $this->get_function_name()
         );
     }
 
-    protected function upgrade()
+    public function run()
     {
-        $function = $this->get_function_name(
-            $this->snapshot->version()->serialize()
-        );
+        while($this->can_upgrade())
+        {
+            $function = $this->get_function_name();
 
-        if (!method_exists($this, $function)) {
-            throw new \Exception('A upgrade handler could not be found.');
+            if (!method_exists($this, $function)) {
+                throw new \Exception('An upgrade handler could not be found.');
+            }
+
+            $this->$function($this->schema);
+            $this->version = $this->version->increment();
         }
-
-        $this->snapshot = new Snapshot(
-            $this->$function($this->snapshot->schema()),
-            $this->snapshot->version()->increment()
-        );
     }
 }

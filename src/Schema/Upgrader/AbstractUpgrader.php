@@ -1,32 +1,54 @@
 <?php namespace BoundedContext\Schema\Upgrader;
-use BoundedContext\Schema\Snapshot;
 
-abstract class AbstractUpgrader
+use BoundedContext\Contracts\Schema\Schema;
+use BoundedContext\Contracts\Schema\Upgrader;
+use BoundedContext\ValueObject\Integer as Version;
+use BoundedContext\ValueObject\Integer;
+
+abstract class AbstractUpgrader implements Upgrader
 {
     use Upgrading;
 
-    private $snapshot;
+    private $schema;
+    private $version;
 
-    public function __construct(Snapshot $snapshot)
+    public function __construct(Schema $schema, Version $version)
     {
-        $this->snapshot = $snapshot;
+        $this->schema = $schema;
+        $this->version = $version;
 
-        if($snapshot->version()->serialize() == 0)
+        if($this->version->equals(new Version()))
         {
-            $this->snapshot = new Snapshot(
-                $this->snapshot->schema()->add('id'),
-                $snapshot->version()->increment()
-            );
-        }
-
-        while($this->can_upgrade())
-        {
-            $this->upgrade();
+            $this->schema->add('id');
         }
     }
 
-    public function snapshot()
+    public function version()
     {
-        return $this->snapshot;
+        return $this->version;
+    }
+
+    public function latest_version()
+    {
+        $class = new \ReflectionClass($this);
+        $methods = $class->getMethods(\ReflectionMethod::IS_PROTECTED);
+
+        $version = new Integer();
+
+        foreach($methods as $method)
+        {
+            if (preg_match('#^when_version_#i', $url) === 1) {
+                $version = $version->increment();
+            }
+        }
+
+        dd('Make sure correct number of methods are called.');
+
+        return $version;
+    }
+
+    public function schema()
+    {
+        return $this->schema;
     }
 }

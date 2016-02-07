@@ -29,5 +29,5 @@ interface Stream
      * @return Collection
      */
 
-    public function get();
+    public function as_collection();
 }

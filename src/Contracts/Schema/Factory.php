@@ -2,12 +2,13 @@
 
 use BoundedContext\Contracts\Core\Versionable;
 
-interface Snapshot extends Versionable
+interface Factory extends Versionable
 {
     /**
-     * Gets the schema for the Snapshot.
+     * Runs an upgraded Schema.
      *
-     * @return Schema
+     * @throws \Exception
+     * @return void
      */
 
     public function schema();

@@ -43,7 +43,9 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
 
     public function by(Command $command)
     {
-        $state = $this->state_factory->snapshot(
+        $state = $this->state_factory
+            ->with($command)
+            ->snapshot(
             $this->state_snapshot_repository->id(
                 $command->id()
             )
@@ -53,7 +55,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
             ->stream()
             ->after($state->version())
             ->with($state->id())
-            ->get();
+            ->as_collection();
 
         foreach($event_snapshots as $event_snapshot)
         {
