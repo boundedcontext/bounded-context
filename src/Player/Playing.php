@@ -1,72 +1,52 @@
 <?php namespace BoundedContext\Player;
 
 use BoundedContext\Contracts\Event\Event;
-use BoundedContext\Contracts\Event\Factory;
 use BoundedContext\Contracts\Event\Snapshot\Snapshot;
 
 trait Playing
 {
-    /**
-     * @var Factory $event_factory
-     */
-    protected $event_factory;
-
     private function from_camel_case($input)
     {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
-
         $ret = $matches[0];
-        foreach ($ret as &$match) {
+        foreach ($ret as &$match)
+        {
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
-
         return implode('_', $ret);
     }
 
-    private function get_function_name(Event $e)
+    protected function get_handler_name(Event $event)
     {
-        $reflect = new \ReflectionClass($e);
-        $class_name = $reflect->getShortName();
-
-        $namespaced_class = get_class($e);
-        $words = preg_split('#[\\\.]#', $namespaced_class, -1, PREG_SPLIT_NO_EMPTY);
-
-        return 'when_' . strtolower($words[1]) . '_' . strtolower($words[3]) . '_' . $this->from_camel_case($class_name);
+        $reflect = new \ReflectionClass($event);
+        $namespace_path_items = preg_split(
+            '#[\\\.]#',
+            get_class($event),
+            -1,
+            PREG_SPLIT_NO_EMPTY
+        );
+        return 'when_'
+        . strtolower($namespace_path_items[1])
+        . '_'
+        . strtolower($namespace_path_items[3])
+        . '_'
+        . $this->from_camel_case(
+            $reflect->getShortName()
+        )
+            ;
     }
 
     protected function can_apply(Event $event)
     {
-        $function = $this->get_function_name($event);
+        $function = $this->get_handler_name($event);
 
         return method_exists($this, $function);
     }
 
-    private function mutate($function, Event $event, Snapshot $snapshot)
+    protected function mutate(Event $event, Snapshot $snapshot)
     {
-        $this->$function($event, $snapshot);
-    }
+        $handler = $this->get_handler_name($event);
 
-    protected function apply(Snapshot $event_snapshot)
-    {
-        $event = $this->event_factory->snapshot($event_snapshot);
-
-        if (!$this->can_apply($event))
-        {
-            return $this->snapshot->skip(
-                $event_snapshot->id(),
-                $this->datetime_generator
-            );
-        }
-
-        $this->mutate(
-            $this->get_function_name($event),
-            $event,
-            $event_snapshot
-        );
-
-        return $this->snapshot->take(
-            $event_snapshot->id(),
-            $this->datetime_generator
-        );
+        $this->$handler($event, $snapshot);
     }
 }

@@ -3,35 +3,16 @@
 use BoundedContext\Contracts\Collection\Collection;
 use BoundedContext\Contracts\Core\Resetable;
 use BoundedContext\Contracts\Event\Snapshot\Snapshot;
-use BoundedContext\Contracts\Sourced\Aggregate\Stream\Stream;
-use BoundedContext\Contracts\ValueObject\Identifier;
+use BoundedContext\Contracts\Sourced\Stream\Builder;
 
 interface Log extends Resetable
 {
     /**
      * Returns a new Stream for the Log.
      *
-     * @return Stream
+     * @return Builder
      */
-    public function stream();
-
-    /**
-     * Returns a Collection of Snapshots from the Log.
-     *
-     * @param Identifier $starting_id
-     * @param int $limit
-     * @return Collection
-     */
-    public function get_collection(Identifier $starting_id, $limit = 1000);
-
-    /**
-     * Appends a Collection of Snapshots to the end of the Log.
-     *
-     * @param Collection $snapshots
-     * @return void
-     */
-
-    public function append_collection(Collection $snapshots);
+    public function builder();
 
     /**
      * Appends a Snapshot to the end of the Log.
@@ -41,4 +22,13 @@ interface Log extends Resetable
      */
 
     public function append(Snapshot $snapshot);
+
+    /**
+     * Appends a Collection of Snapshots to the end of the Log.
+     *
+     * @param Collection $snapshots
+     * @return void
+     */
+
+    public function append_collection(Collection $snapshots);
 }
