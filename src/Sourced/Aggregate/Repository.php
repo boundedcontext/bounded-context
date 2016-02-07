@@ -1,11 +1,14 @@
 <?php namespace BoundedContext\Sourced\Aggregate;
 
 use BoundedContext\Contracts\Command\Command;
-use BoundedContext\Contracts\Event\Factory as EventFactory;
-use BoundedContext\Contracts\Event\Snapshot\Factory as EventSnapshotFactory;
-use BoundedContext\Contracts\Sourced\Aggregate\Factory as AggregateFactory;
-use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
+
 use BoundedContext\Contracts\Sourced\Log\Log as EventLog;
+
+use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
+use BoundedContext\Contracts\Sourced\Aggregate\Factory as AggregateFactory;
+
+use BoundedContext\Contracts\Sourced\Aggregate\Stream\Builder as AggregateStreamBuilder;
+
 use BoundedContext\Contracts\Sourced\Aggregate\State\Factory as StateFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Factory as StateSnapshotFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Repository as StateSnapshotRepository;
@@ -15,9 +18,10 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
     private $state_snapshot_repository;
     private $state_snapshot_factory;
     private $state_factory;
+
     private $aggregate_factory;
-    private $event_snapshot_factory;
-    private $event_factory;
+    private $aggregate_stream_builder;
+
     private $event_log;
 
     public function __construct(
@@ -25,8 +29,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         StateSnapshotFactory $state_snapshot_factory,
         StateFactory $state_factory,
         AggregateFactory $aggregate_factory,
-        EventSnapshotFactory $event_snapshot_factory,
-        EventFactory $event_factory,
+        AggregateStreamBuilder $aggregate_stream_builder,
         EventLog $event_log
     )
     {
@@ -36,8 +39,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
 
         $this->aggregate_factory = $aggregate_factory;
 
-        $this->event_snapshot_factory = $event_snapshot_factory;
-        $this->event_factory = $event_factory;
+        $this->aggregate_stream_builder = $aggregate_stream_builder;
         $this->event_log = $event_log;
     }
 
@@ -46,22 +48,20 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         $state = $this->state_factory
             ->with($command)
             ->snapshot(
-            $this->state_snapshot_repository->id(
-                $command->id()
+                $this->state_snapshot_repository->id(
+                    $command->id()
+                )
             )
-        );
+        ;
 
-        $event_snapshots = $this->event_log
-            ->stream()
-            ->after($state->version())
+        $event_stream = $this->aggregate_stream_builder
             ->with($state->id())
-            ->as_collection();
+            ->after($state->version())
+            ->stream();
 
-        foreach($event_snapshots as $event_snapshot)
+        foreach($event_stream as $event)
         {
-            $state->apply(
-                $this->event_factory->snapshot($event_snapshot)
-            );
+            $state->apply($event);
         }
 
         return $this->aggregate_factory->state($state);
@@ -76,9 +76,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         );
 
         $this->event_log->append_collection(
-            $this->event_snapshot_factory->collection(
-                $aggregate->changes()
-            )
+            $aggregate->changes()
         );
 
         $aggregate->flush();

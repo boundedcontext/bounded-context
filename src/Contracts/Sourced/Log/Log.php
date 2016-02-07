@@ -3,7 +3,7 @@
 use BoundedContext\Contracts\Collection\Collection;
 use BoundedContext\Contracts\Core\Resetable;
 use BoundedContext\Contracts\Event\Snapshot\Snapshot;
-use BoundedContext\Contracts\Event\Snapshot\Stream;
+use BoundedContext\Contracts\Sourced\Aggregate\Stream\Stream;
 use BoundedContext\Contracts\ValueObject\Identifier;
 
 interface Log extends Resetable
