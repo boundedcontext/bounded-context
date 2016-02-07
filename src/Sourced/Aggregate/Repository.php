@@ -1,11 +1,11 @@
 <?php namespace BoundedContext\Sourced\Aggregate;
 
+use BoundedContext\Contracts\Command\Command;
 use BoundedContext\Contracts\Event\Factory as EventFactory;
 use BoundedContext\Contracts\Event\Snapshot\Factory as EventSnapshotFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\Factory as AggregateFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
 use BoundedContext\Contracts\Sourced\Log\Log as EventLog;
-use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Factory as StateFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Factory as StateSnapshotFactory;
 use BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Repository as StateSnapshotRepository;
@@ -41,10 +41,12 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         $this->event_log = $event_log;
     }
 
-    public function id(Identifier $id)
+    public function by(Command $command)
     {
         $state = $this->state_factory->snapshot(
-            $this->state_snapshot_repository->id($id)
+            $this->state_snapshot_repository->id(
+                $command->id()
+            )
         );
 
         $event_snapshots = $this->event_log
