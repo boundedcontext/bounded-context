@@ -5,11 +5,11 @@ use BoundedContext\Contracts\Sourced\Aggregate\State\State;
 interface Factory
 {
     /**
-     * Returns a new Aggregate.
+     * Returns a new Aggregate from its state.
      *
      * @param State $state
      * @return Aggregate
      */
 
-    public function create(State $state);
+    public function state(State $state);
 }

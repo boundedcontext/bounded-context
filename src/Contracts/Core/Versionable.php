@@ -1,14 +1,13 @@
 <?php namespace BoundedContext\Contracts\Core;
 
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Version;
 
 interface Versionable
 {
     /**
-     * Gets a version number.
+     * Gets the current version of the Versionable Object.
      *
-     * @return Integer
+     * @return Version
      */
-
     public function version();
 }

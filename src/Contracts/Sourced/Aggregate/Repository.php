@@ -1,17 +1,21 @@
 <?php namespace BoundedContext\Contracts\Sourced\Aggregate;
 
-use BoundedContext\Contracts\Command\Command;
+use BoundedContext\Contracts\ValueObject\Identifier;
 
 interface Repository {
 
     /**
-     * @param Command $command
+     * Returns an Aggregate by id.
+     *
+     * @param Identifier $id
      * @return Aggregate
      */
 
-    public function by_command(Command $command);
+    public function id(Identifier $id);
 
     /**
+     * Saves an Aggregate to the Repository.
+     *
      * @param Aggregate $aggregate
      * @return void
      */

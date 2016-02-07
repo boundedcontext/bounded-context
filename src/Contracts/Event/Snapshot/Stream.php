@@ -2,18 +2,18 @@
 
 use BoundedContext\Contracts\Collection\Collection;
 use BoundedContext\Contracts\ValueObject\Identifier;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Version;
 
 interface Stream
 {
     /**
      * Sets that the Stream should look for snapshots after a version.
      *
-     * @param Integer $version
+     * @param Version $version
      * @return Stream
      */
 
-    public function after(Integer $version);
+    public function after(Version $version);
 
     /**
      * Sets that the Stream should look for snapshots with an id.
