@@ -14,4 +14,20 @@ abstract class AbstractProjection extends AbstractValueObject implements Project
     {
         return $this;
     }
+
+    public function serialize()
+    {
+        $class = new \ReflectionClass(get_called_class());
+        $properties = $class->getProperties();
+
+        $serialized = [];
+        foreach ($properties as $index => $property)
+        {
+            $name = $property->getName();
+            $value = $this->$name;
+            $serialized[$name] = $value->serialize();
+        }
+
+        return $serialized;
+    }
 }

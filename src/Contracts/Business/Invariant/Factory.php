@@ -20,5 +20,5 @@ interface Factory
      * @return Invariant
      */
 
-    public function by_class($class, $params = []);
+    public function by_class($class);
 }

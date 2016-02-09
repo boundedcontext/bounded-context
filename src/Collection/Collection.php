@@ -76,4 +76,16 @@ class Collection implements CollectionContract
     {
         return isset($this->items[$this->key]);
     }
+
+    public function serialize()
+    {
+        $serialized = [];
+
+        foreach($this as $item)
+        {
+            $serialized[] = $item->serialize();
+        }
+
+        return $serialized;
+    }
 }

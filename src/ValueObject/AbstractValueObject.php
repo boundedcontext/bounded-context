@@ -11,18 +11,18 @@ abstract class AbstractValueObject
 
     public function serialize()
     {
-        $reflection = new \ReflectionClass($this);
+        $class = new \ReflectionClass(get_called_class());
+        $parameters = $class->getConstructor()->getParameters();
 
-        $properties = $reflection->getProperties();
-
-        $serialised = [];
-
-        foreach($properties as $property)
+        $serialized = [];
+        foreach ($parameters as $index => $parameter)
         {
-            $serialised[$property->getName()] = $property->getValue($this)->serialize();
+            $name = $parameter->getName();
+            $value = $this->$name;
+            $serialized[$name] = $value->serialize();
         }
 
-        return $serialised;
+        return $serialized;
     }
 
     public static function deserialize($serialised = null)

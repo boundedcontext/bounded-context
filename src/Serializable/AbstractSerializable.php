@@ -4,14 +4,15 @@ class AbstractSerializable
 {
     public function serialize()
     {
-        $class_vars = (new \ReflectionObject($this))
-            ->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $class = new \ReflectionClass(get_called_class());
+        $parameters = $class->getConstructor()->getParameters();
 
         $serialized = [];
-
-        foreach ($class_vars as $property) {
-            $name = $property->getName();
-            $serialized[$name] = $this->$name->serialize();
+        foreach ($parameters as $index => $parameter)
+        {
+            $name = $parameter->getName();
+            $value = $this->$name;
+            $serialized[$name] = $value->serialize();
         }
 
         return $serialized;

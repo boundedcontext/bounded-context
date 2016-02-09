@@ -4,7 +4,7 @@ use BoundedContext\Contracts\Schema\Schema;
 use BoundedContext\Contracts\ValueObject\DateTime;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Snapshot\AbstractSnapshot;
-use BoundedContext\ValueObject\Integer;
+use BoundedContext\ValueObject\Integer as Integer_;
 
 class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Event\Snapshot\Snapshot
 {
@@ -13,7 +13,7 @@ class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Eve
 
     public function __construct(
         Identifier $id,
-        Integer $version,
+        Integer_ $version,
         DateTime $occurred_at,
         Identifier $type_id,
         Schema $event
@@ -30,11 +30,6 @@ class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Eve
         return $this->type_id;
     }
 
-    /**
-     * Gets the current Schema.
-     *
-     * @return Schema
-     */
     public function schema()
     {
         return $this->event;

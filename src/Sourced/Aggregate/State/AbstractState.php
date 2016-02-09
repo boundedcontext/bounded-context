@@ -1,7 +1,7 @@
 <?php namespace BoundedContext\Sourced\Aggregate\State;
 
 use BoundedContext\Contracts\Event\Event;
-use BoundedContext\Contracts\Generator\Identifier;
+use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Contracts\Projection\Projection;
 use BoundedContext\Contracts\Sourced\Aggregate\State\State;
 use BoundedContext\Event\Applying;
@@ -13,8 +13,6 @@ abstract class AbstractState extends AbstractValueObject implements State
     use Applying;
 
     protected $id;
-    protected $version;
-    protected $projection;
 
     public function __construct(
         Identifier $id,

@@ -8,7 +8,7 @@ use BoundedContext\ValueObject\Integer as Version;
 
 class Snapshot extends AbstractSnapshot implements \BoundedContext\Contracts\Sourced\Aggregate\State\Snapshot\Snapshot
 {
-    private $schema;
+    protected $schema;
 
     public function __construct(
         Identifier $id,

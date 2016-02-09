@@ -9,9 +9,6 @@ abstract class AbstractUpgrader implements Upgrader
 {
     use Upgrading;
 
-    private $schema;
-    private $version;
-
     public function __construct(Schema $schema, Version $version)
     {
         $this->schema = $schema;
@@ -37,12 +34,10 @@ abstract class AbstractUpgrader implements Upgrader
 
         foreach($methods as $method)
         {
-            if (preg_match('#^when_version_#i', $url) === 1) {
+            if (preg_match('#^when_version_#i', $method->name) === 1) {
                 $version = $version->increment();
             }
         }
-
-        dd('Make sure correct number of methods are called.');
 
         return $version;
     }

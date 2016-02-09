@@ -14,7 +14,6 @@ abstract class AbstractAggregate
     protected $state;
     protected $changes;
 
-    protected $assert;
     protected $check;
 
     public function __construct(Factory $invariant_factory, State $state)
@@ -22,7 +21,6 @@ abstract class AbstractAggregate
         $this->state = $state;
         $this->changes = new Collection();
 
-        $this->assert = new Assertion($invariant_factory, $state);
         $this->check = new Check($invariant_factory, $state);
     }
 

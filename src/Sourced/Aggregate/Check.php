@@ -14,21 +14,10 @@ class Check
         $this->state = $state;
     }
 
-    public function is($class, $parameters = [])
+    public function that($class)
     {
-        $invariant = $this->invariant_factory
+        return $this->invariant_factory
             ->with($this->state->queryable())
-            ->by_class($class, $parameters);
-
-        return $invariant->is_satisfied();
-    }
-
-    public function not($class, $parameters = [])
-    {
-        $invariant = $this->invariant_factory
-            ->with($this->state->queryable())
-            ->by_class($class, $parameters);
-
-        return $invariant->not()->is_satisfied();
+            ->by_class($class);
     }
 }

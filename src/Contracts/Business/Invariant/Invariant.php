@@ -1,6 +1,7 @@
 <?php namespace BoundedContext\Contracts\Business\Invariant;
 
 use BoundedContext\Contracts\Business\Invariant\Exception;
+use BoundedContext\Contracts\ValueObject\ValueObject;
 
 interface Invariant
 {
@@ -11,6 +12,15 @@ interface Invariant
      */
 
     public function not();
+
+    /**
+     * Adds assumptions to the Invariant.
+     *
+     * @param array $assumptions
+     * @return Invariant
+     */
+
+    public function assuming(array $assumptions = []);
 
     /**
      * Returns whether or not the invariant has been satisfied.
@@ -27,5 +37,5 @@ interface Invariant
      * @return void
      */
 
-    public function assert();
+    public function asserts();
 }

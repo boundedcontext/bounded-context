@@ -59,4 +59,9 @@ class Index implements \BoundedContext\Contracts\Index\Index
 
         unset($this->index[$id->serialize()]);
     }
+
+    public function serialize()
+    {
+        return $this->collection()->serialize();
+    }
 }

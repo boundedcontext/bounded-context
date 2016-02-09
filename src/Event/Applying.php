@@ -62,8 +62,8 @@ trait Applying
                 $this->projection,
                 $event
             );
-
-            $this->version = $this->version->increment();
         }
+
+        $this->version = $this->version->increment();
     }
 }

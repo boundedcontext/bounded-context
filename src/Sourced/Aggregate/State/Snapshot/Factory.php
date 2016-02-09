@@ -47,7 +47,7 @@ class Factory implements \BoundedContext\Contracts\Sourced\Aggregate\State\Snaps
             $this->identifier_generator->generate(),
             $state->version(),
             $this->datetime_generator->now(),
-            new Schema($state->serialize())
+            new Schema($state->queryable()->serialize())
         );
     }
 }
