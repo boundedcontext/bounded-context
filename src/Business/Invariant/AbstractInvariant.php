@@ -45,7 +45,8 @@ abstract class AbstractInvariant implements Invariant
 
     public function asserts()
     {
-        if(!$this->satisfy($this->queryable) && $this->is_invariant)
+        if(
+        )
         {
             throw new Exception("More Context later on.");
 

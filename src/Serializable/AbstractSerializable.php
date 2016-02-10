@@ -18,25 +18,33 @@ class AbstractSerializable
         return $serialized;
     }
 
-    public static function deserialize($array = [])
+    public static function deserialize($serialised = null)
     {
-        $serializable_class = get_called_class();
-        $class_params = (new \ReflectionClass($serializable_class))
-            ->getMethod('__construct')
-            ->getParameters();
-
-        $params = [];
-
-        foreach($class_params as $class_param)
+        if(is_null($serialised))
         {
-            $class = $class_param->getClass()->name;
-            $name = $class_param->name;
-
-            $params[] = $class::deserialize($array[$name]);
+            throw new \Exception("Having problems deserializing...");
         }
 
-        $serializable_class = new \ReflectionClass($serializable_class);
+        $deserialised = [];
 
-        return $serializable_class->newInstanceArgs($params);
+        $reflection = new \ReflectionClass(get_called_class());
+
+        $parameters = $reflection->getConstructor()->getParameters();
+
+        foreach($parameters as $parameter)
+        {
+            $parameter_name = $parameter->getName();
+            $parameter_class = $parameter->getClass()->name;
+
+            dd($parameter_class);
+
+            $deserialised[$parameter_name] = $parameter_class::deserialize(
+                $serialised[$parameter_name]
+            );
+        }
+
+        dd($deserialised);
+
+        return $reflection->newInstanceArgs($deserialised);
     }
 }

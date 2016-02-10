@@ -19,7 +19,14 @@ abstract class AbstractValueObject
         {
             $name = $parameter->getName();
             $value = $this->$name;
-            $serialized[$name] = $value->serialize();
+
+            if(is_object($value))
+            {
+                $serialized[$name] = $value->serialize();
+            } else
+            {
+                $serialized[$name] = $value;
+            }
         }
 
         return $serialized;

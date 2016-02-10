@@ -37,14 +37,14 @@ class Factory implements \BoundedContext\Contracts\Sourced\Aggregate\State\Snaps
             $this->identifier_generator->string($tree['id']),
             new Integer($tree['version']),
             $this->datetime_generator->string($tree['occurred_at']),
-            new Schema()
+            new Schema($tree['state'])
         );
     }
 
     public function state(State $state)
     {
         return new Snapshot(
-            $this->identifier_generator->generate(),
+            $state->id(),
             $state->version(),
             $this->datetime_generator->now(),
             new Schema($state->queryable()->serialize())

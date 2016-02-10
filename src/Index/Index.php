@@ -10,9 +10,14 @@ class Index implements \BoundedContext\Contracts\Index\Index
 {
     private $index;
 
-    public function __construct()
+    public function __construct(array $items = [])
     {
         $this->index = [];
+
+        foreach($items as $item)
+        {
+            $this->add($item);
+        }
     }
 
     public function collection()
