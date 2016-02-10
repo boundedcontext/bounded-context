@@ -16,15 +16,6 @@ interface Factory
     public function event(Event $event);
 
     /**
-     * Returns a new Snapshot from a Collections of Events.
-     *
-     * @param Collection $events
-     * @return Collection $event_snapshots
-     */
-
-    public function collection(Collection $events);
-
-    /**
      * Returns a new Snapshot from a Schema.
      *
      * @param Schema $schema

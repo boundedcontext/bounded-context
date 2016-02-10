@@ -1,5 +1,6 @@
 <?php namespace BoundedContext\ValueObject;
 
+use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\Contracts\ValueObject\ValueObject;
 
 class Integer extends AbstractValueObject implements ValueObject
@@ -28,6 +29,13 @@ class Integer extends AbstractValueObject implements ValueObject
         $new_version = $this->serialize() - 1;
 
         return new Integer($new_version);
+    }
+
+    public function add(Integer $other)
+    {
+        return new Integer(
+            $this->serialize() + $other->serialize()
+        );
     }
 
     public function serialize()

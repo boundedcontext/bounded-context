@@ -19,6 +19,16 @@ abstract class AbstractInvariant implements Invariant
         $this->is_invariant = true;
     }
 
+    public function __get($name)
+    {
+        return $this->assumptions[$name];
+    }
+
+    public function __set($name, $value)
+    {
+        $this->assumptions[$name] = $value;
+    }
+
     public function assuming(array $assumptions = [])
     {
         $this->assumptions = $assumptions;
@@ -40,12 +50,14 @@ abstract class AbstractInvariant implements Invariant
 
     public function is_satisfied()
     {
-        return ($this->satisfy($this->queryable) && $this->is_invariant);
+        return ($this->satisfier($this->queryable) && $this->is_invariant);
     }
 
     public function asserts()
     {
         if(
+            (!$this->satisfier($this->queryable) && $this->is_invariant) ||
+            ($this->satisfier($this->queryable) && !$this->is_invariant)
         )
         {
             throw new Exception("More Context later on.");
