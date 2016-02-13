@@ -2,16 +2,10 @@
 
 use BoundedContext\Collection\Collection;
 use BoundedContext\Contracts\Event\Snapshot\Factory as EventSnapshotFactory;
-use BoundedContext\Contracts\Event\Factory as EventFactory;
 use BoundedContext\ValueObject\Integer as Integer_;
 
 abstract class AbstractStream
 {
-    /**
-     * @var EventFactory
-     */
-    protected $event_factory;
-
     /**
      * @var EventSnapshotFactory
      */
@@ -31,13 +25,11 @@ abstract class AbstractStream
     protected $event_snapshot_schemas;
 
     public function __construct(
-        EventFactory $event_factory,
         EventSnapshotFactory $event_snapshot_factory,
         Integer_ $limit,
         Integer_ $chunk_size
     )
     {
-        $this->event_factory = $event_factory;
         $this->event_snapshot_factory = $event_snapshot_factory;
 
         $this->limit = $limit;
@@ -65,7 +57,10 @@ abstract class AbstractStream
 
     protected function has_more_chunks()
     {
-        return ($this->event_snapshot_schemas->count()->serialize() < $this->chunk_size->serialize());
+        return (
+            $this->event_snapshot_schemas->count()->serialize() <
+            $this->chunk_size->serialize()
+        );
     }
 
     public function current()
