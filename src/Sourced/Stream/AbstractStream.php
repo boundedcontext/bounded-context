@@ -35,7 +35,8 @@ abstract class AbstractStream
         $this->limit = $limit;
         $this->chunk_size = $chunk_size;
 
-        $this->rewind();
+        $this->reset();
+        $this->fetch();
     }
 
     protected function reset()
@@ -103,7 +104,6 @@ abstract class AbstractStream
 
     public function rewind()
     {
-        $this->reset();
-        $this->fetch();
+        $this->event_snapshots->rewind();
     }
 }

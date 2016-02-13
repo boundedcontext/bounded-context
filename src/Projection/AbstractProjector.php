@@ -34,6 +34,13 @@ abstract class AbstractProjector extends AbstractPlayer implements \BoundedConte
         $this->projection = $projection;
     }
 
+    public function reset()
+    {
+        parent::reset();
+
+        $this->projection->reset();
+    }
+
     protected function mutate(Event $event, EventSnapshot $snapshot)
     {
         $handler = $this->get_handler_name($event);

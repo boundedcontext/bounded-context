@@ -8,6 +8,7 @@ use BoundedContext\Contracts\Player\Snapshot\Snapshot;
 
 use BoundedContext\Contracts\Event\Factory as EventFactory;
 use BoundedContext\Event\Snapshot\Snapshot as EventSnapshot;
+use BoundedContext\ValueObject\Integer;
 
 abstract class AbstractPlayer implements Player
 {
@@ -47,13 +48,12 @@ abstract class AbstractPlayer implements Player
         $snapshot_stream = $this->log
             ->builder()
             ->after($this->snapshot()->last_id())
+            ->limit(new Integer($limit))
             ->stream();
 
         foreach($snapshot_stream as $snapshot)
         {
-            $this->snapshot = $this->apply(
-                $snapshot
-            );
+            $this->apply($snapshot);
         }
     }
 
@@ -63,8 +63,6 @@ abstract class AbstractPlayer implements Player
 
         if (!$this->can_apply($event))
         {
-            dd($this->snapshot);
-
             $this->snapshot = $this->snapshot->skip(
                 $snapshot->id(),
                 $this->datetime_generator
