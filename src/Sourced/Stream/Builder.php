@@ -1,16 +1,15 @@
-<?php namespace BoundedContext\Sourced\Aggregate\Stream;
+<?php namespace BoundedContext\Sourced\Stream;
 
-use BoundedContext\Contracts\Sourced\Aggregate\Stream\Factory as StreamFactory;
+use BoundedContext\Contracts\Sourced\Stream\Factory as StreamFactory;
 use BoundedContext\Contracts\Generator\Identifier as IdentifierGenerator;
 use BoundedContext\Contracts\ValueObject\Identifier;
 use BoundedContext\ValueObject\Integer as Integer_;
 
-class Builder implements \BoundedContext\Contracts\Sourced\Aggregate\Stream\Builder
+class Builder implements \BoundedContext\Contracts\Sourced\Stream\Builder
 {
     private $stream_factory;
 
-    private $id;
-    private $version;
+    private $starting_id;
     private $limit;
     private $chunk_size;
 
@@ -22,21 +21,13 @@ class Builder implements \BoundedContext\Contracts\Sourced\Aggregate\Stream\Buil
         $this->stream_factory = $stream_factory;
 
         $this->id = $generator->null();
-        $this->version = new Integer_();
         $this->limit = new Integer_(1000);
         $this->chunk_size = new Integer_(1000);
     }
 
-    public function after(Integer_ $version)
+    public function after(Identifier $starting_id)
     {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    public function with(Identifier $id)
-    {
-        $this->id = $id;
+        $this->starting_id = $starting_id;
 
         return $this;
     }
@@ -58,8 +49,7 @@ class Builder implements \BoundedContext\Contracts\Sourced\Aggregate\Stream\Buil
     public function stream()
     {
         return $this->stream_factory->create(
-            $this->id,
-            $this->version,
+            $this->starting_id,
             $this->limit,
             $this->chunk_size
         );

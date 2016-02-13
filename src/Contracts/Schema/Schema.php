@@ -1,6 +1,8 @@
 <?php namespace BoundedContext\Contracts\Schema;
 
-interface Schema
+use BoundedContext\Contracts\Core\Collectable;
+
+interface Schema extends Collectable
 {
     /**
      * Adds a new structure to the Schema by key.

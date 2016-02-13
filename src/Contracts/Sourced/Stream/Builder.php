@@ -8,20 +8,23 @@ interface Builder
     /**
      * Sets the Identifier to stream after.
      *
+     * @param Identifier $starting_id
      * @return Builder
      */
-    public function after(Identifier $id);
+    public function after(Identifier $starting_id);
 
     /**
-     * Sets the Stream to be the at the end of the Log.
+     * Sets the maximum number of snapshots to be streamed.
      *
+     * @param Integer_ $limit
      * @return Builder
      */
-    public function end();
+    public function limit(Integer_ $limit);
 
     /**
      * Sets the chunk size of the Streamer.
      *
+     * @param Integer_ $size
      * @return Builder
      */
     public function chunk(Integer_ $size);

@@ -2,6 +2,7 @@
 
 use BoundedContext\Contracts\Core\Collectable;
 use BoundedContext\Contracts\Collection\Collection as CollectionContract;
+use BoundedContext\ValueObject\Integer;
 
 class Collection implements CollectionContract
 {
@@ -20,7 +21,7 @@ class Collection implements CollectionContract
 
     public function count()
     {
-        return count($this->items);
+        return new Integer(count($this->items));
     }
 
     public function reset()

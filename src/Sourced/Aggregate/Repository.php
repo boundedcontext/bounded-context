@@ -2,6 +2,7 @@
 
 use BoundedContext\Contracts\Command\Command;
 
+use BoundedContext\Contracts\Event\Factory as EventFactory;
 use BoundedContext\Contracts\Sourced\Log\Log as EventLog;
 
 use BoundedContext\Contracts\Sourced\Aggregate\Aggregate;
@@ -22,6 +23,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
     private $aggregate_factory;
     private $aggregate_stream_builder;
 
+    private $event_factory;
     private $event_log;
 
     public function __construct(
@@ -30,6 +32,7 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         StateFactory $state_factory,
         AggregateFactory $aggregate_factory,
         AggregateStreamBuilder $aggregate_stream_builder,
+        EventFactory $event_factory,
         EventLog $event_log
     )
     {
@@ -40,6 +43,8 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
         $this->aggregate_factory = $aggregate_factory;
 
         $this->aggregate_stream_builder = $aggregate_stream_builder;
+
+        $this->event_factory = $event_factory;
         $this->event_log = $event_log;
     }
 
@@ -61,7 +66,9 @@ class Repository implements \BoundedContext\Contracts\Sourced\Aggregate\Reposito
 
         foreach($event_stream as $event)
         {
-            $state->apply($event);
+            $state->apply(
+                $this->event_factory->snapshot($event)
+            );
         }
 
         return $this->aggregate_factory->state($state);
