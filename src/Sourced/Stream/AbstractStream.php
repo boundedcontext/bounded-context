@@ -22,7 +22,7 @@ abstract class AbstractStream
     /**
      * @var Collection
      */
-    protected $event_snapshot_schemas;
+    protected $event_snapshots;
 
     public function __construct(
         EventSnapshotFactory $event_snapshot_factory,
@@ -41,7 +41,7 @@ abstract class AbstractStream
     protected function reset()
     {
         $this->streamed_count = new Integer_(0);
-        $this->event_snapshot_schemas = new Collection();
+        $this->event_snapshots = new Collection();
     }
 
     /**
@@ -58,21 +58,24 @@ abstract class AbstractStream
     protected function has_more_chunks()
     {
         return (
-            $this->event_snapshot_schemas->count()->serialize() <
+            $this->event_snapshots->count()->serialize() <
             $this->chunk_size->serialize()
         );
     }
 
     public function current()
     {
-        return $this->event_snapshot_schemas->current();
+        return $this->event_snapshots->current();
     }
 
     public function next()
     {
-        $this->event_snapshot_schemas->next();
+        $this->event_snapshots->next();
 
-        if(!$this->event_snapshot_schemas->valid() && $this->has_more_chunks())
+        if(
+            !$this->event_snapshots->valid() &&
+            $this->has_more_chunks()
+        )
         {
             $this->fetch();
         }
@@ -82,17 +85,20 @@ abstract class AbstractStream
 
     public function key()
     {
-        return $this->event_snapshot_schemas->key();
+        return $this->event_snapshots->key();
     }
 
     public function valid()
     {
-        if($this->streamed_count->equals($this->limit) && !$this->is_unlimited())
+        if(
+            $this->streamed_count->equals($this->limit) &&
+            !$this->is_unlimited()
+        )
         {
             return false;
         }
 
-        return $this->event_snapshot_schemas->valid();
+        return $this->event_snapshots->valid();
     }
 
     public function rewind()
