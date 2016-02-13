@@ -63,6 +63,8 @@ abstract class AbstractPlayer implements Player
 
         if (!$this->can_apply($event))
         {
+            dd($this->snapshot);
+
             $this->snapshot = $this->snapshot->skip(
                 $snapshot->id(),
                 $this->datetime_generator
